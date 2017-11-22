@@ -1,12 +1,17 @@
 import React, {Component} from 'react'
 import injectSheet from 'react-jss'
+import {renderRoutes} from 'react-router-config'
 
 import NavBar from './components/NavBar'
+import Container from './components/Container'
 
-const styles = {
+const styles = theme => ({
     '@global': {
         '*': {
             fontFamily: 'Roboto !important'
+        },
+        body: {
+            backgroundColor: theme.palette.background + ' !important'
         }
     },
     root: {
@@ -18,7 +23,7 @@ const styles = {
     btnTwo: {
         padding: 50 + '!important'
     }
-}
+})
 
 class App extends Component {
     componentDidMount = () => {
@@ -27,9 +32,14 @@ class App extends Component {
     };
 
     render() {
-        let {classes} = this.props;
+        let {classes, route} = this.props;
         return (
-            <NavBar/>
+            <div>
+                <NavBar/>
+                <Container style={{marginTop: 70}}>
+                    {renderRoutes(route.routes)}
+                </Container>
+            </div>
         )
     }
 }

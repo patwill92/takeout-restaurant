@@ -15,10 +15,11 @@ const styles = theme => ({
         }
     },
     btn: {
-        backgroundColor: theme.colorPrimary + ' !important',
+        backgroundColor: theme.palette.primary + ' !important',
         color: '#ffffff !important',
         '&:hover': {
             color: '#ffffff !important',
+            backgroundColor: theme.palette.hoverPrimary + ' !important',
         },
         '&:active': {
             boxShadow: theme.shadows[1] + ' !important'

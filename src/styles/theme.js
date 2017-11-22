@@ -1,6 +1,9 @@
 export default  {
-    colorPrimary: '#e80507',
-    colorBackground: '#ebf0eb',
+    palette: {
+        primary: '#B71C1C',
+        hoverPrimary: '#C62828',
+        background: '#ebf0eb',
+    },
     shadows: [
         "none",
         "0px 1px 3px 0px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 2px 1px -1px rgba(0, 0, 0, 0.12)",

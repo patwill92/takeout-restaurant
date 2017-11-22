@@ -1,24 +1,28 @@
 import React from 'react';
 import {renderToString} from 'react-dom/server'
 import {StaticRouter} from 'react-router-dom'
+import {Provider} from 'react-redux'
 import {renderRoutes} from 'react-router-config'
+import serialize from 'serialize-javascript'
 import {JssProvider, SheetsRegistry, ThemeProvider} from 'react-jss'
 
 import Routes from '../client/Routes'
 import css from '../styles/semantic.min.css';
 import theme from '../styles/theme'
 
-export default (req, context) => {
+export default (req, store, context) => {
   const sheets = new SheetsRegistry();
 
   const content = renderToString(
-    <StaticRouter location={req.url} context={context}>
-      <JssProvider registry={sheets}>
-        <ThemeProvider theme={theme}>
-            {renderRoutes(Routes)}
-        </ThemeProvider>
-      </JssProvider>
-    </StaticRouter>
+    <Provider store={store}>
+        <StaticRouter location={req.url} context={context}>
+            <JssProvider registry={sheets}>
+                <ThemeProvider theme={theme}>
+                    {renderRoutes(Routes)}
+                </ThemeProvider>
+            </JssProvider>
+        </StaticRouter>
+    </Provider>
   );
 
 
@@ -39,6 +43,7 @@ export default (req, context) => {
       </head>
       <body>
         <div id="root">${content}</div>
+        <script>window.INITIAL_STATE = ${serialize(store.getState())}</script>
         <script src="bundle.js"></script>
       </body>
     </html>

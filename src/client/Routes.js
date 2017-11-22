@@ -1,10 +1,17 @@
 import React from 'react';
 import App from './App'
 
+import Home from './pages/Home'
+
 export default [
   {
     ...App,
-    path: '/',
-    exact: true
+    routes: [
+        {
+            ...Home,
+            path: '/',
+            exact: true
+        }
+    ]
   }
 ];
