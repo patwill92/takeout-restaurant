@@ -44,7 +44,9 @@ class Home extends Component {
     }
 }
 
-const mapStateToProps = ({menu}) => {return {menu}};
+const mapStateToProps = ({menu}) => {
+    return {menu}
+};
 
 const loadData = async (Model) => {
     let {MenuItem} = Model;
