@@ -13,13 +13,14 @@ const app = express();
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://restaurant-dev:rest-dev@ds117316.mlab.com:17316/restaurant-dev');
+Models();
 app.use(express.static('public'));
 app.use('/api', api);
 
 app.get('*', (req, res) => {
     const store = createServerStore();
     let promises = matchRoutes(Routes, req.url).map(({route}) => {
-        return route.loadData ? route.loadData(Models) : null
+        return route.loadData ? route.loadData(mongoose) : null
     }).filter(promise => promise);
 
     Promise.all(promises).then((promise) => {

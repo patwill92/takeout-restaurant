@@ -48,15 +48,14 @@ const mapStateToProps = ({menu}) => {
     return {menu}
 };
 
-const loadData = async (Model) => {
-    let {MenuItem} = Model;
-    let menu = await MenuItem.find({available: true})
+const loadData = async (mongoose) => {
+    let menu = await mongoose.model('Item').getClientMenu();
+    // let adminMenu = await mongoose.model('Item').getAdminMenu();
     return {
         data: {
             menu
         },
         func: fetchMenuServer
-
     }
 }
 
