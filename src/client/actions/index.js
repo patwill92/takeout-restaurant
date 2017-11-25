@@ -3,10 +3,10 @@ import axios from 'axios'
 export const FETCH_MENU = 'FETCH_MENU';
 
 export const fetchMenu = () => async (dispatch) => {
-    // const {data} = await axios.get('/api/menu');
+    const {data} = await axios.get('/api/menu');
     dispatch({
         type: FETCH_MENU,
-        payload: {data: 'text'}
+        payload: data
     })
 };
 

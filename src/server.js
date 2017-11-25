@@ -14,7 +14,7 @@ const app = express();
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://restaurant-dev:rest-dev@ds117316.mlab.com:17316/restaurant-dev');
 app.use(express.static('public'));
-app.use(api, '/api');
+app.use('/api', api);
 
 app.get('*', (req, res) => {
     const store = createServerStore();
