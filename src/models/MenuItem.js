@@ -23,13 +23,5 @@ const menuItemSchema = new Schema({
     }
 });
 
-menuItemSchema.statics.getClientMenu = function() {
-    return this.find({available: true})
-}
-
-menuItemSchema.statics.getAdminMenu = function() {
-    return this.find({available: false})
-}
-
 export default mongoose.model("Item", menuItemSchema);
 

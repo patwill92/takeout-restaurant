@@ -3,7 +3,7 @@ import withStyles from 'react-jss'
 import {Grid} from 'semantic-ui-react'
 import {connect} from 'react-redux';
 
-import {fetchMenu, fetchMenuServer} from "../../actions/index";
+import {fetchMenu, fetchMenuServer, fetchMenuAdminServer} from "../../actions/index";
 import HomeCard from './HomeCard'
 
 const styles = theme => ({
@@ -14,7 +14,7 @@ class Home extends Component {
 
     componentDidMount = () => {
         this.props.fetchMenu();
-        console.log(this.props.menu);
+        console.log(this.props.clientMenu);
     }
 
     render() {
@@ -44,19 +44,26 @@ class Home extends Component {
     }
 }
 
-const mapStateToProps = ({menu}) => {
-    return {menu}
+const mapStateToProps = ({menu: {clientMenu, adminMenu}}) => {
+    return {
+        clientMenu,
+        adminMenu
+    }
 };
 
 const loadData = async (mongoose) => {
-    let menu = await mongoose.model('Item').getClientMenu();
-    // let adminMenu = await mongoose.model('Item').getAdminMenu();
-    return {
-        data: {
-            menu
+    let menu = await mongoose.model('Item').find({available: true});
+    let adminMenu = await  mongoose.model('Item').find({});
+    return [
+        {
+            data: menu,
+            func: fetchMenuServer
         },
-        func: fetchMenuServer
-    }
+        {
+            data: adminMenu,
+            func: fetchMenuAdminServer
+        }
+    ]
 }
 
 export default {

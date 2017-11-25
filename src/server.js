@@ -12,7 +12,7 @@ import api from './api/apiMenu'
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://restaurant-dev:rest-dev@ds117316.mlab.com:17316/restaurant-dev');
+mongoose.connect('mongodb://restaurant-dev:rest-dev@ds117316.mlab.com:17316/restaurant-dev', {useMongoClient: true});
 Models();
 app.use(express.static('public'));
 app.use('/api', api);
@@ -25,8 +25,9 @@ app.get('*', (req, res) => {
 
     Promise.all(promises).then((promise) => {
         if(promise[0]) {
-            let {data, func} = promise[0];
-            store.dispatch(func(data))
+            promise[0].forEach(({data, func}) => {
+                store.dispatch(func(data))
+            })
         }
         const context = {};
         const content = renderer(req, store, context);
