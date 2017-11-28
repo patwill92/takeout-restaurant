@@ -1,10 +1,4 @@
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-
 module.exports = {
-    // Tell webpack to run babel on every file it runs through
-    plugins: [
-        new UglifyJSPlugin(),
-    ],
     module: {
         rules: [
             {

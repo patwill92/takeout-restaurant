@@ -6,13 +6,13 @@ import Routes from './client/Routes'
 import renderer from './helpers/renderer';
 import {server as createServerStore} from './helpers/store'
 import Models from './models'
-
+import keys from './config/keys.js'
 import api from './api/apiMenu'
 
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://restaurant-dev:rest-dev@ds117316.mlab.com:17316/restaurant-dev', {useMongoClient: true});
+mongoose.connect(keys.mongoURI, {useMongoClient: true});
 Models();
 app.use(express.static('public'));
 app.use('/api', api);
