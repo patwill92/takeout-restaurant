@@ -13,7 +13,7 @@ import keys from './config/keys'
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongoURI, {useMongoClient: true});
+mongoose.connect(process.env.MONGO_URI, {useMongoClient: true});
 Models();
 app.use(express.static('public'));
 app.use('/api', api);
