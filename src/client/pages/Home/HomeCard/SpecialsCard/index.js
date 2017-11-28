@@ -58,8 +58,8 @@ const SpecialsCard = ({classes, title, info}) => {
             <Card.Content className={classes.content}>
                 <Card.Header className={classes.title}>Specials</Card.Header>
                 <List divided relaxed>
-                    {Array(3).fill().map(() => (
-                        <List.Item className={classes.item}>
+                    {Array(3).fill().map((props, index) => (
+                        <List.Item key={index} className={classes.item}>
                             <List.Content >
                                 <List.Header className={classes.itemTitle}>Avo-Chicken Burger</List.Header>
                                 <List.Description className={classes.description}>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</List.Description>

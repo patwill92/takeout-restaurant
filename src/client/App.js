@@ -3,6 +3,7 @@ import injectSheet from 'react-jss'
 import {renderRoutes} from 'react-router-config'
 
 import NavBar from './components/NavBar'
+import Footer from './components/Footer'
 import Container from './components/Container'
 
 const styles = theme => ({
@@ -43,6 +44,7 @@ class App extends Component {
                 <Container style={{marginTop: 70}}>
                     {renderRoutes(route.routes)}
                 </Container>
+                <Footer/>
             </div>
         )
     }
