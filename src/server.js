@@ -11,7 +11,6 @@ import api from './api/apiMenu'
 import keys from './config/keys'
 
 console.log(keys.mongoURI)
-// console.log(process.env.NODE_ENV);
 const app = express();
 
 mongoose.Promise = global.Promise;
