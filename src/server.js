@@ -12,7 +12,7 @@ import api from './api/apiMenu'
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://restaurant-dev:rest-dev@ds117316.mlab.com:17316/restaurant-dev');
+mongoose.connect('mongodb://restaurant-dev:rest-dev@ds117316.mlab.com:17316/restaurant-dev', {useMongoClient: true});
 Models();
 app.use(express.static('public'));
 app.use('/api', api);
@@ -35,8 +35,8 @@ app.get('*', (req, res) => {
     })
 });
 
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-app.listen(port, () => {
-    console.log(`Listening on port ${process.env.PORT}`);
+app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
 });

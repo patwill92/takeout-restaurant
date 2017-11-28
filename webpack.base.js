@@ -1,15 +1,11 @@
 const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     // Tell webpack to run babel on every file it runs through
     plugins: [
-        new UglifyJSPlugin({
-            sourceMap: true
-        }),
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify('production'),
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV ? process.env.NODE_ENV : 'development'),
                 DEBUG: JSON.stringify(true)
             }
         })
