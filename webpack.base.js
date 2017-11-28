@@ -8,9 +8,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         options: {
-          presets: [
-             'react-app'
-           ],
+          presets: ['react-plus'],
            plugins: ['transform-css-import-to-string']
         }
       }

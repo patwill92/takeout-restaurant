@@ -9,7 +9,7 @@ const padding = {
     marginRight: 'auto'
 }
 
-const styles = {
+const styles = theme => ({
     '@media (min-width: 1200px)': {
         root: {
             width: 1140,
@@ -38,7 +38,7 @@ const styles = {
             ...padding
         }
     },
-}
+});
 
 const Container = ({classes, children, style}) => {
     return (
