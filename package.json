@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "build/bundle.js",
+  "engines": {
+    "node": "8.9.1"
+  },
   "scripts": {
     "start": "node build/bundle.js",
     "dev": "npm-run-all --parallel dev:*",
