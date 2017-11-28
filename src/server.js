@@ -10,10 +10,12 @@ import Models from './models'
 import api from './api/apiMenu'
 import keys from './config/keys'
 
+console.log(keys.mongoURI)
+// console.log(process.env.NODE_ENV);
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongoURI, {useMongoClient: true});
+mongoose.connect('mongodb://restaurant-dev:rest-dev@ds117316.mlab.com:17316/restaurant-dev', {useMongoClient: true});
 Models();
 app.use(express.static('public'));
 app.use('/api', api);

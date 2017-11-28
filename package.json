@@ -45,7 +45,6 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.76.0",
     "serialize-javascript": "^1.4.0",
     "webpack": "^3.5.6",
@@ -54,5 +53,8 @@
     "webpack-node-externals": "^1.6.0"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "uglifyjs-webpack-plugin": "^1.1.1"
+  }
 }
