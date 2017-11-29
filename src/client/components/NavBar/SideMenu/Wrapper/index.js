@@ -23,11 +23,12 @@ class Wrapper extends Component {
     }
 
     handleClickOutside = (event) => {
-        let a = event.target.parentNode.id && event.target.parentNode.id === this.wrapperRef.id;
+        let a = event.target.parentNode.id === this.wrapperRef.id;
         let b = this.wrapperRef.id === event.target.id;
         let burgerEvent = event.target.id === 'burger' || event.target.parentNode.parentNode.id === 'burger';
-        if (!(a || b) && !burgerEvent) {
-            this.props.toggleSideNav(false)
+        if (!(a || b)) {
+            if(!burgerEvent)
+                this.props.toggleSideNav(false)
         }
     };
 
