@@ -36,10 +36,10 @@ class Wrapper extends Component {
     render() {
         let {classes} = this.props;
         if(this.props.sideNav) {
-            document.addEventListener('mousedown', this.handleClickOutside);
+            document.querySelector('body').addEventListener('mousedown', this.handleClickOutside);
         } else {
             if(this.state.document) {
-                document.removeEventListener('mousedown', this.handleClickOutside);
+                document.querySelector('body').removeEventListener('mousedown', this.handleClickOutside);
             }
         }
         return (
