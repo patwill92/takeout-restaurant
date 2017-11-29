@@ -26,6 +26,7 @@ class Wrapper extends Component {
         let a = event.target.parentNode.id === this.wrapperRef.id;
         let b = this.wrapperRef.id === event.target.id;
         let burgerEvent = event.target.id === 'burger' || event.target.parentNode.parentNode.id === 'burger';
+        alert(!(a || b) + ' ' + !burgerEvent)
         if (!(a || b)) {
             if(!burgerEvent)
                 this.props.toggleSideNav(false)
