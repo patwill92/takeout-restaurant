@@ -34,7 +34,7 @@ const styles = theme => ({
     },
     '@media (min-width: 992px) and (max-width: 1199px)': {
         parent: {
-            columnCount: 3
+            columnCount: 2
         }
     },
     '@media (min-width: 768px) and (max-width: 991px)': {

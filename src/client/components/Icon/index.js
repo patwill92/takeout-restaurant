@@ -5,7 +5,8 @@ const style = {
     height: '1em',
     width: '1em',
     position: 'absolute',
-    bottom: '-0.125em'
+    bottom: '-0.125em',
+    pointerEvents: 'none'
 };
 
 const svgStyle = {
@@ -13,7 +14,8 @@ const svgStyle = {
     alignSelf: 'center',
     position: 'relative',
     height: '1em',
-    width: '1em'
+    width: '1em',
+    zIndex: 0
 };
 
 const MyIcon = props => {
@@ -26,7 +28,7 @@ const MyIcon = props => {
     <span id='svg-icon' style={props.style ? {...svgStyle,...props.style} : svgStyle}>
       <svg style={style} id={name} width={props.size ? width * (props.size / height) : width}
            height={props.size ? props.size : height} xmlns="http://www.w3.org/2000/svg" viewBox={viewBox}>
-        <path fill={props.color ? props.color : '#333'} d={path}/>
+        <path style={{pointerEvents: 'none'}} fill={props.color ? props.color : '#333'} d={path}/>
       </svg>
     </span>
     )

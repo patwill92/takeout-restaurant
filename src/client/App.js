@@ -3,6 +3,7 @@ import injectSheet from 'react-jss'
 import {renderRoutes} from 'react-router-config'
 
 import NavBar from './components/NavBar'
+import SideMenu from './components/NavBar/SideMenu'
 import Footer from './components/Footer'
 import Container from './components/Container'
 
@@ -20,15 +21,11 @@ const styles = theme => ({
         }
     },
     root: {
-        backgroundColor: 'green'
-    },
-    btnOne: {
-        marginTop: '20px !important'
-    },
-    btnTwo: {
-        padding: 50 + '!important'
+        display: 'grid',
+        gridAutoColumns: '100vw',
+        gridTemplateRows: 'auto 1fr auto'
     }
-})
+});
 
 class App extends Component {
     componentDidMount = () => {
@@ -39,9 +36,9 @@ class App extends Component {
     render() {
         let {classes, route} = this.props;
         return (
-            <div>
+            <div className={classes.root} style={{minHeight: 'inherit'}}>
                 <NavBar/>
-                <Container style={{marginTop: 70}}>
+                <Container>
                     {renderRoutes(route.routes)}
                 </Container>
                 <Footer/>

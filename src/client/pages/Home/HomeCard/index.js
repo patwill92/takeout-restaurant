@@ -22,6 +22,6 @@ const HomeCard = ({classes, type, src, carousel, content}) => {
         case 'specials': return <SpecialsCard />;
         case 'image': return <ImageCard src={src} />;
     }
-}
+};
 
 export default withStyles(styles)(HomeCard)

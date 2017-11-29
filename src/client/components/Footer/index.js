@@ -11,7 +11,7 @@ const styles = theme => ({
         alignContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgba(0,0,0,0.8)',
-        marginTop: 50,
+        marginTop: 30,
         paddingTop: 50,
         paddingBottom: 50,
         '& div': {

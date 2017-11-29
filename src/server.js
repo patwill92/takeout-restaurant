@@ -8,6 +8,7 @@ import {server as createServerStore} from './helpers/store'
 import Models from './models'
 import keys from './config/keys.js'
 import api from './api/apiMenu'
+import {toggleSideNav} from "./client/actions/index";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.get('*', (req, res) => {
                 store.dispatch(func(data))
             })
         }
+        store.dispatch(toggleSideNav(false));
         const context = {};
         const content = renderer(req, store, context);
         res.send(content);

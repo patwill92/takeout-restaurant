@@ -9,7 +9,7 @@ const padding = {
     marginRight: 'auto'
 }
 
-const styles = theme => ({
+let styles = theme => ({
     '@media (min-width: 1200px)': {
         root: {
             width: 1140,

@@ -1,4 +1,4 @@
-import {FETCH_MENU, FETCH_MENU_ADMIN} from "../actions/index"
+import {FETCH_MENU, FETCH_MENU_ADMIN} from "../actions/types"
 
 export default (state = {}, action) => {
     switch(action.type) {
