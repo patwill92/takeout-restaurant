@@ -20,27 +20,28 @@ class Wrapper extends Component {
 
     componentDidMount = () => {
         this.setState({document: true})
-    }
+
+    };
 
     handleClickOutside = (event) => {
         let a = event.target.parentNode.id === this.wrapperRef.id;
         let b = this.wrapperRef.id === event.target.id;
         let burgerEvent = event.target.id === 'burger' || event.target.parentNode.parentNode.id === 'burger';
-        alert(!(a || b) + ' ' + !burgerEvent)
+        alert(!(a || b) + ' ' + !burgerEvent);
         if (!(a || b)) {
-            if(!burgerEvent)
+            if(!burgerEvent) {
                 this.props.toggleSideNav(false)
+                document.querySelector('#root').removeEventListener('mousedown', this.handleClickOutside);
+            } else {
+                document.querySelector('#root').removeEventListener('mousedown', this.handleClickOutside);
+            }
         }
     };
 
     render() {
         let {classes} = this.props;
         if(this.props.sideNav) {
-            document.querySelector('body').addEventListener('mousedown', this.handleClickOutside);
-        } else {
-            if(this.state.document) {
-                document.querySelector('body').removeEventListener('mousedown', this.handleClickOutside);
-            }
+            document.querySelector('#root').addEventListener('mousedown', this.handleClickOutside);
         }
         return (
             <div id='wrapper' className={classes.root} ref={(node) => this.wrapperRef = node}>
