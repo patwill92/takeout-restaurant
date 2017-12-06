@@ -6,7 +6,6 @@ import withStyles from 'react-jss'
 import Icon from '../Icon'
 import Container from '../Container'
 import SideMenu from './SideMenu'
-import Wrapper from './SideMenu/Wrapper/index'
 import {toggleSideNav} from "../../actions/index";
 
 
@@ -55,7 +54,8 @@ const styles = theme => ({
         fontWeight: 500 + ' !important',
         fontSize: '1.0rem !important',
         '&:hover': {
-            backgroundColor: theme.palette.hoverPrimary
+            backgroundColor: theme.palette.hoverPrimary + ' !important',
+            cursor: 'pointer'
         }
     },
     menuItemRight: {
@@ -63,7 +63,8 @@ const styles = theme => ({
         fontWeight: 500 + ' !important',
         fontSize: '1.0rem !important',
         '&:hover': {
-            backgroundColor: theme.palette.hoverPrimary
+            backgroundColor: theme.palette.hoverPrimary + ' !important',
+            cursor: 'pointer'
         }
     },
 })
@@ -91,15 +92,15 @@ class NavBar extends Component {
                         <Menu.Item className={classes.logo}>
                             <h3>{'Forkit'.toUpperCase()}</h3>
                         </Menu.Item>
-                        <Menu.Item className={classes.menuItem} name='menu' active={activeItem === 'messages'}
+                        <Menu.Item className={classes.menuItem} name='menu'
                                    onClick={this.handleItemClick}/>
-                        <Menu.Menu className={classes.rightMenu} position='right'>
+                        <Menu.Menu position='right'>
                             <Menu.Item className={classes.menuItemRight} active={activeItem === 'friends'}
                                        onClick={this.handleItemClick}>
                                 Order <Icon style={{marginLeft: 5, bottom: 2}} color='#ffffff' name='utensilsAlt'/>
                             </Menu.Item>
-                            <Menu.Item className={classes.menuItemRight} name='login' active={activeItem === 'friends'}
-                                       onClick={this.handleItemClick}/>
+                            <Menu.Item className={classes.menuItemRight} name='login'/>
+                            <Menu.Item className={classes.menuItemRight} name='signup' />
                             <Menu.Item id='burger' style={{bottom: 2, ...inactiveBackground}} active={this.props.sideNav} className={classes.burgerMenu}
                                        onClick={this.toggleVisibility}>
                                 <h3><Icon color='#ffffff' name='bars'/></h3>
