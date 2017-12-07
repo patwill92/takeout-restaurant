@@ -9,13 +9,14 @@ const styles = theme => ({
     }
 });
 
-const Confirmation = ({handleSubmit, classes}) => {
+const Confirmation = ({handleSubmit, classes, previousPage}) => {
 
     return (
         (
-            <div className={classes.root} onSubmit={handleSubmit}>
+            <div className={classes.root} >
 
-                <Button type='submit' >ENTER</Button>
+                <Button onClick={handleSubmit} type='submit'>ENTER</Button>
+                <Button onClick={previousPage} type='submit'>Back</Button>
             </div>
         )
     )
@@ -23,8 +24,8 @@ const Confirmation = ({handleSubmit, classes}) => {
 
 let ConfirmationPage = reduxForm({
     form: 'signup',
-    destroyOnUnmount: true,
-    forceUnregisterOnUnmount: true
+    destroyOnUnmount: false,
+    forceUnregisterOnUnmount: true,
 })(withStyles(styles)(Confirmation));
 
 export default ConfirmationPage;

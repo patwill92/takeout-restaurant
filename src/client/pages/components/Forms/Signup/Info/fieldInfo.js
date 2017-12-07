@@ -2,23 +2,28 @@ export default [
     {
         name: 'name',
         type: 'text',
-        label: 'Full Name'
+        label: 'Full Name',
+        icon: 'user'
     },{
         name: 'email',
         type: 'text',
-        label: 'Email'
+        label: 'Email',
+        icon: 'at'
     },{
         name: 'phone',
         type: 'text',
-        label: 'Phone Number'
+        label: 'Phone Number',
+        icon: 'phone'
     },{
         name: 'password',
         type: 'password',
-        label: 'Password'
+        label: 'Password',
+        icon: 'unlock'
     },{
         name: 'password2',
         type: 'password',
-        label: 'Confirm Password'
+        label: 'Confirm Password',
+        icon: 'lock'
     },
 
 ]

@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {Menu} from 'semantic-ui-react'
 import withStyles from 'react-jss'
@@ -90,7 +91,7 @@ class NavBar extends Component {
                 <Container>
                     <Menu borderless size='huge' className={classes.nav}>
                         <Menu.Item className={classes.logo}>
-                            <h3>{'Forkit'.toUpperCase()}</h3>
+                            <Link to='/'><h3>{'Forkit'.toUpperCase()}</h3></Link>
                         </Menu.Item>
                         <Menu.Item className={classes.menuItem} name='menu'
                                    onClick={this.handleItemClick}/>
@@ -100,9 +101,11 @@ class NavBar extends Component {
                                 Order <Icon style={{marginLeft: 5, bottom: 2}} color='#ffffff' name='utensilsAlt'/>
                             </Menu.Item>
                             <Menu.Item className={classes.menuItemRight} name='login'/>
-                            <Menu.Item className={classes.menuItemRight} name='signup' />
-                            <Menu.Item id='burger' style={{bottom: 2, ...inactiveBackground}} active={this.props.sideNav} className={classes.burgerMenu}
-                                       onClick={this.toggleVisibility}>
+                            <Menu.Item className={classes.menuItemRight} >
+                                <Link to='/signup'>sign up</Link>
+                            </Menu.Item>
+                            <Menu.Item id='burger' style={{bottom: 2, ...inactiveBackground}} active={this.props.sideNav}
+                                       className={classes    .burgerMenu} onClick={this.toggleVisibility}>
                                 <h3><Icon color='#ffffff' name='bars'/></h3>
                             </Menu.Item>
                         </Menu.Menu>

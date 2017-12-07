@@ -3,7 +3,7 @@ import injectSheet from 'react-jss'
 import {renderRoutes} from 'react-router-config'
 
 import NavBar from './components/NavBar'
-import SideMenu from './components/NavBar/SideMenu'
+import SignupForm from './pages/components/Forms/Signup'
 import Footer from './components/Footer'
 import Container from './components/Container'
 
@@ -38,7 +38,7 @@ class App extends Component {
         return (
             <div className={classes.root} style={{minHeight: 'inherit'}}>
                 <NavBar/>
-                <Container>
+                <Container style={{display: 'flex', alignItems: 'center', alignContent: 'center', justifyContent: 'center'}}>
                     {renderRoutes(route.routes)}
                 </Container>
                 <Footer/>

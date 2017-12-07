@@ -2,7 +2,7 @@ import React from 'react'
 import {Button, Form, Grid, Header, Message, Segment} from 'semantic-ui-react'
 import withStyle from 'react-jss'
 
-import Icon from '../../../components/Icon'
+import Icon from '../../../../components/Icon/index'
 
 const styles = theme => ({
     gridCol: {
