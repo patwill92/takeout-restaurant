@@ -1,3 +1,6 @@
 export default () => {
-    require('./MenuItem')
+    require('./MenuItem');
+    require('./Invoice');
+    require('./Order');
+    require('./User');
 }

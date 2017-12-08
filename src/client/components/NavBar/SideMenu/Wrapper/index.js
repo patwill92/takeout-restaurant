@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import withStyles from 'react-jss'
 
-import {toggleSideNav, fetchMenuAdminServer} from "../../../../actions/index";
+import {toggleSideNav, fetchMenuAdmin} from "../../../../actions";
 
 const styles = {
     root: {
@@ -56,4 +56,4 @@ const mapStateToProps = ({sideNav}) => {
     }
 }
 
-export default connect(mapStateToProps, {toggleSideNav, fetchMenuAdminServer})(withStyles(styles)(Wrapper))
+export default connect(mapStateToProps, {toggleSideNav, fetchMenuAdmin})(withStyles(styles)(Wrapper))

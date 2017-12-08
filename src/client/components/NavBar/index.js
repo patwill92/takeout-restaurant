@@ -7,7 +7,7 @@ import withStyles from 'react-jss'
 import Icon from '../Icon'
 import Container from '../Container'
 import SideMenu from './SideMenu'
-import {toggleSideNav} from "../../actions/index";
+import {toggleSideNav} from "../../actions";
 
 
 const styles = theme => ({
@@ -52,7 +52,7 @@ const styles = theme => ({
     },
     menuItem: {
         textTransform: 'uppercase !important',
-        fontWeight: 500 + ' !important',
+        fontWeight: 400 + ' !important',
         fontSize: '1.0rem !important',
         '&:hover': {
             backgroundColor: theme.palette.hoverPrimary + ' !important',
@@ -61,7 +61,7 @@ const styles = theme => ({
     },
     menuItemRight: {
         textTransform: 'uppercase !important',
-        fontWeight: 500 + ' !important',
+        fontWeight: 400 + ' !important',
         fontSize: '1.0rem !important',
         '&:hover': {
             backgroundColor: theme.palette.hoverPrimary + ' !important',
@@ -73,7 +73,7 @@ const styles = theme => ({
 class NavBar extends Component {
     state = {
         activeItem: 'home'
-    }
+    };
 
     toggleVisibility = () => this.props.toggleSideNav(!this.props.sideNav);
 

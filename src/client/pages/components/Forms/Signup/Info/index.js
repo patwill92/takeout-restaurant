@@ -4,8 +4,8 @@ import {Button, Form, Divider, Grid} from 'semantic-ui-react'
 import withStyles from 'react-jss'
 
 import RenderField from '../../RenderField/index'
-import validate from './validate'
-import fieldInfo from './fieldInfo'
+import validate from './data/validate'
+import fieldInfo from './data/fieldInfo'
 import Container from '../../../../../components/Container'
 import Icon from '../../../../../components/Icon'
 
@@ -20,21 +20,26 @@ const styles = theme => ({
         margin: 0 + '!important',
         maxHeight: 'inherit !important'
     },
-    button: {
+    email: {
         backgroundColor: '#fff !important',
         color: 'rgba(0,0,0,0.8) !important',
-        border: '1px solid rgba(0,0,0,0.8) !important'
+        border: '1px solid rgba(0,0,0,0.8) !important',
+        '&:hover': {
+            backgroundColor: 'rgba(0,0,0,0.8) !important',
+            color: '#fff !important',
+        }
     },
     social: {
         display: 'flex',
         justifyContent: 'flex-start',
         width: 245,
+        fontWeight: 400 + ' !important',
         margin: 'auto',
         '& *': {
             textTransform: 'uppercase !important'
         }
     },
-    socialFacebook: {
+    facebook: {
         backgroundColor: '#fff !important',
         border: '1px solid #3b5998 !important',
         color: '#3b5998 !important',
@@ -44,15 +49,13 @@ const styles = theme => ({
 
         }
     },
-    socialGoogle: {
+    google: {
         backgroundColor: '#fff !important',
         color: '#d62d20 !important',
         border: '1px solid #d62d20 !important',
         '&:hover': {
             backgroundColor: '#d62d20 !important',
-            '& span': {
-                color: '#fff !important'
-            }
+            color: '#fff !important'
 
         }
     }
@@ -61,12 +64,13 @@ const styles = theme => ({
 class InfoForm extends Component {
     state = {
         google: '#d62d20',
-        facebook: '#3b5998'
+        facebook: '#3b5998',
+        email: 'rgba(0,0,0,0.8)'
     };
 
     render() {
         let {handleSubmit, classes} = this.props;
-        let fields = fieldInfo.map(({name, type, label, icon}) => (
+        let fields = fieldInfo.inputs.map(({name, type, label, icon}) => (
             <Field
                 name={name}
                 type={type}
@@ -76,39 +80,38 @@ class InfoForm extends Component {
                 icon={icon}
             />
         ));
-        let google = '#d62d20';
-        let facebook = '#3b5998';
         return (
             <Grid className={classes.root} centered>
                 <Grid.Column className={classes.column} mobile={16} tablet={10} computer={8}>
                     <Container>
                         <Form className={classes.form} onSubmit={handleSubmit}>
                             {fields}
-                            <Button className={classes.button} fluid type='submit'>DONE!</Button>
+                            {/*<Button className={classes.button} fluid type='submit'>DONE!</Button>*/}
+
+                            {/*<Divider horizontal>Or</Divider>*/}
+                            {fieldInfo.buttons.map(({name, icon, color}, i) => {
+                                let divider = i < 1 && <Divider key='divider' horizontal>Or</Divider>;
+                                return (
+                                    [
+                                        <Button onMouseOut={() => this.setState({[name]: color})}
+                                                onMouseOver={() => this.setState({[name]: '#fff'})}
+                                                key={name + i}
+                                                className={classes[name]} style={{marginBottom: i === 1 ? 10 : 0}} fluid
+                                                type='submit'>
+                                            <div className={classes.social}>
+                                                <div style={{flex: 0, marginLeft: 15}}>
+                                                    <Icon name={icon} color={this.state[name]}/>
+                                                </div>
+                                                <div style={{flex: 1}}>
+                                                    <span>Sign up with {name}</span>
+                                                </div>
+                                            </div>
+                                        </Button>,
+                                        divider
+                                    ]
+                                )
+                            })}
                         </Form>
-                        <Divider horizontal>Or</Divider>
-                        <Button onMouseOut={() => this.setState({facebook})} onMouseOver={() => this.setState({facebook: '#fff'})}
-                            className={classes.socialFacebook} style={{marginBottom: 10}} fluid type='submit'>
-                            <div className={classes.social}>
-                                <div style={{flex: 0, marginLeft: 15}}>
-                                    <Icon name='facebookF' color={this.state.facebook}/>
-                                </div>
-                                <div style={{flex: 1}}>
-                                    <span>Sign up with facebook</span>
-                                </div>
-                            </div>
-                        </Button>
-                        <Button onMouseOut={() => this.setState({google})} onMouseOver={() => this.setState({google: '#fff'})}
-                                className={classes.socialGoogle} fluid type='submit'>
-                            <div className={classes.social}>
-                                <div style={{flex: 0, marginLeft: 15}}>
-                                    <Icon name='google' color={this.state.google}/>
-                                </div>
-                                <div style={{flex: 1}}>
-                                    <span>Sign up with google</span>
-                                </div>
-                            </div>
-                        </Button>
                     </Container>
                 </Grid.Column>
             </Grid>

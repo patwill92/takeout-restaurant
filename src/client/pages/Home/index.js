@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import withStyles from 'react-jss'
 import {connect} from 'react-redux';
 
-import {fetchMenu, fetchMenuServer, fetchMenuAdminServer} from "../../actions/index";
+import {fetchMenu, fetchMenuAdmin} from "../../actions";
 import HomeCard from './HomeCard'
 
 const styles = theme => ({
@@ -54,15 +54,15 @@ class Home extends Component {
     componentDidMount = () => {
         this.props.fetchMenu();
         console.log(this.props.clientMenu);
-    }
+    };
 
     render() {
         let {classes} = this.props;
         let srcSalmon = 'http://www.seriouseats.com/recipes/assets_c/2017/04/20170406-salmon-burgers-vicky-wasik-18-thumb-1500xauto-437252.jpg';
         let srcMain = 'http://fast.clickbooq.com/c58447-986/040312_Mercer_Knives_0391_FF-lg.jpg';
         let srcTall = 'https://i.pinimg.com/736x/db/fd/49/dbfd49836e7f521056ecff279afa0f69--gourmet-burgers-burger-recipes.jpg';
-        let src = 'https://www.goodfood.com.au/content/dam/images/g/s/p/r/l/u/image.related.wideLandscape.940x529.gsu081.png/1495780213265.jpg'
-        let src2 = 'https://d36wnpk9e3wo84.cloudfront.net/menu-item-images/400/web-butter-burger-deluxe-double-bacon.jpg'
+        let src = 'https://www.goodfood.com.au/content/dam/images/g/s/p/r/l/u/image.related.wideLandscape.940x529.gsu081.png/1495780213265.jpg';
+        let src2 = 'https://d36wnpk9e3wo84.cloudfront.net/menu-item-images/400/web-butter-burger-deluxe-double-bacon.jpg';
         return (
             <div className={classes.parent}>
                 <div><HomeCard type='button' content='order now' className={classes.root} src={'https://www.habitburger.com/wp-content/uploads/golden-chicken-widget.jpg'}/></div>
@@ -90,14 +90,14 @@ const loadData = async (mongoose) => {
     return [
         {
             data: menu,
-            func: fetchMenuServer
+            func: fetchMenu
         },
         {
             data: adminMenu,
-            func: fetchMenuAdminServer
+            func: fetchMenuAdmin
         }
     ]
-}
+};
 
 export default {
     component: connect(mapStateToProps, {fetchMenu})(withStyles(styles)(Home)),

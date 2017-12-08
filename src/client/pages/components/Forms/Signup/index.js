@@ -30,4 +30,5 @@ SignupForm.propTypes = {
     onSubmit: PropTypes.func.isRequired
 };
 
-export default SignupForm;
+
+export default SignupForm

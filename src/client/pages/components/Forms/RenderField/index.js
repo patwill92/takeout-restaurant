@@ -11,13 +11,10 @@ const styles = {
     inputContainer: {
         position: 'relative'
     }
-}
-
-
+};
 
 const RenderField = ({classes, input, label, type, meta, icon}) => {
     let iconSize = 15;
-    console.log(meta);
     let {touched, error, active} = meta;
     let iconColor = () => {
         if(!!(touched && error)) {
@@ -33,7 +30,7 @@ const RenderField = ({classes, input, label, type, meta, icon}) => {
     };
     return (
         <Form.Field error={!!(touched && error)}>
-            <label>{label}</label>
+            <label style={{fontWeight: 400, textTransform: 'uppercase'}}>{label}</label>
             <div className={classes.inputContainer}>
                 <input className={classes.root} {...input} placeholder={label} type={type} />
                 <div  style={{position: 'absolute', top: 38/4, left: 12}}>

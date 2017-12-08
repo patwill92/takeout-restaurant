@@ -15,7 +15,7 @@ const validate = values => {
     }
     if(!values.password) {
         errors.password = 'Please set a password'
-    } else if(values.password.length < 5) {
+    } else if(values.password.length < 4) {
         errors.password = 'Password must be at least 5 characters long'
     }
     if(!values.password2) {
