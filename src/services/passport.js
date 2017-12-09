@@ -35,54 +35,41 @@ passport.use(new GoogleStrategy({
         clientSecret: keys.googleClientSecret,
         callbackURL: '/auth/google/callback'
     },
-    (accessToken, refreshToken, profile, done) => {
-        console.log(profile);
-        User.findOne({googleId: profile.id})
-            .then(existingUser => {
-                if (existingUser) {
-                    done(null, existingUser)
-                } else {
-                    let user = {
-                        googleId: profile.id,
-                        name: profile.displayName,
-                    };
-                    if (profile.emails.length > 0) {
-                        user.email = profile.emails[0].value;
-                    }
-                    new User(user)
-                        .save()
-                        .then(user => done(null, user))
-                }
-            }).catch((err) => {
-            console.log(err);
-        })
+    async (accessToken, refreshToken, profile, done) => {
+        let email = profile.emails.length > 0 ? profile.emails[0].value : '';
+        let user = await User.findOne({email});
+        if (user) {
+            return done(null, user)
+        }
+        user = {
+            googleId: profile.id,
+            name: profile.displayName,
+            email: profile.emails.length > 0 ? profile.emails[0].value : ''
+        };
+        let newUser = await User(user).save();
+        done(null, newUser)
     })
 );
 
 passport.use(new FacebookStrategy({
-        clientID: '174898419734009',
-        clientSecret: '0b1a3aaaf8dbd7635d01c4741d1ee443',
-        callbackURL: '/auth/facebook/callback'
+        clientID: keys.facebookClientID,
+        clientSecret: keys.facebookClientSecret,
+        callbackURL: '/auth/facebook/callback',
+        profileFields: ['id', 'displayName', 'emails']
     },
-    (accessToken, refreshToken, profile, done) => {
-        console.log(profile);
-        User.findOne({facebookId: profile.id})
-            .then(existingUser => {
-                if (existingUser) {
-                    console.log(existingUser);
-                    done(null, existingUser)
-                } else {
-                    let user = {
-                        facebookId: profile.id,
-                        name: profile.displayName,
-                    };
-                    new User(user)
-                        .save()
-                        .then(user => done(null, user))
-                }
-            }).catch((err) => {
-            console.log(err);
-        })
+    async (accessToken, refreshToken, profile, done) => {
+    let email = profile.emails.length > 0 ? profile.emails[0].value : '';
+        let user = await User.findOne({email});
+        if (user) {
+            return done(null, user)
+        }
+        user = {
+            facebookId: profile.id,
+            name: profile.displayName,
+            email: profile.emails.length > 0 ? profile.emails[0].value : ''
+        };
+        let newUser = await User(user).save();
+        done(null, newUser)
     }));
 
 passport.serializeUser(function (user, done) {

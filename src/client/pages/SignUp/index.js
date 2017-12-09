@@ -17,13 +17,14 @@ const styles = theme => ({
 class SignUp extends Component {
     signUp = async (user) => {
         try {
-            await axios.post('/user/signup', user);
-            return this.props.history.push('/login');
-        } catch (e) {
+            let {data} = await axios.post('/user/signup', user);
+            if(!data.errors) {
+                return this.props.history.push('/');
+            }
+        } catch(e) {
             console.log(e.response.data);
         }
     };
-
     render() {
         let {classes} = this.props;
         return (

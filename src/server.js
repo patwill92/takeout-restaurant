@@ -16,14 +16,17 @@ import Models from './models'
 import keys from './config/keys.js'
 import api from './routes/api/apiMenu'
 import localAuth from './routes/auth/authLocal'
-import {toggleSideNav, getUser} from "./client/actions";
+import oAuth from './routes/auth/oAuth'
+import {toggleSideNav, getUser} from './client/actions'
 
 const MongoStore = MyMongoStore(session);
 const app = express();
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, {useMongoClient: true});
+
 Models();
+import './services/passport';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -58,6 +61,7 @@ app.use(expressValidator({
 app.use(express.static('public'));
 app.use('/api', api);
 app.use('/user', localAuth);
+app.use('/auth', oAuth);
 
 app.get('*', (req, res) => {
     const store = createServerStore();

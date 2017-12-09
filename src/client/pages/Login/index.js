@@ -1,32 +1,45 @@
 import React, {Component} from 'react'
+import {withRouter} from 'react-router-dom'
 import withStyles from 'react-jss'
 import {connect} from "react-redux"
+import axios from 'axios'
+
+import SignupForm from '../components/Forms/LoginForm'
+import {getUser} from "../../actions/auth-actions"
 
 const styles = theme => ({
     root: {
-
+        width: '100%',
+        display: 'flex'
     }
 });
 
-class Login extends Component {
-
+class SignUp extends Component {
+    signUp = async (user) => {
+        try {
+            let {data} = await axios.post('/user/login', user);
+            if(!data.errors) {
+                return this.props.history.push('/');
+            }
+        } catch(e) {
+            console.log(e.response.data);
+        }
+    };
     render() {
         let {classes} = this.props;
         return (
-            <div>
-                <h1>LOGIN PAGE</h1>
-            </div>
+            <SignupForm onSubmit={() => this.signUp(this.props.form.values)}/>
         )
     }
 }
 
 const mapStateToProps = ({form}) => {
     return {
-        form
+        form: form.login
     }
 };
 
 export default {
-    component: connect(mapStateToProps, null)(withStyles(styles)(Login))
+    component: connect(mapStateToProps, null)(withRouter(withStyles(styles)(SignUp)))
 }
 

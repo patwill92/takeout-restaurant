@@ -107,10 +107,10 @@ class InfoForm extends Component {
                                                 type={i < 1 ? 'submit' : 'button'}>
                                             <div className={classes.social}>
                                                 <div style={{flex: 0, marginLeft: 15}}>
-                                                    <Icon style={{bottom: 1}} name={icon} color={this.state[name]}/>
+                                                    <Icon style={{bottom: 2}} name={icon} color={this.state[name]}/>
                                                 </div>
                                                 <div style={{flex: 1}}>
-                                                    {i === 0 && <span>Sign up with {name}</span>}
+                                                    {i === 0 && <span>Continue with email</span>}
                                                     {i > 0 && <a href={`/auth/${name}`}><span>Continue with {name}</span></a>}
                                                 </div>
                                             </div>
@@ -128,7 +128,7 @@ class InfoForm extends Component {
 }
 
 let SignupInfoForm = reduxForm({
-    form: 'signup',
+    form: 'login',
     destroyOnUnmount: true,
     forceUnregisterOnUnmount: true,
     validate

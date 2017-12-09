@@ -79,6 +79,25 @@ class NavBar extends Component {
 
     handleItemClick = (e, {name}) => this.setState({activeItem: name});
 
+    renderNav = (user, classes) => {
+        switch(user) {
+            case null: return '';
+            case false: return [
+                <Menu.Item key='login' className={classes.menuItemRight} >
+                    <Link to='/login'>login</Link>
+                </Menu.Item>,
+                <Menu.Item key='signup' className={classes.menuItemRight} >
+                    <Link to='/signup'>sign up</Link>
+                </Menu.Item>
+            ];
+            default: return (
+                <Menu.Item className={classes.menuItemRight} >
+                    <a style={{textDecoration: 'none', color: '#fff'}} href='/user/logout'>logout</a>
+                </Menu.Item>
+            )
+        }
+    };
+
     render() {
         let {activeItem} = this.state;
         let {classes} = this.props;
@@ -100,10 +119,7 @@ class NavBar extends Component {
                                        onClick={this.handleItemClick}>
                                 Order <Icon style={{marginLeft: 5, bottom: 2}} color='#ffffff' name='utensilsAlt'/>
                             </Menu.Item>
-                            <Menu.Item className={classes.menuItemRight} name='login'/>
-                            <Menu.Item className={classes.menuItemRight} >
-                                <Link to='/signup'>sign up</Link>
-                            </Menu.Item>
+                            {this.renderNav(this.props.user, classes)}
                             <Menu.Item id='burger' style={{bottom: 2, ...inactiveBackground}} active={this.props.sideNav}
                                        className={classes    .burgerMenu} onClick={this.toggleVisibility}>
                                 <h3><Icon color='#ffffff' name='bars'/></h3>
@@ -116,9 +132,10 @@ class NavBar extends Component {
     }
 }
 
-const mapStateToProps = ({sideNav}) => {
+const mapStateToProps = ({sideNav, user}) => {
     return {
-        sideNav
+        sideNav,
+        user
     }
 };
 

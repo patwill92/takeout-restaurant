@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import withStyles from 'react-jss'
 import {connect} from 'react-redux';
+import axios from 'axios'
 
-import {fetchMenu, fetchMenuAdmin} from "../../actions";
+import {fetchMenu, fetchMenuAdmin, getUser} from "../../actions";
 import HomeCard from './HomeCard'
 
 const styles = theme => ({
@@ -53,7 +54,7 @@ class Home extends Component {
 
     componentDidMount = () => {
         this.props.fetchMenu();
-        console.log(this.props.clientMenu);
+        this.props.getUser();
     };
 
     render() {
@@ -65,8 +66,9 @@ class Home extends Component {
         let src2 = 'https://d36wnpk9e3wo84.cloudfront.net/menu-item-images/400/web-butter-burger-deluxe-double-bacon.jpg';
         return (
             <div className={classes.parent}>
-                <div><HomeCard type='button' content='order now' className={classes.root} src={'https://www.habitburger.com/wp-content/uploads/golden-chicken-widget.jpg'}/></div>
-                <div><HomeCard type='specials'  className={classes.root} /></div>
+                <div><HomeCard type='button' content='order now' className={classes.root}
+                               src={'https://www.habitburger.com/wp-content/uploads/golden-chicken-widget.jpg'}/></div>
+                <div><HomeCard type='specials' className={classes.root}/></div>
                 <div><HomeCard type='image' className={classes.root} src={src}/></div>
                 <div><HomeCard type='image' className={classes.root} src={srcMain}/></div>
                 <div><HomeCard type='image' className={classes.root} src={srcSalmon}/></div>
@@ -77,10 +79,11 @@ class Home extends Component {
     }
 }
 
-const mapStateToProps = ({menu: {clientMenu, adminMenu}}) => {
+const mapStateToProps = ({menu: {clientMenu, adminMenu}, user}) => {
     return {
         clientMenu,
-        adminMenu
+        adminMenu,
+        user
     }
 };
 
@@ -100,6 +103,6 @@ const loadData = async (mongoose) => {
 };
 
 export default {
-    component: connect(mapStateToProps, {fetchMenu})(withStyles(styles)(Home)),
+    component: connect(mapStateToProps, {fetchMenu, getUser})(withStyles(styles)(Home)),
     loadData
 }
