@@ -2,9 +2,8 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import withStyles from 'react-jss'
 import {connect} from "react-redux"
-import axios from 'axios'
 
-import SignupForm from '../components/Forms/LoginForm'
+import LoginForm from '../../components/Forms/LoginForm'
 import {getUser} from "../../actions/auth-actions"
 import Icon from '../../components/Icon'
 
@@ -24,21 +23,10 @@ const styles = theme => ({
     }
 });
 
-class SignUp extends Component {
+class Login extends Component {
     state = {
         stars: '#333',
         number: ''
-    };
-
-    signUp = async (user) => {
-        try {
-            let {data} = await axios.post('/user/login', user);
-            if (!data.errors) {
-                return this.props.history.push('/');
-            }
-        } catch (e) {
-            console.log(e.response.data);
-        }
     };
 
     mouseOver = (num) => {
@@ -57,7 +45,7 @@ class SignUp extends Component {
 
         return (
             <div>
-                <SignupForm onSubmit={() => this.signUp(this.props.form.values)}/>
+                <LoginForm />
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -90,6 +78,6 @@ const mapStateToProps = ({form}) => {
 };
 
 export default {
-    component: connect(mapStateToProps, null)(withRouter(withStyles(styles)(SignUp)))
+    component: connect(mapStateToProps, null)(withRouter(withStyles(styles)(Login)))
 }
 

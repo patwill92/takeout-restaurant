@@ -11,6 +11,10 @@ const userSchema = new Schema({
     },
     phone: String,
     password: String,
+    admin: {
+        type: Boolean,
+        default: false
+    },
     cart:  { type: String, default: '' },
     history: [{
         type: Schema.Types.ObjectId,

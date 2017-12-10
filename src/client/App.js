@@ -3,7 +3,7 @@ import injectSheet from 'react-jss'
 import {renderRoutes} from 'react-router-config'
 
 import NavBar from './components/NavBar'
-import SignupForm from './pages/components/Forms/Signup'
+import SignupForm from './components/Forms/Signup'
 import Footer from './components/Footer'
 import Container from './components/Container'
 

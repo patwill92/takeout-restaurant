@@ -4,6 +4,7 @@ import App from './App'
 import Home from './pages/Home'
 import Signup from './pages/SignUp'
 import Login from './pages/Login'
+import Admin from './pages/Admin'
 
 export default [
     {
@@ -21,6 +22,10 @@ export default [
             {
                 ...Login,
                 path: '/login'
+            },
+            {
+                ...Admin,
+                path: '/admin'
             }
         ]
     }

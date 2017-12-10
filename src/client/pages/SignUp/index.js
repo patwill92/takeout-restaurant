@@ -4,7 +4,7 @@ import withStyles from 'react-jss'
 import {connect} from "react-redux"
 import axios from 'axios'
 
-import SignupForm from '../components/Forms/Signup'
+import SignupForm from '../../components/Forms/Signup'
 import {getUser} from "../../actions/auth-actions"
 
 const styles = theme => ({

@@ -60,6 +60,10 @@ const styles = theme => ({
         }
     },
     menuItemRight: {
+        display: 'flex',
+        alignItems: 'center',
+        paddingLeft: 16,
+        paddingRight: 16,
         textTransform: 'uppercase !important',
         fontWeight: 400 + ' !important',
         fontSize: '1.0rem !important',
@@ -83,17 +87,12 @@ class NavBar extends Component {
         switch(user) {
             case null: return '';
             case false: return [
-                <Menu.Item key='login' className={classes.menuItemRight} >
-                    <Link to='/login'>login</Link>
-                </Menu.Item>,
-                <Menu.Item key='signup' className={classes.menuItemRight} >
-                    <Link to='/signup'>sign up</Link>
-                </Menu.Item>
+                <Link className={classes.menuItemRight} key='login' to='/login' >login</Link>,
+                <Link className={classes.menuItemRight} key='signup' to='/signup' >signup</Link>
+
             ];
             default: return (
-                <Menu.Item className={classes.menuItemRight} >
-                    <a style={{textDecoration: 'none', color: '#fff'}} href='/user/logout'>logout</a>
-                </Menu.Item>
+                    <a className={classes.menuItemRight} style={{textDecoration: 'none', color: '#fff'}} href='/user/logout'>logout</a>
             )
         }
     };

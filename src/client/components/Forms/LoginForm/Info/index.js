@@ -6,8 +6,8 @@ import withStyles from 'react-jss'
 import RenderField from '../../RenderField/index'
 import validate from './data/validate'
 import fieldInfo from './data/fieldInfo'
-import Container from '../../../../../components/Container'
-import Icon from '../../../../../components/Icon'
+import Container from '../../../Container/index'
+import Icon from '../../../Icon/index'
 
 const styles = theme => ({
     root: {
@@ -94,7 +94,7 @@ class InfoForm extends Component {
             <Grid className={classes.root} centered>
                 <Grid.Column className={classes.column} mobile={16} tablet={10} computer={8}>
                     <Container>
-                        <Form className={classes.form} onSubmit={handleSubmit}>
+                        <Form className={classes.form} action='/user/login' method='post'>
                             {fields}
                             {fieldInfo.buttons.map(({name, icon, color}, i) => {
                                 let divider = i < 1 && <Divider key='divider' horizontal>Or</Divider>;
@@ -107,10 +107,10 @@ class InfoForm extends Component {
                                                 type={i < 1 ? 'submit' : 'button'}>
                                             <div className={classes.social}>
                                                 <div style={{flex: 0, marginLeft: 15}}>
-                                                    <Icon style={{bottom: 1}} name={icon} color={this.state[name]}/>
+                                                    <Icon style={{bottom: 2}} name={icon} color={this.state[name]}/>
                                                 </div>
                                                 <div style={{flex: 1}}>
-                                                    {i === 0 && <span>Sign up with {name}</span>}
+                                                    {i === 0 && <span>Continue with email</span>}
                                                     {i > 0 && <a href={`/auth/${name}`}><span>Continue with {name}</span></a>}
                                                 </div>
                                             </div>
@@ -127,11 +127,11 @@ class InfoForm extends Component {
     }
 }
 
-let SignupInfoForm = reduxForm({
-    form: 'signup',
+let LoginInfoForm = reduxForm({
+    form: 'login',
     destroyOnUnmount: true,
     forceUnregisterOnUnmount: true,
     validate
 })(withStyles(styles)(InfoForm));
 
-export default SignupInfoForm
+export default LoginInfoForm
