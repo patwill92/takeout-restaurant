@@ -4,6 +4,5 @@
 .LSOverride
 node_modules
 .idea
-/src/config/dev.js
 /build
 /public
