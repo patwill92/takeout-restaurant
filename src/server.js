@@ -53,7 +53,9 @@ app.use('/auth', oAuth);
 
 app.get('*', (req, res) => {
     const store = createServerStore();
-    let promises = matchRoutes(Routes, req.url).map(({route}) => {
+    store.dispatch(getUser(req));
+    let routes = req.user ? !req.user.admin ? Routes.user : Routes.admin : Routes.user;
+    let promises = matchRoutes(routes, req.url).map(({route}) => {
         return route.loadData ? route.loadData(mongoose) : null
     }).filter(promise => promise);
 
@@ -65,9 +67,8 @@ app.get('*', (req, res) => {
             })
         }
         store.dispatch(toggleSideNav(false));
-        store.dispatch(getUser(req));
         const context = {};
-        const content = renderer(req, store, context);
+        const content = renderer(req, store, context, routes);
         res.send(content);
     })
 });

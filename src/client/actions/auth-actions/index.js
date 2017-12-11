@@ -4,7 +4,8 @@ import {GET_USER} from "../types";
 
 export const getUser = req => {
     if(req) {
-        req.user && delete req.user._doc.admin;
+        // req.user && delete req.user._doc.admin;
+        req.user && delete req.user._doc.password;
         return {type: GET_USER, payload: req.user}
     } else {
         return async dispatch => {

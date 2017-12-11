@@ -6,26 +6,24 @@ import {renderRoutes} from 'react-router-config'
 import serialize from 'serialize-javascript'
 import {JssProvider, SheetsRegistry, ThemeProvider} from 'react-jss'
 
-import Routes from '../client/Routes'
 import css from '../styles/semantic.min.css';
 import theme from '../styles/theme'
 
-export default (req, store, context) => {
+export default (req, store, context, routes) => {
     const sheets = new SheetsRegistry();
     const initStore = store.getState();
-
+    initStore.user && delete initStore.user.password;
     const content = renderToString(
         <Provider store={store}>
             <StaticRouter location={req.url} context={context}>
                 <JssProvider registry={sheets}>
                     <ThemeProvider theme={theme}>
-                        {renderRoutes(Routes)}
+                        {renderRoutes(routes)}
                     </ThemeProvider>
                 </JssProvider>
             </StaticRouter>
         </Provider>
     );
-
 
     return `
     <html>
@@ -44,7 +42,7 @@ export default (req, store, context) => {
       </head>
       <body>
         <div id="root">${content}</div>
-        <script>window.INITIAL_STATE = ${serialize(initStore)}</script>
+        <script id="initialState">window.INITIAL_STATE = ${serialize(initStore)}</script>
         <script src="bundle.js"></script>
       </body>
     </html>

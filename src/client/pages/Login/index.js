@@ -1,72 +1,33 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {withRouter} from 'react-router-dom'
 import withStyles from 'react-jss'
 import {connect} from "react-redux"
+import {Grid} from 'semantic-ui-react'
 
-import LoginForm from '../../components/Forms/LoginForm'
-import {getUser} from "../../actions/auth-actions"
-import Icon from '../../components/Icon'
-
-let icon = {
-
-};
+import LoginForm from '../../components/LoginForm'
+import Container from '../../components/Container'
 
 const styles = theme => ({
     root: {
-        width: '100%',
-        display: 'flex'
+        width: '100% !important',
+        margin: 0 + ' !important'
     },
-    icon: {
-        '&:hover': {
-            cursor: 'pointer'
-        }
+    column: {
+        backgroundColor: '#fff !important',
     }
 });
 
 class Login extends Component {
-    state = {
-        stars: '#333',
-        number: ''
-    };
-
-    mouseOver = (num) => {
-        this.setState({number: num});
-        switch(num) {
-            case 0: return this.setState({stars: '#39ff2b'});
-            case 1: return this.setState({stars: '#991312'});
-            case 2: return this.setState({stars: '#2b14dd'});
-            case 3: return this.setState({stars: '#de12b7'});
-            case 4: return this.setState({stars: '#de8918'});
-        }
-    }
-
     render() {
         let {classes} = this.props;
-
         return (
-            <div>
-                <LoginForm />
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    maxWidth: 400,
-                    marginTop: 50,
-                    marginLeft: 'auto',
-                    marginRight: 'auto'
-                }}>
-                    <div className={classes.iconParent}>
-                        {
-                            Array(5).fill().map((name, i) => {
-                                return (
-                                    <div onMouseOver={() => this.mouseOver(i)} key={i} className={classes.icon} style={{display: 'inline-block'}}>
-                                        <Icon color={!isNaN(this.state.number) && i <= this.state.number ? this.state.stars: '#333'} name='star'/>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                </div>
-            </div>
+            <Grid className={classes.root} centered>
+                <Grid.Column className={classes.column} mobile={16} tablet={10} computer={8}>
+                    <Container>
+                        <LoginForm/>
+                    </Container>
+                </Grid.Column>
+            </Grid>
         )
     }
 }

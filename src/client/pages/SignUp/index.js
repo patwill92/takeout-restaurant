@@ -2,33 +2,32 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import withStyles from 'react-jss'
 import {connect} from "react-redux"
-import axios from 'axios'
+import {Grid} from 'semantic-ui-react'
 
-import SignupForm from '../../components/Forms/Signup'
-import {getUser} from "../../actions/auth-actions"
+import Container from '../../components/Container'
+import SignupForm from '../../components/SignupForm'
 
 const styles = theme => ({
     root: {
-        width: '100%',
-        display: 'flex'
-    }
+        width: '100% !important',
+        margin: 0 + ' !important'
+    },
+    column: {
+        backgroundColor: '#fff !important',
+    },
 });
 
 class SignUp extends Component {
-    signUp = async (user) => {
-        try {
-            let {data} = await axios.post('/user/signup', user);
-            if(!data.errors) {
-                return this.props.history.push('/');
-            }
-        } catch(e) {
-            console.log(e.response.data);
-        }
-    };
     render() {
         let {classes} = this.props;
         return (
-            <SignupForm onSubmit={() => this.signUp(this.props.form.values)}/>
+            <Grid className={classes.root} centered>
+                <Grid.Column className={classes.column} mobile={16} tablet={10} computer={8}>
+                    <Container>
+                        <SignupForm/>
+                    </Container>
+                </Grid.Column>
+            </Grid>
         )
     }
 }

@@ -14,7 +14,8 @@ import ImageField from './FormImageField'
 
 const styles = theme => ({
     root: {
-        width: '100% !important'
+        width: '100% !important',
+        margin: 0 + ' !important'
     },
     column: {
         backgroundColor: '#fff !important',

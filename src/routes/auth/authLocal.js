@@ -10,7 +10,7 @@ import validate from './middleware'
 
 router.get('/current_user', (req, res) => {
     if (req.user) {
-        delete req.user.password;
+        delete req.user._doc.password;
         return res.send(req.user);
     } else {
         res.send('')
@@ -36,8 +36,6 @@ router.route('/signup')
                 let newUser = await User.create(user);
                 req.login(newUser, err => {
                     if (err) { return next(err); }
-                    delete newUser._doc.password;
-                    delete newUser._doc.admin;
                     return res.redirect('/');
                 });
             } catch (e) {
@@ -51,7 +49,6 @@ router.route('/login')
     .post(validate(check, User).login,
         passport.authenticate('local'),
         (req, res) => {
-            delete req.user.password;
             res.redirect('/')
         });
 

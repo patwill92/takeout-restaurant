@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import injectSheet from 'react-jss'
 import {renderRoutes} from 'react-router-config'
+import {connect} from 'react-redux'
 
 import NavBar from './components/NavBar'
-import SignupForm from './components/Forms/Signup'
 import Footer from './components/Footer'
 import Container from './components/Container'
 
@@ -34,10 +34,10 @@ class App extends Component {
     };
 
     render() {
-        let {classes, route} = this.props;
+        let {classes, route, user} = this.props;
         return (
             <div className={classes.root} style={{minHeight: 'inherit'}}>
-                <NavBar/>
+                { user ? !user.admin && <NavBar/> : <NavBar/>}
                 <Container style={{display: 'flex', alignItems: 'center', alignContent: 'center', justifyContent: 'center'}}>
                     {renderRoutes(route.routes)}
                 </Container>
@@ -47,7 +47,12 @@ class App extends Component {
     }
 }
 
+const mapStateToProps = ({user}) => {
+    return {
+        user
+    }
+}
 
 export default {
-    component: injectSheet(styles)(App)
+    component: connect(mapStateToProps)(injectSheet(styles)(App))
 };
