@@ -1,17 +1,10 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {withRouter} from 'react-router-dom'
-import {Field, reduxForm} from 'redux-form'
 import withStyles from 'react-jss'
 import {connect} from "react-redux"
-import axios from 'axios'
 
-import LoginForm from '../../components/Forms/LoginForm'
-import {getUser} from "../../actions/auth-actions"
-import Icon from '../../components/Icon'
-import MiniForm from './form'
 import AddItemForm from './AddItemForm'
-
-let icon = {};
+import ConfirmationForm from './AddItemConfirm'
 
 const styles = theme => ({
     root: {
@@ -32,42 +25,43 @@ const styles = theme => ({
 
 class Admin extends Component {
     state = {
-        stars: '#333',
-        number: ''
+        form: true,
+        blob: '',
+        height: '',
+        select: ''
     };
 
-    signUp = async (user) => {
-        try {
-            let {data} = await axios.post('/user/login', user);
-            if (!data.errors) {
-                return this.props.history.push('/');
-            }
-        } catch (e) {
-            console.log(e.response.data);
-        }
+    setBlob = (blob) => {
+        this.setState({blob})
     };
 
-    mouseOver = (num) => {
-        this.setState({number: num});
-        switch (num) {
-            case 0:
-                return this.setState({stars: '#39ff2b'});
-            case 1:
-                return this.setState({stars: '#991312'});
-            case 2:
-                return this.setState({stars: '#2b14dd'});
-            case 3:
-                return this.setState({stars: '#de12b7'});
-            case 4:
-                return this.setState({stars: '#de8918'});
-        }
+    goToConfirmation = () => {
+        this.setState({form: false})
+    }
+
+    setHeight = (height) => {
+        this.setState({height})
+    }
+
+    setSelect = (select) => {
+        this.setState({select})
     }
 
     render() {
         let {classes} = this.props;
-
         return (
-            <AddItemForm/>
+            <Fragment>
+                {this.state.form &&
+                <AddItemForm
+                    blob={this.state.blob}
+                    setBlob={this.setBlob}
+                    setSelect={this.setSelect}
+                    select={this.state.select}
+                    height={this.state.height}
+                    setHeight={this.setHeight}
+                    onSubmit={this.goToConfirmation} />}
+                {!this.state.form && <ConfirmationForm height={this.state.height} onSubmit={() => alert('submitted')} onBack={() => this.setState({form: true})}/>}
+            </Fragment>
         )
     }
 }
@@ -81,4 +75,3 @@ const mapStateToProps = ({form}) => {
 export default {
     component: connect(mapStateToProps, null)(withRouter(withStyles(styles)(Admin)))
 }
-

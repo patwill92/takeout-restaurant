@@ -1,7 +1,7 @@
 const validate = values => {
     const errors = {};
     if(!values.name) {
-        errors.firstName = 'Your name is required'
+        errors.name = 'Your name is required'
     }
     if(!values.email) {
         errors.email = 'Your email is required'

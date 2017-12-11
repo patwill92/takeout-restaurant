@@ -1,13 +1,16 @@
 import React, {Component} from 'react'
-import {Field, reduxForm} from 'redux-form'
-import {Button, Form, Divider, Grid} from 'semantic-ui-react'
+import {connect} from 'react-redux'
+import {Field, reduxForm, change, formValueSelector} from 'redux-form'
+import {Button, Form, Grid} from 'semantic-ui-react'
 import withStyles from 'react-jss'
 
-import RenderField from './formFields'
-import {fieldData} from './fieldData'
-import Container from '../../../components/Container'
-import Icon from '../../../components/Icon'
-import ImageField from './ImageField'
+import validate from '../data/validate'
+import InputFields from '../FormInputFields/index'
+import {fieldData} from '../data/index'
+import Container from '../../../components/Container/index'
+import Icon from '../../../components/Icon/index'
+import ImageField from '../FormImageField/index'
+
 
 const styles = theme => ({
     root: {
@@ -15,59 +18,13 @@ const styles = theme => ({
     },
     column: {
         backgroundColor: '#fff !important',
+        boxShadow: theme.shadows[4] + ' !important',
+        borderRadius: 5,
+        minHeight: 529.5 + ' !important'
     },
     form: {
         margin: 0 + '!important',
         maxHeight: 'inherit !important'
-    },
-    email: {
-        backgroundColor: '#fff !important',
-        color: 'rgba(0,0,0,0.8) !important',
-        border: '1px solid rgba(0,0,0,0.8) !important',
-        '&:hover': {
-            backgroundColor: 'rgba(0,0,0,0.8) !important',
-            color: '#fff !important',
-        }
-    },
-    social: {
-        display: 'flex',
-        justifyContent: 'flex-start',
-        width: 245,
-        fontWeight: 400 + ' !important',
-        margin: 'auto',
-        '& *': {
-            textTransform: 'uppercase !important'
-        }
-    },
-    facebook: {
-        backgroundColor: '#fff !important',
-        border: '1px solid #3b5998 !important',
-        '& a': {
-            color: '#3b5998 !important',
-            textDecoration: 'none'
-        },
-        '&:hover': {
-            backgroundColor: '#3b5998 !important',
-            '& a': {
-                color: '#fff !important',
-                textDecoration: 'none'
-            }
-        }
-    },
-    google: {
-        backgroundColor: '#fff !important',
-        '& a': {
-            color: '#d62d20 !important',
-            textDecoration: 'none'
-        },
-        border: '1px solid #d62d20 !important',
-        '&:hover': {
-            backgroundColor: '#d62d20 !important',
-            '& a': {
-                color: '#fff !important',
-                textDecoration: 'none'
-            }
-        }
     },
     file: {
         border: `1px solid ${theme.palette.primary}`,
@@ -75,56 +32,113 @@ const styles = theme => ({
         display: 'inline-block',
         padding: '6px 12px',
         cursor: 'pointer'
+    },
+    btn: {
+        float: 'right',
+        fontWeight: 400 + ' !important',
+        textTransform: 'uppercase !important',
+        color: '#fff !important',
+        backgroundColor: theme.palette.primary + ' !important',
+        boxShadow: theme.shadows[1] + ' !important',
+        '&:hover': {
+            boxShadow: theme.shadows[3] + ' !important'
+        }
     }
 });
 
 class AddItemForm extends Component {
     state = {
         blob: '',
-        name: ''
+        name: '',
+        height: ''
     };
+
+    componentDidMount = () => {
+        if(this.props.select) {
+            document.querySelector('.text').classList.remove('default');
+            document.querySelector('.text').innerHTML = this.props.select;
+        }
+    }
+
+    onSelectChange = (payload) => {
+        this.props.setSelect(payload);
+        this.props.dispatch(change('additem', 'category', payload))
+    };
+
     onImgChange = (e) => {
         let file = e.target.files[0];
         console.log(file);
         this.setState({name: file.name});
         let reader = new FileReader();
         reader.addEventListener("load", () => {
-            this.setState({blob: reader.result})
+            this.props.setBlob(reader.result)
         }, false);
         if (file) {
             reader.readAsDataURL(file);
         }
     };
 
+    componentWillUpdate = (nextProps) => {
+        if (nextProps.price) {
+            console.log(nextProps.price.length);
+            let firstCondition = !(parseInt(nextProps.price) || Number(nextProps.price) === 0 || /\./.test(nextProps.price));
+            if (nextProps.price.length === 1 && firstCondition) {
+                this.props.dispatch(change('additem', 'price', ''));
+            }
+            if (nextProps.price.length === 2 && (nextProps.price.match(/[0]/g) || []).length > 1) {
+                this.props.dispatch(change('additem', 'price', this.props.price));
+            }
+            if ((nextProps.price.match(/\./g) || []).length > 1) {
+                this.props.dispatch(change('additem', 'price', this.props.price));
+            }
+            if ((nextProps.price.match(/\./g) || []).length > 0 && !(/\.\d{0,2}?$/.test(nextProps.price))) {
+                this.props.dispatch(change('additem', 'price', this.props.price));
+            }
+        }
+    };
+
+    customSubmit = () => {
+        this.props.setHeight(document.getElementById('form1').clientHeight);
+        this.props.handleSubmit()
+    }
+
     render() {
-        let {handleSubmit, classes} = this.props;
-        console.log(this.state.name);
+        let {classes, handleSubmit} = this.props;
         let fields = fieldData.map((field, i) => (
             <Field
+                onSelectChange={this.onSelectChange}
                 name={field.name}
                 type={field.type}
                 label={field.label}
-                component={RenderField}
+                component={InputFields}
                 value={field.value}
                 key={field.value ? field.value : field.name}
                 icon={field.icon}
-                textArea={field.textArea ? field.textArea : false}
-                radio={field.radio ? field.radio : false}
+                cat={field.select}
+                textArea={field.textArea}
+                radio={field.radio}
             />
         ));
         return (
             <Grid className={classes.root} centered>
-                <Grid.Column className={classes.column} mobile={16} tablet={10} computer={8}>
-                    <Container>
-                        <Form className={classes.form} >
+                <Grid.Column id='form1'  className={classes.column} mobile={16} tablet={10} computer={8}>
+                    <Container >
+                        <Form onSubmit={this.customSubmit} className={classes.form}>
                             <Field name="avatar"
-                            label={this.state.blob}
-                            form={this.state.name}
-                            onChange={this.onImgChange}
-                            component={ImageField}
-                            classes={classes}
+                                   label={this.props.blob}
+                                   form={this.state.name}
+                                   onChange={this.onImgChange}
+                                   component={ImageField}
+                                   classes={classes}
                             />
                             {fields}
+                            <br/>
+                            <Button
+                                type='submit'
+                                className={classes.btn}>Continue
+                                <Icon color='#fff' style={{marginLeft: 5, fontSize: '0.9rem', bottom: 1}}
+                                      name='chevronRight'/>
+                            </Button>
                         </Form>
                     </Container>
                 </Grid.Column>
@@ -134,11 +148,18 @@ class AddItemForm extends Component {
 }
 
 
-
 let AddItem = reduxForm({
     form: 'additem',
-    destroyOnUnmount: true,
+    destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
+    validate
 })(withStyles(styles)(AddItemForm));
 
-export default AddItem
+const formSelector = formValueSelector('additem');
+const mapStateToProps = state => {
+    return {
+        price: formSelector(state, 'price')
+    }
+};
+
+export default connect(mapStateToProps)(AddItem)

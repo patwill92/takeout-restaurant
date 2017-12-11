@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Icon from '../../../components/Icon'
+import Icon from '../../../components/Icon/index'
 
 const ImageField = props => {
     let {input, label, classes} = props;
@@ -9,7 +9,7 @@ const ImageField = props => {
             <label>{'image'.toUpperCase()}</label>
             <div style={{marginBottom: 5}} />
             <label className={classes.file}>
-                <input type='file' {...input} value={null} style={{display: 'none'}}/>
+                <input type='file' {...input} value={undefined} style={{display: 'none'}}/>
                 <Icon name='image' style={{marginRight: 5, top: 1}}/>
                 <span style={{fontSize: '1rem'}}>{input.value && input.value[0].name ? input.value[0].name : 'Upload'}</span>
             </label>
