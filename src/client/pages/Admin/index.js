@@ -5,6 +5,7 @@ import {connect} from "react-redux"
 
 import AddItemForm from './AddItemForm'
 import ConfirmationForm from './AddItemConfirm'
+import {addMenuItem} from "../../actions/menu-actions";
 
 const styles = theme => ({
     root: {
@@ -37,18 +38,27 @@ class Admin extends Component {
 
     goToConfirmation = () => {
         this.setState({form: false})
-    }
+    };
 
     setHeight = (height) => {
         this.setState({height})
-    }
+    };
 
     setSelect = (select) => {
         this.setState({select})
+    };
+
+    uploadMenuItem = async (item) => {
+        let formData = new FormData();
+        item = {...item, image: item.image[0]};
+        for(const name in item) {
+            formData.append(name, item[name])
+        }
+        this.props.addMenuItem(formData, this.props.history);
     }
 
     render() {
-        let {classes} = this.props;
+        let {classes, form} = this.props;
         return (
             <Fragment>
                 {this.state.form &&
@@ -60,7 +70,13 @@ class Admin extends Component {
                     height={this.state.height}
                     setHeight={this.setHeight}
                     onSubmit={this.goToConfirmation} />}
-                {!this.state.form && <ConfirmationForm height={this.state.height} onSubmit={() => alert('submitted')} onBack={() => this.setState({form: true})}/>}
+                {!this.state.form &&
+                <ConfirmationForm
+                    formContent={this.props.form}
+                    height={this.state.height}
+                    blob={this.state.blob}
+                    onSubmit={() => this.uploadMenuItem(form.values)}
+                    onBack={() => this.setState({form: true})}/>}
             </Fragment>
         )
     }
@@ -68,10 +84,10 @@ class Admin extends Component {
 
 const mapStateToProps = ({form}) => {
     return {
-        form
+        form: form.addItem
     }
 };
 
 export default {
-    component: connect(mapStateToProps, null)(withRouter(withStyles(styles)(Admin)))
+    component: connect(mapStateToProps, {addMenuItem})(withRouter(withStyles(styles)(Admin)))
 }

@@ -2,7 +2,6 @@ import express from 'express'
 import {matchRoutes} from 'react-router-config'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
-import expressValidator from 'express-validator'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
 import MyMongoStore from 'connect-mongo'
@@ -24,6 +23,11 @@ const app = express();
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, {useMongoClient: true});
+cloudinary.config({
+    cloud_name: keys.cloudName,
+    api_key: keys.cloudKey,
+    api_secret: keys.cloudSecret
+});
 
 Models();
 import './services/passport';
@@ -42,22 +46,6 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(expressValidator({
-    errorFormatter(param, msg, value) {
-        let namespace = param.split('.')
-            , root = namespace.shift()
-            , formParam = root;
-        while (namespace.length) {
-            formParam += '[' + namespace.shift() + ']';
-        }
-        return {
-            param: formParam,
-            msg: msg,
-            value: value
-        };
-    }
-}));
-
 app.use(express.static('public'));
 app.use('/api', api);
 app.use('/user', localAuth);

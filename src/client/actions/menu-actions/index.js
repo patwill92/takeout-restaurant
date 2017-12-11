@@ -23,3 +23,13 @@ export const fetchMenuAdmin = req => {
         }
     }
 };
+
+export const addMenuItem = (data, history) => async dispatch => {
+    try {
+        await axios.post('/api/menu', data, {headers: {'Content-Type': 'multipart/form-data'}});
+        history.push('/');
+        dispatch({type: FETCH_MENU});
+    } catch(e) {
+        console.log(e)
+    }
+};

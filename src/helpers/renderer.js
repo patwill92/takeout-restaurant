@@ -11,22 +11,23 @@ import css from '../styles/semantic.min.css';
 import theme from '../styles/theme'
 
 export default (req, store, context) => {
-  const sheets = new SheetsRegistry();
+    const sheets = new SheetsRegistry();
+    const initStore = store.getState();
 
-  const content = renderToString(
-    <Provider store={store}>
-        <StaticRouter location={req.url} context={context}>
-            <JssProvider registry={sheets}>
-                <ThemeProvider theme={theme}>
-                    {renderRoutes(Routes)}
-                </ThemeProvider>
-            </JssProvider>
-        </StaticRouter>
-    </Provider>
-  );
+    const content = renderToString(
+        <Provider store={store}>
+            <StaticRouter location={req.url} context={context}>
+                <JssProvider registry={sheets}>
+                    <ThemeProvider theme={theme}>
+                        {renderRoutes(Routes)}
+                    </ThemeProvider>
+                </JssProvider>
+            </StaticRouter>
+        </Provider>
+    );
 
 
-  return `
+    return `
     <html>
       <head>
         <meta charset="UTF-8">
@@ -43,7 +44,7 @@ export default (req, store, context) => {
       </head>
       <body>
         <div id="root">${content}</div>
-        <script>window.INITIAL_STATE = ${serialize(store.getState())}</script>
+        <script>window.INITIAL_STATE = ${serialize(initStore)}</script>
         <script src="bundle.js"></script>
       </body>
     </html>

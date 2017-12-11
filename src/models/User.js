@@ -19,6 +19,10 @@ const userSchema = new Schema({
     history: [{
         type: Schema.Types.ObjectId,
         ref: "Invoice"
+    }],
+    reviews: [{
+        type: Schema.Types.ObjectId,
+        ref: "Review"
     }]
 });
 

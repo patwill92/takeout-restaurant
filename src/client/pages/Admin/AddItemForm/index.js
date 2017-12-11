@@ -4,12 +4,12 @@ import {Field, reduxForm, change, formValueSelector} from 'redux-form'
 import {Button, Form, Grid} from 'semantic-ui-react'
 import withStyles from 'react-jss'
 
-import validate from '../data/validate'
-import InputFields from '../FormInputFields/index'
-import {fieldData} from '../data/index'
-import Container from '../../../components/Container/index'
-import Icon from '../../../components/Icon/index'
-import ImageField from '../FormImageField/index'
+import validate from './data/validate'
+import InputFields from './FormInputFields'
+import {fieldData} from './data/index'
+import Container from '../../../components/Container'
+import Icon from '../../../components/Icon'
+import ImageField from './FormImageField'
 
 
 const styles = theme => ({
@@ -62,7 +62,7 @@ class AddItemForm extends Component {
 
     onSelectChange = (payload) => {
         this.props.setSelect(payload);
-        this.props.dispatch(change('additem', 'category', payload))
+        this.props.dispatch(change('addItem', 'category', payload))
     };
 
     onImgChange = (e) => {
@@ -83,16 +83,16 @@ class AddItemForm extends Component {
             console.log(nextProps.price.length);
             let firstCondition = !(parseInt(nextProps.price) || Number(nextProps.price) === 0 || /\./.test(nextProps.price));
             if (nextProps.price.length === 1 && firstCondition) {
-                this.props.dispatch(change('additem', 'price', ''));
+                this.props.dispatch(change('addItem', 'price', ''));
             }
             if (nextProps.price.length === 2 && (nextProps.price.match(/[0]/g) || []).length > 1) {
-                this.props.dispatch(change('additem', 'price', this.props.price));
+                this.props.dispatch(change('addItem', 'price', this.props.price));
             }
             if ((nextProps.price.match(/\./g) || []).length > 1) {
-                this.props.dispatch(change('additem', 'price', this.props.price));
+                this.props.dispatch(change('addItem', 'price', this.props.price));
             }
             if ((nextProps.price.match(/\./g) || []).length > 0 && !(/\.\d{0,2}?$/.test(nextProps.price))) {
-                this.props.dispatch(change('additem', 'price', this.props.price));
+                this.props.dispatch(change('addItem', 'price', this.props.price));
             }
         }
     };
@@ -124,7 +124,7 @@ class AddItemForm extends Component {
                 <Grid.Column id='form1'  className={classes.column} mobile={16} tablet={10} computer={8}>
                     <Container >
                         <Form onSubmit={this.customSubmit} className={classes.form}>
-                            <Field name="avatar"
+                            <Field name="image"
                                    label={this.props.blob}
                                    form={this.state.name}
                                    onChange={this.onImgChange}
@@ -149,13 +149,13 @@ class AddItemForm extends Component {
 
 
 let AddItem = reduxForm({
-    form: 'additem',
+    form: 'addItem',
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
     validate
 })(withStyles(styles)(AddItemForm));
 
-const formSelector = formValueSelector('additem');
+const formSelector = formValueSelector('addItem');
 const mapStateToProps = state => {
     return {
         price: formSelector(state, 'price')

@@ -20,7 +20,11 @@ const menuItemSchema = new Schema({
     },
     image: {
         type: String
-    }
+    },
+    reviews: [{
+        type: Schema.Types.ObjectId,
+        ref: "Review"
+    }]
 });
 
 export default mongoose.model("Item", menuItemSchema);
