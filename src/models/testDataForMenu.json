@@ -1,0 +1,19 @@
+[{
+    "name":  "CheeseBurger",
+    "category": "Burgers",
+    "description":"wonderful burger with cheese",
+    "price":17.00,
+    "available":true,
+    "image":"https://media-cdn.tripadvisor.com/media/photo-s/0a/65/8f/78/burgerrr.jpg"
+},
+{
+    "name":  "Chicken Sandwich",
+    "category": "Chicken",
+    "description":"Wonderful chicken sandwich",
+    "price":11.00,
+    "available":true,
+    "image":"https://lh3.googleusercontent.com/alX3SlsbUt4ZBZ1ct6efz5wxIcjM6S3Gva_pstMNXGjlFAQRr6CbpwFyFNoixBgPOGXxQi7vqC3U0CDT8oGz4lu4IZWzifs40owj_jA=w600-l68"
+}
+]
+
+

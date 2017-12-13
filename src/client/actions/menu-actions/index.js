@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import {FETCH_MENU_ADMIN, FETCH_MENU} from "../types";
+import {FETCH_MENU_ADMIN, FETCH_MENU, FETCH_TEST_MENU} from "../types";
 
 export const fetchMenu = req => {
     if(req) {
@@ -12,6 +12,11 @@ export const fetchMenu = req => {
         }
     }
 };
+
+export const fetchTestMenu = () => async dispatch => {
+    const {data} = await axios.get('/api/testmenu');
+    dispatch({type: FETCH_TEST_MENU, payload: data})
+}
 
 export const fetchMenuAdmin = req => {
     if(req) {

@@ -1,6 +1,7 @@
 export {
     fetchMenu,
-    fetchMenuAdmin
+    fetchMenuAdmin,
+    fetchTestMenu,
 } from './menu-actions'
 
 export {

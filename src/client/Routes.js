@@ -6,6 +6,9 @@ import Signup from './pages/SignUp'
 import Login from './pages/Login'
 import Admin from './pages/Admin'
 import Error from './pages/Error'
+import Menu from './pages/Menu'
+import Testing from './pages/Testing'
+import TestMenu from './pages/Testmenu'
 
 export default {
     admin: [
@@ -41,7 +44,19 @@ export default {
                     ...Login,
                     path: '/login'
                 },
-                {...Error}
+                {
+                    ...Menu,
+                    path: '/menu'
+                },
+                {
+                    ...TestMenu,
+                    path: '/testmenu'
+                },
+                {
+                    ...Testing,
+                    path: '/testing'
+                },
+                {...Error},
             ]
         }
     ]
