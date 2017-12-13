@@ -20,6 +20,10 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Invoice"
     }],
+    itemsPurchased:[{
+        type: Schema.Types.ObjectId,
+        ref: "Item"
+    }],
     reviews: [{
         type: Schema.Types.ObjectId,
         ref: "Review"
