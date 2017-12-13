@@ -11,6 +11,7 @@ const styles = theme => ({
         alignContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgba(0,0,0,0.8)',
+        backgroundImage: 'url("http://res.cloudinary.com/daj4m3xio/image/upload/v1511822287/black-linen_vglyyw.png") !important',
         marginTop: 30,
         paddingTop: 50,
         paddingBottom: 50,
@@ -38,7 +39,7 @@ const Footer = ({classes}) => {
     return (
         <div className={classes.root}>
             <div className={classes.social}>
-                <Icon name='facebook' color='rgba(255, 255, 255, 0.8)' />
+                <Icon name='facebook' color='rgba(255, 255, 255, 0.8)'/>
             </div>
             <div className={classes.address}>
                 Giulia 1682 Massachusetts Avenue

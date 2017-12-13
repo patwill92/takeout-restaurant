@@ -15,6 +15,11 @@ const styles = theme => ({
         body: {
             backgroundColor: '#FAFAFA !important',
             backgroundImage: 'url("http://res.cloudinary.com/daj4m3xio/image/upload/e_colorize:100/v1511820883/45-degree-fabric-light_drgxti.png") !important',
+
+        },
+        '.sidebar::-webkit-scrollbar': {
+            '-webkit-appearance': 'none !important',
+            display: 'none !important'
         },
         '#root': {
             minHeight: '100% !important'
@@ -33,17 +38,23 @@ class App extends Component {
         jssStyles.parentNode.removeChild(jssStyles);
     };
 
-    render() {
-        let {classes, route, user} = this.props;
+    renderUserApp = (route, classes) => {
         return (
             <div className={classes.root} style={{minHeight: 'inherit'}}>
-                { user ? !user.admin && <NavBar/> : <NavBar/>}
-                <Container style={{display: 'flex', alignItems: 'center', alignContent: 'center', justifyContent: 'center'}}>
+                <NavBar/>
+                <Container
+                    style={{display: 'flex', alignItems: 'center', alignContent: 'center', justifyContent: 'center'}}>
                     {renderRoutes(route.routes)}
                 </Container>
                 <Footer/>
             </div>
         )
+    };
+
+    render() {
+        let {classes, route, user} = this.props;
+        return user ? !user.admin ? this.renderUserApp(route, classes)
+         : renderRoutes(route.routes) : this.renderUserApp(route, classes)
     }
 }
 
@@ -51,7 +62,7 @@ const mapStateToProps = ({user}) => {
     return {
         user
     }
-}
+};
 
 export default {
     component: connect(mapStateToProps)(injectSheet(styles)(App))

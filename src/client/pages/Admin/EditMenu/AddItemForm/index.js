@@ -5,11 +5,11 @@ import {Button, Form, Grid} from 'semantic-ui-react'
 import withStyles from 'react-jss'
 
 import validate from './data/validate'
-import InputFields from './FormInputFields'
+import InputFields from './FormInputFields/index'
 import {fieldData} from './data/index'
-import Container from '../../../components/Container'
-import Icon from '../../../components/Icon'
-import ImageField from './FormImageField'
+import Container from '../../../../components/Container/index'
+import Icon from '../../../../components/Icon/index'
+import ImageField from './FormImageField/index'
 
 
 const styles = theme => ({
@@ -81,19 +81,17 @@ class AddItemForm extends Component {
 
     componentWillUpdate = (nextProps) => {
         if (nextProps.price) {
-            console.log(nextProps.price.length);
-            let firstCondition = !(parseInt(nextProps.price) || Number(nextProps.price) === 0 || /\./.test(nextProps.price));
+            let firstCondition = !(/[0-9]/g.test(nextProps.price) || /\./.test(nextProps.price));
             if (nextProps.price.length === 1 && firstCondition) {
-                this.props.dispatch(change('addItem', 'price', ''));
-            }
-            if (nextProps.price.length === 2 && (nextProps.price.match(/[0]/g) || []).length > 1) {
-                this.props.dispatch(change('addItem', 'price', this.props.price));
-            }
-            if ((nextProps.price.match(/\./g) || []).length > 1) {
-                this.props.dispatch(change('addItem', 'price', this.props.price));
-            }
-            if ((nextProps.price.match(/\./g) || []).length > 0 && !(/\.\d{0,2}?$/.test(nextProps.price))) {
-                this.props.dispatch(change('addItem', 'price', this.props.price));
+                return this.props.dispatch(change('addItem', 'price', ''));
+            } else if (nextProps.price.length === 2 && (nextProps.price.match(/[0]/g) || []).length > 1) {
+                return this.props.dispatch(change('addItem', 'price', this.props.price));
+            } else if ((nextProps.price.match(/\./g) || []).length > 1) {
+                return this.props.dispatch(change('addItem', 'price', this.props.price));
+            } else if(!/[0-9]/g.test(nextProps.price) && (nextProps.price.match(/\./g) || []).length < 1) {
+                return this.props.dispatch(change('addItem', 'price', this.props.price));
+            } else if ((nextProps.price.match(/\./g) || []).length > 0 && !(/\.\d{0,2}?$/.test(nextProps.price))) {
+                return this.props.dispatch(change('addItem', 'price', this.props.price));
             }
         }
     };
