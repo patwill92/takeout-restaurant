@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+
+
 const userSchema = new Schema({
     googleId: String,
     facebookId: String,
@@ -23,10 +25,6 @@ const userSchema = new Schema({
     itemsPurchased:[{
         type: Schema.Types.ObjectId,
         ref: "Item"
-    }],
-    reviews: [{
-        type: Schema.Types.ObjectId,
-        ref: "Review"
     }]
 });
 

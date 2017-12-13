@@ -45,7 +45,7 @@ class Admin extends Component {
                     <Link className={classes.menuItem} to='/signup'>signup</Link>
                 </Menu>
                 <Container >
-                    <Dashboard/>
+                    <EditMenu/>
                 </Container>
             </div>
         )

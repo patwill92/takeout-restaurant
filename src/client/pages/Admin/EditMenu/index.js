@@ -88,6 +88,4 @@ const mapStateToProps = ({form}) => {
     }
 };
 
-export default {
-    component: connect(mapStateToProps, {addMenuItem, fetchMenu})(withRouter(withStyles(styles)(Admin)))
-}
+export default connect(mapStateToProps, {addMenuItem, fetchMenu})(withRouter(withStyles(styles)(Admin)))
