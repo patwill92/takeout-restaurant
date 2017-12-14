@@ -2,6 +2,7 @@ export {
     fetchMenu,
     fetchMenuAdmin,
     fetchTestMenu,
+    updateMenu
 } from './menu-actions'
 
 export {

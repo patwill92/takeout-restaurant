@@ -58,8 +58,9 @@ app.get('*', (req, res) => {
     let promises = matchRoutes(routes, req.url).map(({route}) => {
         return route.loadData ? route.loadData(mongoose) : null
     }).filter(promise => promise);
-
-    Promise.all(promises).then((promise) => {
+/*    console.log("look below")
+    console.log(promises) */
+     Promise.all(promises).then((promise) => {
         if(promise[0]) {
             promise[0].forEach(({data, func}) => {
                 req.dispatchData = data;
@@ -69,6 +70,7 @@ app.get('*', (req, res) => {
         store.dispatch(toggleSideNav(false));
         const context = {};
         const content = renderer(req, store, context, routes);
+        console.log(store.getState())
         res.send(content);
     })
 });

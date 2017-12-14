@@ -9,13 +9,10 @@ import {client as createClientStore} from '../helpers/store'
 import Routes from './Routes'
 import theme from '../styles/theme'
 
-const init = document.getElementById('initialState');
-const initState = {...window.INITIAL_STATE};
-const store = createClientStore(initState);
+
+const store = createClientStore(window.INITIAL_STATE);
 const {user} = store.getState();
 const routes = user ? !user.admin ? Routes.user : Routes.admin : Routes.user;
-
-init.remove();
 
 ReactDOM.hydrate(
     <Provider store={store}>

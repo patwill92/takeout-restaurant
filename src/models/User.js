@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-
-
-
 const userSchema = new Schema({
     googleId: String,
     facebookId: String,
@@ -28,8 +25,7 @@ const userSchema = new Schema({
     }]
 }, {
   toJSON: { virtuals:true },
-  toObject:{virtuals:true},
-  id:false
+  toObject:{virtuals:true}
 });
 
 userSchema.virtual('userReviews', {
