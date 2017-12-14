@@ -8,46 +8,13 @@ import Review from "../../models/Review";
 
 const router = express.Router();
 
-router.route('/testmenu')
-    .get(async (req, res) => {
-        const menu = await Menu.find({})
-            .populate({
-                path: 'reviews',
-                populate: {
-                    path: 'user',
-                    model: 'User'
-                }
-            });
-        res.send(menu)
-    });
-
 router.route('/menu')
     .get(async (req, res) => {
-        const menu = await Menu.find({available: true}).populate({
-            path: 'reviews',
-            populate: {path: 'user'}
+        const menu = await Menu.find().populate({
+            path:'itemReviews',
+            populate:{path:'user',select:'name'}
         })
-        const response = menu.map((menuItem) => {
-            return {
-                "_id": menuItem._id,
-                "itemName": menuItem.name,
-                "category": menuItem.category,
-                "description": menuItem.description,
-                "price": menuItem.price,
-                "available": menuItem.available,
-                "image": menuItem.image,
-                "reviews": menuItem.reviews.map(review => {
-                    return {
-                        reviewId: review._id,
-                        userId: review.user._id,
-                        userName: review.user.name,
-                        content: review.content,
-                        rating: review.rating
-                    }
-                })
-            }
-        });
-        res.json(response);
+        res.json(menu);
     })
     .post(multer().single('image'),
         async (req, res) => {
@@ -67,35 +34,78 @@ router.route('/menu')
             }).end(req.file.buffer);
         });
 router.post('/addreview', async (req, res) => {
-    try {
-        // let {id, review} = req.body;
-        // review = new Review(review);
-        // review = await review.save();
-        // let item = await Menu.findOneAndUpdate({"_id": id}, {$push: {'reviews': review}}, {new: true});
-        // res.send(item)
-        let menu = await Menu.findOneAndUpdate(
-            {"itemName": req.body.name},
-            {"$push": {"reviews": {user: req.body.user, review: req.body.review, rating: req.body.rating}}});
+    try{
+        let review = await Review.create(
+           {
+            user:req.body.user,
+            content:req.body.content,
+            rating:req.body.rating,
+            item:req.body.item
+        });
             res.json(menu)
-    } catch (error) {
+        }catch(error){
         res.send(error)
     }
 })
+//can later be implemented with a $match version for oath
+router.get('/getusers', async (req, res) => {
+       try{
+        let users = await User.aggregate([{
+            $lookup: {
+                from: "reviews",
+                localField: "_id",
+                foreignField: "user",
+                as: "userReviews"
+            }
+        },{
+            $unwind:"$userReviews"
+        },{
+            $group:{
+                _id:"$_id",
+                "name": {$first:"$name"},
+                "email": {$first:"$email"},
+                "phone": {$first:"$phone"},
+                "itemsPurchased": {$first:"$itemsPurchased"},
+                "history": {$first:"$history"},
+                "cart": {$first:"$cart"},
+                "admin": {$first:"$admin"},
+                userReviews:{$push:"$userReviews._id"}
+            }
+        }]);
+            res.json(users)
+        }catch(error){
+        res.send(error)
+    }
+})
+    
+    
 router.post('/reviewvalue', async (req, res) => {
     const toResolve = [];
-    Review.create(req.body.value).then(response => console.log(response)).catch(error => console.log(error))
+    Review.create(req.body.value).then(response=>console.log(response)).catch(error=>console.log(error))
     res.json(req.body);
+})
+
+router.get('/deletetestingnow', async (req, res) => {
+    const toResolve = [];
+    try{
+     const result = await User.update({_id:req.query.id},{$pop:{"itemsPurchased":1}})
+    res.json(result);
+    }catch(error){
+        console.log(error)
+        res.send(error)
+    }
+    const result = await User.update({_id:"5a31c79d88d76d04337af7b6"},{$pop:{"itemsPurchased":1}})
 })
 
 router.post('/menuvalue', (req, res) => {
     const toResolve = [];
-    Menu.create(req.body.value).then(response => console.log(response)).catch(error => console.log(error))
+    Menu.create(req.body.value).then(response=>console.log(response)).catch(error=>console.log(error))
     res.json(req.body);
 })
 
 router.post('/uservalue', (req, res) => {
     const toResolve = [];
-    User.create(req.body.value).then(response => console.log(response)).catch(error => console.log(error))
+    User.create(req.body.value).then(response=>console.log(response)).catch(error=>console.log(error))
     res.json(req.body);
 })
 

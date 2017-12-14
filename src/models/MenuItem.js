@@ -20,11 +20,16 @@ const menuItemSchema = new Schema({
     },
     image: {
         type: String
-    },
-    reviews: [{
-        type: Schema.Types.ObjectId,
-        ref: "Review"
-    }],
+    }
+}, {
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true },
+});
+
+menuItemSchema.virtual('itemReviews', {
+  ref: 'Review',
+  localField: '_id',
+  foreignField: 'item'
 });
 
 export default mongoose.model("Item", menuItemSchema);

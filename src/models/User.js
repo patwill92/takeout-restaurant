@@ -26,6 +26,16 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Item"
     }]
+}, {
+  toJSON: { virtuals:true },
+  toObject:{virtuals:true},
+  id:false
+});
+
+userSchema.virtual('userReviews', {
+  ref: 'Review',
+  localField: '_id',
+  foreignField: 'user'
 });
 
 export default mongoose.model('User', userSchema);
