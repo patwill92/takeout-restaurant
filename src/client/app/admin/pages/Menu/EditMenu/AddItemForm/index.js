@@ -82,15 +82,18 @@ class AddItemForm extends Component {
     componentWillUpdate = (nextProps) => {
         if (nextProps.price) {
             let firstCondition = !(/[0-9]/g.test(nextProps.price) || /\./.test(nextProps.price));
+            let decimal = (nextProps.price.match(/\./g) || []).length;
+            let longCondition = !/[0-9]/g.test(nextProps.price.charAt(nextProps.price.length - 1)) &&
+                (!/\./g.test(nextProps.price.charAt(nextProps.price.length - 1)) || decimal > 1);
             if (nextProps.price.length === 1 && firstCondition) {
                 return this.props.dispatch(change('addItem', 'price', ''));
             } else if (nextProps.price.length === 2 && (nextProps.price.match(/[0]/g) || []).length > 1) {
                 return this.props.dispatch(change('addItem', 'price', this.props.price));
             } else if ((nextProps.price.match(/\./g) || []).length > 1) {
                 return this.props.dispatch(change('addItem', 'price', this.props.price));
-            } else if(!/[0-9]/g.test(nextProps.price) && (nextProps.price.match(/\./g) || []).length < 1) {
+            } else if(longCondition) {
                 return this.props.dispatch(change('addItem', 'price', this.props.price));
-            } else if ((nextProps.price.match(/\./g) || []).length > 0 && !(/\.\d{0,2}?$/.test(nextProps.price))) {
+            }else if ((nextProps.price.match(/\./g) || []).length > 0 && !(/\.\d{0,2}?$/.test(nextProps.price))) {
                 return this.props.dispatch(change('addItem', 'price', this.props.price));
             }
         }

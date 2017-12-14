@@ -94,10 +94,6 @@ const loadData = async (mongoose) => {
         {
             data: menu,
             func: fetchMenu
-        },
-        {
-            data: adminMenu,
-            func: fetchMenuAdmin
         }
     ]
 };

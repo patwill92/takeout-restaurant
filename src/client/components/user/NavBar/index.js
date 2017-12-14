@@ -103,7 +103,7 @@ class NavBar extends Component {
                     case null: return '';
                     case false: return (
                         <Fragment>
-                            <Link className={classes.menuItemRight} to='/login' >login</Link>
+                            <Link className={classes.menuItemRight} to='/login' >login </Link>
                             <Link className={classes.menuItemRight} to='/signup' >signup</Link>
                         </Fragment>
                     );
@@ -153,7 +153,7 @@ class NavBar extends Component {
                 <Container>
                     <Menu borderless size='huge' className={classes.nav}>
                         <Menu.Item className={classes.logo}>
-                            <Link to='/'><h3>{'Forkit'.toUpperCase()}</h3></Link>
+                            <Link to='/'><h3>{'Forkit'.toUpperCase()} <i className="far fa-camera-retro"/></h3></Link>
                         </Menu.Item>
                         <Menu.Item className={classes.menuItemRight} name='menu'
                                    onClick={this.handleItemClick}/>
