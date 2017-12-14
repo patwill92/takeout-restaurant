@@ -3,7 +3,7 @@ import withStyles from 'react-jss'
 import {connect} from "react-redux"
 import {Card} from 'semantic-ui-react'
 
-import Icon from '../../../../components/Icon'
+import Icon from '../../../../../components/Icon/index'
 
 const styles = theme => ({
     cardContentWrapper: {

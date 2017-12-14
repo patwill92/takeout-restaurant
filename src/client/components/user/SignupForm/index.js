@@ -4,7 +4,7 @@ import {Field, reduxForm} from 'redux-form'
 import RenderField from '../RenderField/index'
 import validate from './data/validate'
 import fieldInfo from './data/fieldInfo'
-import FormContainer from '../FormContainer/index'
+import FormContainer from '../../FormContainer/index'
 
 let SignupForm = () => {
     return (

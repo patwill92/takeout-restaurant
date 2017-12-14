@@ -16,6 +16,7 @@ import keys from './config/keys.js'
 import api from './routes/api/apiMenu'
 import localAuth from './routes/auth/authLocal'
 import oAuth from './routes/auth/oAuth'
+import adminUserRoutes from './routes/admin/userRoutes'
 import {toggleSideNav, getUser} from './client/actions'
 
 const MongoStore = MyMongoStore(session);
@@ -50,6 +51,7 @@ app.use(express.static('public'));
 app.use('/api', api);
 app.use('/user', localAuth);
 app.use('/auth', oAuth);
+app.use('/admin', adminUserRoutes);
 
 app.get('*', (req, res) => {
     const store = createServerStore();

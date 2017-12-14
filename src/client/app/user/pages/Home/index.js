@@ -3,7 +3,7 @@ import withStyles from 'react-jss'
 import {connect} from 'react-redux';
 import axios from 'axios'
 
-import {fetchMenu, fetchMenuAdmin, getUser} from "../../actions";
+import {fetchMenu, fetchMenuAdmin, getUser} from "../../../../actions";
 import HomeCard from './HomeCard'
 
 const styles = theme => ({

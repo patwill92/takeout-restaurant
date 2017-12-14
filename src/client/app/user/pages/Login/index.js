@@ -4,8 +4,8 @@ import withStyles from 'react-jss'
 import {connect} from "react-redux"
 import {Grid} from 'semantic-ui-react'
 
-import LoginForm from '../../components/LoginForm'
-import Container from '../../components/Container'
+import LoginForm from '../../../../components/user/LoginForm'
+import Container from '../../../../components/Container'
 
 const styles = theme => ({
     root: {

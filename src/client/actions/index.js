@@ -5,7 +5,8 @@ export {
 } from './menu-actions'
 
 export {
-    toggleSideNav
+    toggleSideNav,
+    fetchAdminTab
 } from './ui-actions'
 
 export {

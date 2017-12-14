@@ -4,10 +4,10 @@ import {connect} from 'react-redux'
 import {Menu} from 'semantic-ui-react'
 import withStyles from 'react-jss'
 
-import Icon from '../Icon'
-import Container from '../Container'
-import SideMenu from '../SideMenu'
-import {toggleSideNav} from "../../actions";
+import Icon from '../../Icon/index'
+import Container from '../../Container/index'
+import SideMenu from '../SideMenu/index'
+import {toggleSideNav} from "../../../actions/index";
 
 
 const styles = theme => ({

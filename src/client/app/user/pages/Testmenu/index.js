@@ -3,7 +3,7 @@ import withStyles from 'react-jss'
 import {connect} from "react-redux"
 import {Card} from 'semantic-ui-react'
 
-import {fetchTestMenu} from "../../actions/menu-actions";
+import {fetchTestMenu} from "../../../../actions/menu-actions";
 
 
 const styles = theme => ({

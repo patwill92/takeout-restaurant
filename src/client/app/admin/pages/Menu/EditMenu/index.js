@@ -5,7 +5,7 @@ import {connect} from "react-redux"
 
 import AddItemForm from './AddItemForm/index'
 import ConfirmationForm from './AddItemConfirm/index'
-import {addMenuItem, fetchMenu} from "../../../actions/menu-actions/index";
+import {addMenuItem, fetchMenu} from "../../../../../actions/menu-actions/index";
 
 const styles = theme => ({
     root: {

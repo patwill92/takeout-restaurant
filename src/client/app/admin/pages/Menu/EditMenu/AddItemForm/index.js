@@ -7,8 +7,8 @@ import withStyles from 'react-jss'
 import validate from './data/validate'
 import InputFields from './FormInputFields/index'
 import {fieldData} from './data/index'
-import Container from '../../../../components/Container/index'
-import Icon from '../../../../components/Icon/index'
+import Container from '../../../../../../components/Container/index'
+import Icon from '../../../../../../components/Icon/index'
 import ImageField from './FormImageField/index'
 
 
@@ -21,7 +21,8 @@ const styles = theme => ({
         backgroundColor: '#fff !important',
         boxShadow: theme.shadows[4] + ' !important',
         borderRadius: 5,
-        minHeight: 529.5 + ' !important'
+        minHeight: 529.5 + ' !important',
+        maxWidth: 500 + ' !important'
     },
     form: {
         margin: 0 + '!important',
@@ -123,8 +124,7 @@ class AddItemForm extends Component {
         ));
         return (
             <Grid className={classes.root} centered>
-                <Grid.Column id='form1'  className={classes.column} mobile={16} tablet={10} computer={8}>
-                    <Container >
+                <Grid.Column id='form1'  className={classes.column} mobile={16} tablet={14} computer={10}>
                         <Form onSubmit={this.customSubmit} className={classes.form}>
                             <Field name="image"
                                    label={this.props.blob}
@@ -142,7 +142,6 @@ class AddItemForm extends Component {
                                       name='chevronRight'/>
                             </Button>
                         </Form>
-                    </Container>
                 </Grid.Column>
             </Grid>
         )

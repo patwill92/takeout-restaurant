@@ -5,7 +5,7 @@ import {connect} from "react-redux"
 import {Menu} from 'semantic-ui-react'
 
 import Icon from '../../../components/Icon'
-import data from './data'
+import data from './data/index'
 import {fetchAdminTab} from "../../../actions/ui-actions";
 
 const styles = theme => ({
@@ -45,10 +45,9 @@ const highlight = (state, tab) => {
 };
 
 const MenuItem = props => {
-    const {classes, name, link, icon, state, switchTab} = props;
+    const {classes, name, link, icon, state} = props;
     return (
         <Link
-            onClick={() => switchTab(name)}
             className={classes.menuItem}
             to={`${link}`}
             style={{backgroundColor: highlight(state, name)}}>
@@ -63,7 +62,7 @@ class SideMenu extends Component {
         return (
             <Fragment>
                 <Menu className={classes.menu} vertical>
-                    {data.map(item => <MenuItem state={tab} classes={classes} key={item.name} {...item} switchTab={this.props.fetchAdminTab}/>)}
+                    {data.map(item => <MenuItem state={tab} classes={classes} key={item.name} {...item}/>)}
                 </Menu>
                 <Menu style={{minWidth: '300px', position: 'sticky', top: 50, background: 'transparent', border: 'none', margin: 0, zIndex: 0}} vertical/>
             </Fragment>
@@ -78,4 +77,4 @@ const mapStateToProps = ({menu, admin}) => {
     }
 };
 
-export default connect(mapStateToProps, {fetchAdminTab})(withStyles(styles)(SideMenu))
+export default connect(mapStateToProps)(withStyles(styles)(SideMenu))

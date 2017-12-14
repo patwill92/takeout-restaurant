@@ -3,8 +3,8 @@ import injectSheet from 'react-jss'
 import {renderRoutes} from 'react-router-config'
 import {connect} from 'react-redux'
 
-import NavBar from './components/NavBar'
-import Footer from './components/Footer'
+import NavBar from './components/user/NavBar'
+import Footer from './components/user/Footer'
 import Container from './components/Container'
 
 const styles = theme => ({
@@ -52,9 +52,8 @@ class App extends Component {
     };
 
     render() {
-        let {classes, route, user} = this.props;
-        return user ? !user.admin ? this.renderUserApp(route, classes)
-         : renderRoutes(route.routes) : this.renderUserApp(route, classes)
+        let {classes, route} = this.props;
+        return this.renderUserApp(route, classes)
     }
 }
 

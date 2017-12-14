@@ -5,7 +5,7 @@ import withStyles from 'react-jss'
 import {connect} from 'react-redux';
 import axios from 'axios'
 import {Link, withRouter} from "react-router-dom"
-import {fetchMenu, fetchMenuAdmin, getUser} from "../../actions";
+import {fetchMenu, fetchMenuAdmin, getUser} from "../../../../actions";
 import * as util from "./util"
 const call = util.call;
 

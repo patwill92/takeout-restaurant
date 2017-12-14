@@ -3,8 +3,8 @@ import {reduxForm} from 'redux-form'
 import {Grid, List, Button} from 'semantic-ui-react'
 import withStyles from 'react-jss'
 
-import Container from '../../../../components/Container/index'
-import Icon from '../../../../components/Icon/index'
+import Container from '../../../../../../components/Container/index'
+import Icon from '../../../../../../components/Icon/index'
 
 
 const styles = theme => ({

@@ -14,3 +14,14 @@ export const getUser = req => {
         }
     }
 };
+
+export const getUsers = req => {
+    if(req) {
+        return {type: GET_USERS, payload: req.user}
+    } else {
+        return async dispatch => {
+            const res = await axios.get('/user/current_user');
+            dispatch({type: GET_USERS, payload: res.data})
+        }
+    }
+};

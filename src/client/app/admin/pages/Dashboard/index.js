@@ -3,9 +3,9 @@ import withStyles from 'react-jss'
 import {connect} from "react-redux"
 import {Card} from 'semantic-ui-react'
 
-import StatsCard from './StatsCard'
-import data from './data'
-import {fetchAdminTab} from "../../../actions";
+import StatsCard from './StatsCard/index'
+import data from './data/index'
+import {fetchAdminTab} from "../../../../actions/index";
 
 
 const styles = theme => ({
@@ -13,6 +13,9 @@ const styles = theme => ({
 });
 
 class Dashboard extends Component {
+    componentDidMount = () => {
+        this.props.fetchAdminTab('dashboard')
+    };
     render() {
         let {classes} = this.props;
         return (
