@@ -12,7 +12,7 @@ import theme from '../styles/theme'
 export default (req, store, context, routes) => {
     const sheets = new SheetsRegistry();
     const initStore = store.getState();
-    initStore.user && delete initStore.user.password;
+    // initStore.user && delete initStore.user.password;
     const content = renderToString(
         <Provider store={store}>
             <StaticRouter location={req.url} context={context}>

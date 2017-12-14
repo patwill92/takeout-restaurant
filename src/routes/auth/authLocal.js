@@ -49,7 +49,7 @@ router.route('/login')
     .post(validate(check, User).login,
         passport.authenticate('local'),
         (req, res) => {
-            res.redirect('/')
+            return res.redirect('/')
         });
 
 router.get('/logout', (req, res) => {

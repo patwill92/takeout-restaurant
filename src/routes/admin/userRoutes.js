@@ -3,9 +3,7 @@ import express from 'express'
 const router = express.Router();
 
 import {adminOnly} from "./middleware/secureRoutes";
-import Menu from '../../models/MenuItem'
 import User from "../../models/User";
-import Review from "../../models/Review";
 
 router.use(adminOnly);
 

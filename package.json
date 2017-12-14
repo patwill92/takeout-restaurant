@@ -15,9 +15,6 @@
     "heroku-postbuild": "webpack --config webpack.server.js && webpack --config webpack.client.js"
   },
   "dependencies": {
-    "@fortawesome/fontawesome": "^1.0.1",
-    "@fortawesome/fontawesome-pro-regular": "^5.0.1",
-    "@fortawesome/react-fontawesome": "0.0.16",
     "axios": "^0.16.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
