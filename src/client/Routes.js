@@ -1,28 +1,33 @@
 
 import React from 'react';
 import App from './App'
+import Admin from './AdminApp'
 
-import Home from './pages/Home'
-import Signup from './pages/SignUp'
-import Login from './pages/Login'
-import Admin from './pages/Admin'
-import Error from './pages/Error'
-import Menu from './pages/Menu'
-import Testing from './pages/Testing'
-import TestMenu from './pages/Testmenu'
+// user App
+import Home from './app/user/pages/Home'
+import Signup from './app/user/pages/SignUp'
+import Login from './app/user/pages/Login'
+import Error from './app/user/pages/Error'
+import Menu from './app/user/pages/Menu'
+import Testing from './app/user/pages/Testing'
+import TestMenu from './app/user/pages/Testmenu'
+
+//admin app
+import AdminDashboard from './app/admin/pages/Dashboard'
+import AdminMenu from './app/admin/pages/Menu'
 
 export default {
     admin: [
         {
-            ...App,
+            ...Admin,
             routes: [
                 {
-                    ...Admin,
+                    ...AdminDashboard,
                     path: '/',
                     exact: true
                 },
                 {
-                    ...Home,
+                    ...AdminMenu,
                     path: '/menu'
                 }
             ]

@@ -49,7 +49,7 @@ const MyIcon = props => {
     );
     return props.loose ? <LooseIcon/> : (
         <span id='svg-icon' style={props.style ? {...svgStyle, ...props.style} : svgStyle}>
-          <svg style={style} id={name} width={props.size ? width * (props.size / height) : width}
+          <svg style={props.svgStyle ? {...style, ...props.svgStyle}: style} id={name} width={props.size ? width * (props.size / height) : width}
                height={props.size ? props.size : height} xmlns="http://www.w3.org/2000/svg" viewBox={viewBox}>
             <path style={{pointerEvents: 'none'}} fill={props.color ? props.color : '#333'} d={path}/>
           </svg>
