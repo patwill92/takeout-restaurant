@@ -20,7 +20,6 @@ const menuItemSchema = new Schema({
     },
     image: {
         type: String
-<<<<<<< HEAD
     }
 }, {
   toJSON: { virtuals: true },
@@ -31,13 +30,6 @@ menuItemSchema.virtual('itemReviews', {
   ref: 'Review',
   localField: '_id',
   foreignField: 'item'
-=======
-    },
-    reviews: [{
-        type: Schema.Types.ObjectId,
-        ref: "Review"
-    }],
->>>>>>> 4c11aebc7f9d44e8aa9df0d96ed49d1f56b65d08
 });
 
 export default mongoose.model("Item", menuItemSchema);
