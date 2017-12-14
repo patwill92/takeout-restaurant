@@ -97,14 +97,17 @@ export function toggleBetweenShowingReviewsAndShowingSelectionButtons(item,Revie
 
 export function apiCallAddReview(axios,item){
     let index = null
-    const menuItemInQuestion = this.state.menu.filter(function(itemValue,indexValue){index=index?index:(itemValue.itemName===item?indexValue:null);return itemValue.itemName===item})[0]
-    if(menuItemInQuestion.mouseOverStarAmount  === 0) return {menuItemInQuestion,index}
+    const menuItemInQuestion = 
+    this.state.menu.filter(function(itemValue,indexValue)
+    	{index=index?index:(itemValue.itemName===item?indexValue:null);
+    		return itemValue.itemName===item})[0]
+    if(menuItemInQuestion.starAmount  === 0) return {menuItemInQuestion,index}
+   	if(!menuItemInQuestion.currentReview) return {menuItemInQuestion,index}
 	axios.post("/api/addreview",{
-            review:menuItemInQuestion.currentReview,
-            rating:menuItemInQuestion.mouseOverStarAmount,
-            user:this.props.user.name,
-            name:menuItemInQuestion.itemName,
-            _id:this.props.user._id
+            content:menuItemInQuestion.currentReview,
+            rating:menuItemInQuestion.starAmount,
+            user:this.props.user._id,
+            item:menuItemInQuestion._id
         }).then((response)=>{
             console.log(response)
             this.props.fetchMenu();

@@ -16,6 +16,10 @@ const reviewSchema = new Schema({
     },
     rating: {
         type: Number
+    },
+    active:{
+        type:Boolean,
+        default:true
     }
 });
 

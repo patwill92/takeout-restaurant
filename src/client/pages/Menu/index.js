@@ -62,7 +62,7 @@ class Menu extends Component {
         call(this,util.changeAmountOfMouseOverStarsForOneMenuItem,num,fieldName);
     }
     render(){
-        console.log(this.props);
+        console.log(this.state.menu);
         const icon = this.props.classes.icon;
         const iconParent = this.props.classes.iconParent;
         return(

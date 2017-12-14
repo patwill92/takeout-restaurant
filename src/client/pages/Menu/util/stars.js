@@ -15,17 +15,12 @@ export const whichStar = (amountOfStars)=>{
 		return '#39ff2b'
 	}
 }
-/*	backup in case something goes wrong with the icons =======		style={{padding:"5px",
-			margin:"15px",
-			borderStyle:"solid",
-			borderColor:"black",
-			backgroundColor:mouseOverStarAmount?(mouseOverStarAmount>=num?whichStar(mouseOverStarAmount):""):starAmount>=num?whichStar(starAmount):""}}*/
 
 
 export const renderStarsDynamically = ({list,item,changeMouseOverStars,changeStars,mouseOverStarAmount,starAmount,icon,iconParent})=>{
 return (<div className={iconParent}>{list.map((num)=>(
 			<div key={num+item.itemName}
-				onMouseOver={(event)=>{changeMouseOverStars(num,item.itemName)}}
+				onMouseEnter={(event)=>{changeMouseOverStars(num,item.itemName)}}
 				onMouseLeave={()=>changeMouseOverStars(0,item.itemName)}
 				onClick={()=>changeStars(num,item.itemName)}
 				className={icon} 
@@ -49,7 +44,7 @@ export const generateStaticStarRating = (amount)=>{
 					key={Date.now()/index}
 	       name='star'
 	       loose
-	       size={30}/>
+	       size={40}/>
 	})
 }
 
