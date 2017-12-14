@@ -26,5 +26,4 @@ function mapStateToProps(state, props) {
 }
 
 
-
-export default connect(mapStateToProps)(reduxForm({ enableReinitialize: true, destroyOnUnmount: true })(MiniForm));
+export default connect(mapStateToProps)(reduxForm({enableReinitialize: true, destroyOnUnmount: true})(MiniForm));

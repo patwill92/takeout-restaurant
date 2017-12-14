@@ -1,7 +1,7 @@
 import {FETCH_ADMIN_TAB} from "../actions/types"
 
 export default (state = {}, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case FETCH_ADMIN_TAB:
             return {
                 ...state,

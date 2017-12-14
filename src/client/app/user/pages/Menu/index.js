@@ -7,6 +7,7 @@ import axios from 'axios'
 import {Link, withRouter} from "react-router-dom"
 import {fetchMenu, fetchMenuAdmin, getUser} from "../../../../actions";
 import * as util from "./util"
+
 const call = util.call;
 
 const styles = theme => ({
@@ -22,75 +23,96 @@ const styles = theme => ({
 });
 
 class Menu extends Component {
-    state ={
-        menu:[]
+    state = {
+        menu: []
     }
-    componentDidMount(){
-        call(this,util.initializeMenu);
+
+    componentDidMount() {
+        call(this, util.initializeMenu);
     }
-    componentWillReceiveProps(nextprops){
-        call(this,util.updateMenu,nextprops);
+
+    componentWillReceiveProps(nextprops) {
+        call(this, util.updateMenu, nextprops);
     }
-    reviewItemHandler = (item)=>{
-        call(this,util.changeReviewInputStateForOneMenuItemComponent,item)
+
+    reviewItemHandler = (item) => {
+        call(this, util.changeReviewInputStateForOneMenuItemComponent, item)
     }
-    reviewChangeHandler = (item,value)=>{
-        call(this,util.updateReviewInputValueForOneMenuItem,item,value)
+    reviewChangeHandler = (item, value) => {
+        call(this, util.updateReviewInputValueForOneMenuItem, item, value)
     }
-    emptyField = (item)=>{
-        const potentialResults = call(this,util.apiCallAddReview,axios,item);
+    emptyField = (item) => {
+        const potentialResults = call(this, util.apiCallAddReview, axios, item);
         console.log(potentialResults)
-       if(!potentialResults){
-        call(this,util.emptyMenuItem,item);
-        call(this,util.sayThankYouFor6thOfSecondAfterSubmissionDelay,item)
-       }else{
-        const newMenu = [...this.state.menu];
-        newMenu[potentialResults.index] = {...potentialResults.menuItemInQuestion,specialMessage:true,specialMessageValue:"please fill out all fields"}
-        this.setState({
-            menu:newMenu
-        })
-        call(this,util.sayThankYouFor6thOfSecondAfterSubmissionDelay,item,2000)
-       }
+        if (!potentialResults) {
+            call(this, util.emptyMenuItem, item);
+            call(this, util.sayThankYouFor6thOfSecondAfterSubmissionDelay, item)
+        } else {
+            const newMenu = [...this.state.menu];
+            newMenu[potentialResults.index] = {
+                ...potentialResults.menuItemInQuestion,
+                specialMessage: true,
+                specialMessageValue: "please fill out all fields"
+            }
+            this.setState({
+                menu: newMenu
+            })
+            call(this, util.sayThankYouFor6thOfSecondAfterSubmissionDelay, item, 2000)
+        }
     }
-    showReviews = (item)=>{
-        call(this,util.makeReviewsVisibleToTheUser,item)
+    showReviews = (item) => {
+        call(this, util.makeReviewsVisibleToTheUser, item)
     }
-    changeStars = (num,fieldName)=>{
-        call(this,util.changeAmountOfActualStarsForOneMenuItem,num,fieldName)
+    changeStars = (num, fieldName) => {
+        call(this, util.changeAmountOfActualStarsForOneMenuItem, num, fieldName)
     }
-    changeMouseOverStars = (num,fieldName)=>{
-        call(this,util.changeAmountOfMouseOverStarsForOneMenuItem,num,fieldName);
+    changeMouseOverStars = (num, fieldName) => {
+        call(this, util.changeAmountOfMouseOverStarsForOneMenuItem, num, fieldName);
     }
-    render(){
+
+    render() {
         console.log(this.state.menu);
         const icon = this.props.classes.icon;
         const iconParent = this.props.classes.iconParent;
-        return(
+        return (
             <div>
-            {this.props.user?null:(<Link to={"/login"}><p style={{fontSize:"25px"}}>Login/SignUp to Review!</p></Link>)}
-                {this.state.menu.map((item)=>{
-                    return (
-                        <div key={item._id} style={{margin:"20px auto",color:"white",padding:"auto",boxShadow:"0 2px 2px",width:"900px",height:"auto",textAlign:"center",backgroundColor:"#aab6b7"}}>
-                        <h1 style={{"fontSize":"25px",padding:"10px",fontWeight:"bold"}}>
-                            {item.itemName.charAt(0).toUpperCase()+ item.itemName.slice(1)}
-                        </h1>
-                        <h2 style={{padding:"10px"}}>
-                            ${item.price.toFixed(2)}
-                        </h2>
-                        <h2 style={{padding:"10px"}}>
-                            {util.generateStaticStarRating(item.reviews.reduce((sum,value)=>{return sum+(value.rating)},0)/item.reviews.length)}
-                        </h2>
-                        {call(this,util.toggleBetweenShowingReviewsAndShowingSelectionButtons,item,Reviews,ReviewInput,icon,iconParent)}
-                        </div>)
-                        }
+                {this.props.user ? null : (
+                    <Link to={"/login"}><p style={{fontSize: "25px"}}>Login/SignUp to Review!</p></Link>)}
+                {this.state.menu.map((item) => {
+                        return (
+                            <div key={item._id} style={{
+                                margin: "20px auto",
+                                color: "white",
+                                padding: "auto",
+                                boxShadow: "0 2px 2px",
+                                width: "900px",
+                                height: "auto",
+                                textAlign: "center",
+                                backgroundColor: "#aab6b7"
+                            }}>
+                                <h1 style={{"fontSize": "25px", padding: "10px", fontWeight: "bold"}}>
+                                    {item.itemName.charAt(0).toUpperCase() + item.itemName.slice(1)}
+                                </h1>
+                                <h2 style={{padding: "10px"}}>
+                                    ${item.price.toFixed(2)}
+                                </h2>
+                                <h2 style={{padding: "10px"}}>
+                                    {util.generateStaticStarRating(item.reviews.reduce((sum, value) => {
+                                        return sum + (value.rating)
+                                    }, 0) / item.reviews.length)}
+                                </h2>
+                                {call(this, util.toggleBetweenShowingReviewsAndShowingSelectionButtons, item, Reviews, ReviewInput, icon, iconParent)}
+                            </div>)
+                    }
                 )}
             </div>
 
-            )
-        }
+        )
     }
-const mapStateToProps = call(null,util.mapStateToPropsForMenuComponent);
-const loadData = call(null,util.loadDataForMenu,fetchMenu,fetchMenuAdmin);
+}
+
+const mapStateToProps = call(null, util.mapStateToPropsForMenuComponent);
+const loadData = call(null, util.loadDataForMenu, fetchMenu, fetchMenuAdmin);
 export default {
     component: connect(mapStateToProps, {fetchMenu, getUser})(withRouter(withStyles(styles)(Menu))),
     loadData

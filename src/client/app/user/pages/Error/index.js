@@ -13,7 +13,7 @@ class Error extends Component {
     render() {
         let {classes} = this.props;
         return (
-            <div >
+            <div>
                 <h1 className={classes.error}>404 ERROR</h1>
                 <h2 className={classes.error}>Page not found</h2>
                 <h3 style={{textAlign: 'center', textDecoration: 'underline'}}><Link to='/'>Go Home</Link></h3>
