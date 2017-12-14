@@ -3,8 +3,8 @@ import {reduxForm} from 'redux-form'
 import {Grid, List, Button} from 'semantic-ui-react'
 import withStyles from 'react-jss'
 
-import Container from '../../../components/Container'
-import Icon from '../../../components/Icon'
+import Container from '../../../../components/Container/index'
+import Icon from '../../../../components/Icon/index'
 
 
 const styles = theme => ({
@@ -50,7 +50,9 @@ class AddItemForm extends Component {
                     </List.Content>
                     <List.Content>
                         {typeof value === 'string' ?
-                            <p style={{textTransform: 'capitalize', fontSize: '1.0rem', color: '#333'}}>{value}</p> :
+                            <p style={{textTransform: 'capitalize', fontSize: '1.0rem', color: '#333'}}>
+                                {key==='available' ? value === '0' ? 'No' : 'Yes' : value}
+                            </p> :
                             <img style={{width: 'auto', maxHeight: '180px'}} src={this.props.blob}/>}
                     </List.Content>
                 </List.Item>
@@ -59,9 +61,8 @@ class AddItemForm extends Component {
     };
 
     render() {
-        let {classes, handleSubmit, onBack, height, formContent, blob} = this.props;
+        let {classes, onSubmit, onBack, height, formContent, blob} = this.props;
         console.log(this.renderConfirmationFields(formContent));
-        ;
         return (
             <Grid className={classes.root} centered>
                 <Grid.Column className={classes.column} style={{height}} mobile={16} tablet={10} computer={8}>
@@ -79,7 +80,7 @@ class AddItemForm extends Component {
                                 </Button>
                                 <Button
                                     style={{backgroundColor: '#388E3C'}}
-                                    onClick={handleSubmit}
+                                    onClick={onSubmit}
                                     className={classes.btn}>Add Item
                                     <Icon color='#fff' style={{marginLeft: 5, fontSize: '0.9rem', bottom: 1}}
                                           name='paperPlane'/>

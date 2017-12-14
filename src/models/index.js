@@ -3,4 +3,5 @@ export default () => {
     require('./Invoice');
     require('./Order');
     require('./User');
+    require('./Review');
 }

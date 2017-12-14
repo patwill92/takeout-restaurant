@@ -14,6 +14,8 @@ const styles = theme => ({
     },
     column: {
         backgroundColor: '#fff !important',
+        boxShadow: theme.shadows[4] + ' !important',
+        borderRadius: 5
     }
 });
 

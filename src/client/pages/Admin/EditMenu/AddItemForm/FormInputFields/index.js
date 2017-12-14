@@ -2,7 +2,7 @@ import React from 'react'
 import withStyles from 'react-jss'
 import {Form} from 'semantic-ui-react'
 
-import Icon from '../../../../components/Icon/index'
+import Icon from '../../../../../components/Icon/index'
 
 const styles = {
     root: {
@@ -21,6 +21,24 @@ const styles = {
     removeIcon: {
         '& .icon': {
             display: 'none !important'
+        },
+        height: 38,
+        paddingLeft: 31 + ' !important',
+        border: '1px solid rgba(34,36,38,.15)',
+        borderRadius: '0.285714rem',
+        '& select': {
+            '&:hover': {
+                cursor: 'pointer !important'
+            },
+            background: 'transparent !important',
+            border: 'none !important',
+            height: 38 + ' !important',
+            '-webkit-appearance': 'none !important',
+            '-moz-appearance': 'none !important',
+            '&:focus': {
+                borderColor: 'transparent !important',
+                outline: 0 + ' !important'
+            }
         }
     }
 };
@@ -34,6 +52,21 @@ const RenderField = field => {
             return '#9f3a38'
         }
         if (active) {
+            return 'rgba(0,0,0,.7)'
+        }
+        else {
+            return 'rgba(0,0,0,.5)'
+        }
+
+    };
+    let selectColor = () => {
+        if (!!(touched && error)) {
+            return '#e0b4b4'
+        }
+        if (active) {
+            return 'rgba(0,0,0,.7)'
+        }
+        if (!!(touched && !error)) {
             return 'rgba(0,0,0,.7)'
         }
         else {
@@ -56,25 +89,23 @@ const RenderField = field => {
                     {radio && <span style={{marginLeft: 10, marginRight: 10}}>{label.toUpperCase()}</span>}
                     {textArea && <textarea {...input} rows="3"/>}
                     {cat &&
-                    <div {...input} className={classes.removeIcon}>
-                        <Form.Select
-                            className={classes.text}
-                            options={options}
-                            onChange={(e) => {
-                                    console.log(e.target.parentNode);
-                                    onSelectChange(e.target.children[0].innerHTML.toLowerCase())
-                                }
-                            }
-                            placeholder='Category'/>
+                    <div
+                        style={{borderColor: !!(touched && error) && '#e0b4b4', backgroundColor: !!(touched && error) && '#fff6f6'}}
+                        className={classes.removeIcon}>
+                        <select style={{color: selectColor()}} {...input}>
+                            <option value='' disabled>Category</option>
+                            <option value='savory'>Savory</option>
+                            <option value='sweet'>Sweet</option>
+                        </select>
                     </div>}
                     {icon &&
                     <div style={{position: 'absolute', top: 38 / 4, left: 12, zIndex: 100}}>
                         <Icon color={iconColor()} name={icon} loose size={iconSize}/>
                     </div>}
                     {cat &&
-                        <div style={{position: 'absolute', top: 10, right: 12, pointerEvents: 'none', zIndex: 100}}>
-                            <Icon color={iconColor()} name='angleDown' loose size={iconSize}/>
-                        </div>}
+                    <div style={{position: 'absolute', top: 10, right: 12, zIndex: 100}}>
+                        <Icon style={{pointerEvents: 'none'}} color={iconColor()} name='angleDown' loose size={iconSize}/>
+                    </div>}
                 </div>
             </Form.Field>,
             textArea && !radio &&

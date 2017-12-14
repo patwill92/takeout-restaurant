@@ -1,93 +1,63 @@
 import React, {Component, Fragment} from 'react'
-import {withRouter} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import withStyles from 'react-jss'
 import {connect} from "react-redux"
+import {Menu, Button} from 'semantic-ui-react'
 
-import AddItemForm from './AddItemForm'
-import ConfirmationForm from './AddItemConfirm'
-import {addMenuItem} from "../../actions/menu-actions";
+import EditMenu from './EditMenu'
+import SideMenu from '../../components/SideMenu'
+import Container from '../../components/Container'
+import Icon from '../../components/Icon'
+import Dashboard from './Dashboard'
 
 const styles = theme => ({
     root: {
-        width: '100%',
-        display: 'flex'
+        display: 'flex',
+        justifyContent: 'flex-start'
     },
-    icon: {
-        '&:hover': {
-            cursor: 'pointer'
-        }
-    },
-    formParent: {
+    menuItem: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center'
-    }
+        alignItems: 'center',
+        padding: '15px 16px',
+        textTransform: 'uppercase !important',
+        fontWeight: 400 + ' !important',
+        fontSize: '1.0rem !important',
+        color: '#fff !important',
+        textDecoration: 'none !important'
+    },
 });
 
 class Admin extends Component {
-    state = {
-        form: true,
-        blob: '',
-        height: '',
-        select: ''
-    };
-
-    setBlob = (blob) => {
-        this.setState({blob})
-    };
-
-    goToConfirmation = () => {
-        this.setState({form: false})
-    };
-
-    setHeight = (height) => {
-        this.setState({height})
-    };
-
-    setSelect = (select) => {
-        this.setState({select})
-    };
-
-    uploadMenuItem = async (item) => {
-        let formData = new FormData();
-        item = {...item, image: item.image[0]};
-        for(const name in item) {
-            formData.append(name, item[name])
-        }
-        this.props.addMenuItem(formData, this.props.history);
-    }
-
     render() {
-        let {classes, form} = this.props;
+        let {classes} = this.props;
         return (
-            <Fragment>
-                {this.state.form &&
-                <AddItemForm
-                    blob={this.state.blob}
-                    setBlob={this.setBlob}
-                    setSelect={this.setSelect}
-                    select={this.state.select}
-                    height={this.state.height}
-                    setHeight={this.setHeight}
-                    onSubmit={this.goToConfirmation} />}
-                {!this.state.form &&
-                <ConfirmationForm
-                    formContent={this.props.form}
-                    height={this.state.height}
-                    blob={this.state.blob}
-                    onSubmit={() => this.uploadMenuItem(form.values)}
-                    onBack={() => this.setState({form: true})}/>}
-            </Fragment>
+            <div className={classes.root} style={{minHeight: 'inherit'}}>
+                <Menu style={{width: '300px', position: 'sticky', top: 0}} fixed='left' vertical>
+                    <div style={{padding: 10, textAlign: 'center'}}>
+                        <img style={{width: '150px', height: 'auto'}}
+                             src="http://res.cloudinary.com/daj4m3xio/image/upload/v1513110298/forkit_pubkag.png"
+                             alt="forkit"/>
+                    </div>
+                    <Link className={classes.menuItem} to='/menu'>Menu</Link>
+                    <Link onClick={() => this.props.toggleSideNav(false)} className={classes.menuItem}
+                          to='/login'>login</Link>
+                    <Link className={classes.menuItem} to='/signup'>signup</Link>
+                </Menu>
+                <Container >
+                    <EditMenu/>
+                </Container>
+            </div>
         )
     }
 }
 
-const mapStateToProps = ({form}) => {
+const mapStateToProps = ({menu}) => {
     return {
-        form: form.addItem
+        menu
     }
 };
 
 export default {
-    component: connect(mapStateToProps, {addMenuItem})(withRouter(withStyles(styles)(Admin)))
+    component: connect(mapStateToProps)(withStyles(styles)(Admin))
 }
