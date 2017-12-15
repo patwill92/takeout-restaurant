@@ -38,6 +38,7 @@ const styles = theme => ({
 });
 
 const highlight = (state, tab) => {
+    console.log(tab === state, `${tab + ' ' + state}`);
     if(tab === state) {
         return '#dbe0e0'
     }

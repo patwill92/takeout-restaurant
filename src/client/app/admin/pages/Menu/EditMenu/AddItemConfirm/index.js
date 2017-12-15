@@ -3,7 +3,7 @@ import {reduxForm} from 'redux-form'
 import {Grid, List, Button} from 'semantic-ui-react'
 import withStyles from 'react-jss'
 
-import Container from '../../../../../../components/Container/index'
+import PageContainer from '../../../../../../components/admin/PageContainer'
 import Icon from '../../../../../../components/Icon/index'
 
 
@@ -14,14 +14,19 @@ const styles = theme => ({
     },
     column: {
         backgroundColor: '#fff !important',
-        boxShadow: theme.shadows[4] + ' !important',
-        borderRadius: 5
+        boxShadow: 'none !important',
+        border: 'none !important',
+        margin: '0 auto !important',
+        minHeight: 529.5 + ' !important',
+        maxWidth: 500 + ' !important',
+        display: 'flex !important',
+        justifyContent: 'center',
+        flexDirection: 'column'
     },
     list: {
         display: 'flex !important',
         flexDirection: 'column !important',
-        justifyContent: 'space-between !important',
-        height: '100% !important'
+        justifyContent: 'space-between !important'
     },
     btn: {
         float: 'right',
@@ -42,6 +47,7 @@ const styles = theme => ({
 class AddItemForm extends Component {
     renderConfirmationFields = (form) => {
         let {values} = form;
+        values = values.image ? {image: this.props.blob, ...values}: values;
         return Object.entries(values).map(([key, value]) => {
             return (
                 <List.Item key={key}>
@@ -49,9 +55,9 @@ class AddItemForm extends Component {
                         <p style={{textTransform: 'uppercase', fontWeight: 500, marginBottom: 5}}>{key}</p>
                     </List.Content>
                     <List.Content>
-                        {typeof value === 'string' ?
+                        {key !== 'image' ?
                             <p style={{textTransform: 'capitalize', fontSize: '1.0rem', color: '#333'}}>
-                                {key==='available' ? value === '0' ? 'No' : 'Yes' : value}
+                                {key === 'available' ? value === '0' ? 'No' : 'Yes' : value}
                             </p> :
                             <img style={{width: 'auto', maxHeight: '180px'}} src={this.props.blob}/>}
                     </List.Content>
@@ -62,34 +68,32 @@ class AddItemForm extends Component {
 
     render() {
         let {classes, onSubmit, onBack, height, formContent, blob} = this.props;
-        console.log(this.renderConfirmationFields(formContent));
         return (
-            <Grid className={classes.root} centered>
-                <Grid.Column className={classes.column} style={{height}} mobile={16} tablet={10} computer={8}>
-                    <Container>
-                        <List divided verticalAlign='middle' className={classes.list}>
-                            {this.renderConfirmationFields(formContent)}
-                            <div className={classes.buttons}>
-                                <Button
-                                    style={{backgroundColor: '#FFC107'}}
-                                    onClick={onBack}
-                                    className={classes.btn}>
-                                    <Icon color='#fff' style={{marginRight: 5, fontSize: '0.9rem', bottom: 1}}
-                                          name='chevronLeft'/>
-                                    Back
-                                </Button>
-                                <Button
-                                    style={{backgroundColor: '#388E3C'}}
-                                    onClick={onSubmit}
-                                    className={classes.btn}>Add Item
-                                    <Icon color='#fff' style={{marginLeft: 5, fontSize: '0.9rem', bottom: 1}}
-                                          name='paperPlane'/>
-                                </Button>
-                            </div>
-                        </List>
-                    </Container>
+            <PageContainer>
+                {'Confirm'}
+                <Grid.Column className={classes.column}  mobile={16} tablet={14} computer={10}>
+                    <List divided verticalAlign='middle' style={{height: height}} className={classes.list}>
+                        {this.renderConfirmationFields(formContent)}
+                        <div className={classes.buttons}>
+                            <Button
+                                style={{backgroundColor: '#EF5350'}}
+                                onClick={onBack}
+                                className={classes.btn}>
+                                <Icon color='#fff' style={{marginRight: 5, fontSize: '0.9rem', bottom: 1}}
+                                      name='chevronLeft'/>
+                                Back
+                            </Button>
+                            <Button
+                                style={{backgroundColor: '#8BC34A'}}
+                                onClick={onSubmit}
+                                className={classes.btn}>Add Item
+                                <Icon color='#fff' style={{marginLeft: 5, fontSize: '0.9rem', bottom: 1}}
+                                      name='paperPlane'/>
+                            </Button>
+                        </div>
+                    </List>
                 </Grid.Column>
-            </Grid>
+            </PageContainer>
         )
     }
 }

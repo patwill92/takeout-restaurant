@@ -13,4 +13,13 @@ router.route('/users')
         res.send(users)
     });
 
+router.route('/users')
+    .get(async (req, res) => {
+    let users = await User.find({}).populate({
+        path: 'userReviews',
+        populate: {path: 'item'}
+    });
+    res.send(users)
+})
+
 export default router;

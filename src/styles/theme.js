@@ -3,6 +3,11 @@ export default  {
         primary: '#B71C1C',
         hoverPrimary: '#C62828',
         background: '#ebf0eb',
+        admin: {
+            blue: '#2185d0',
+            red: '#EF5350',
+            green: '#8BC34A',
+        }
     },
     shadows: [
         "none",

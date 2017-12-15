@@ -2,11 +2,14 @@ export {
     fetchMenu,
     fetchMenuAdmin,
     fetchTestMenu,
+    addMenuItem
 } from './menu-actions'
 
 export {
     toggleSideNav,
-    fetchAdminTab
+    fetchAdminTab,
+    fetchAdminSubNav,
+    fetchAdminActiveSubNav
 } from './ui-actions'
 
 export {

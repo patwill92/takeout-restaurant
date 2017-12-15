@@ -52,8 +52,8 @@ router.route('/login')
             return res.redirect('/')
         });
 
-router.get('/logout', (req, res) => {
-    req.logout();
+router.get('/logout', async (req, res) => {
+    await req.logout();
     res.redirect('/');
 });
 

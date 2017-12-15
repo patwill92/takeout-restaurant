@@ -71,13 +71,13 @@ router.get('/getusers', async (req, res) => {
                 "admin": {$first: "$admin"},
                 userReviews: {$push: "$userReviews._id"}
             }
-        }]);
+        }
+        ])
         res.json(users)
     } catch (error) {
         res.send(error)
     }
 })
-
 
 router.post('/reviewvalue', async (req, res) => {
     const toResolve = [];

@@ -62,9 +62,11 @@ app.get('*', (req, res) => {
     }).filter(promise => promise);
     Promise.all(promises).then((promise) => {
         if(promise[0]) {
-            promise[0].forEach(({data, func}) => {
-                req.dispatchData = data;
-                store.dispatch(func(req))
+            promise.forEach((promise) => {
+                promise.forEach(({data, func}) => {
+                    req.dispatchData = data;
+                    store.dispatch(func(req))
+                })
             })
         }
         store.dispatch(toggleSideNav(false));

@@ -3,12 +3,11 @@ import {Link} from 'react-router-dom'
 import withStyles from 'react-jss'
 import {connect} from "react-redux"
 import {renderRoutes} from 'react-router-config'
-import {Menu, Button} from 'semantic-ui-react'
 
-import {fetchAdminTab} from "./actions/ui-actions/index";
 import Container from './components/Container/index'
 import Icon from './components/Icon/index'
 import SideMenu from './components/admin/SideMenu'
+import SubNav from './components/admin/SubNav'
 
 const styles = theme => ({
     '@global': {
@@ -44,25 +43,18 @@ const styles = theme => ({
 });
 
 class Admin extends Component {
-    state = {
-        tab: 'dashboard'
-    };
-
-    switchTab = (tab) => {
-        this.setState({tab})
-    };
-
     render() {
-        let {classes, tab, route} = this.props;
+        let {classes, subNav, route} = this.props;
         return (
-            <div style={{display: 'flex', flexDirection: 'column', position: 'relative'}}>
+            <div style={{display: 'flex', flexDirection: 'column', position: 'relative', height: '100%'}}>
                 <div className={classes.topNav}>
                     <Link to='/'><h3>Forkit</h3></Link>
                     <a href='/user/logout'><h5>Logout <Icon style={{marginLeft: 3}} color='#d3d3d3' name='powerOff'/></h5></a>
                 </div>
-                <div className={classes.root} style={{minHeight: 'inherit'}}>
+                <div className={classes.root} style={{height: '100%'}}>
                     <SideMenu/>
-                    <Container>
+                    <Container style={{padding: '20px 20px'}}>
+                        {subNav && <SubNav/>}
                         {renderRoutes(route.routes)}
                     </Container>
                 </div>
@@ -71,12 +63,13 @@ class Admin extends Component {
     }
 }
 
-const mapStateToProps = ({menu}) => {
+const mapStateToProps = ({menu, admin}) => {
     return {
-        menu
+        menu,
+        subNav: admin.subNav
     }
 };
 
 export default {
-    component: connect(mapStateToProps, {fetchAdminTab})(withStyles(styles)(Admin))
+    component: connect(mapStateToProps)(withStyles(styles)(Admin))
 }

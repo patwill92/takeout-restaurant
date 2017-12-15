@@ -5,7 +5,7 @@ import {connect} from "react-redux"
 
 import AddItemForm from './AddItemForm/index'
 import ConfirmationForm from './AddItemConfirm/index'
-import {addMenuItem, fetchMenu} from "../../../../../actions/menu-actions/index";
+import {addMenuItem, fetchMenu, fetchAdminActiveSubNav} from "../../../../../actions";
 
 const styles = theme => ({
     root: {
@@ -24,12 +24,16 @@ const styles = theme => ({
     }
 });
 
-class Admin extends Component {
+class EditMenu extends Component {
     state = {
         form: true,
         blob: '',
         height: '',
         select: ''
+    };
+
+    componentDidMount = () => {
+        this.props.fetchAdminActiveSubNav('add item')
     };
 
     setBlob = (blob) => {
@@ -88,4 +92,16 @@ const mapStateToProps = ({form}) => {
     }
 };
 
-export default connect(mapStateToProps, {addMenuItem, fetchMenu})(withRouter(withStyles(styles)(Admin)))
+const loadData = (mongoose) => {
+    return [
+        {
+            data: 'add item',
+            func: fetchAdminActiveSubNav
+        }
+    ];
+};
+
+export default {
+    component: connect(mapStateToProps, {addMenuItem, fetchMenu, fetchAdminActiveSubNav})(withRouter(withStyles(styles)(EditMenu))),
+    loadData
+}

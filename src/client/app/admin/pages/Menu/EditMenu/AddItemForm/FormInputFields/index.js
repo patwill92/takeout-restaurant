@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import withStyles from 'react-jss'
 import {Form} from 'semantic-ui-react'
 
@@ -85,12 +85,22 @@ const RenderField = field => {
                 <div className={classes.inputContainer}>
                     {!radio && !textArea && !cat &&
                     <input className={classes.root} {...input} placeholder={label} type={type}/>}
-                    {radio && <input style={{marginTop: 10, marginBottom: 0}} type={type} {...input} />}
-                    {radio && <span style={{marginLeft: 10, marginRight: 10}}>{label.toUpperCase()}</span>}
+                    {
+                        radio &&
+                        <Fragment>
+                            <input style={{marginTop: 10, marginBottom: 0}} type={type} {...input} />
+                            <span style={{marginLeft: 10, marginRight: 10}}>{label.toUpperCase()}</span>
+                        </Fragment>
+                    }
+                    {/*{radio && <input style={{marginTop: 10, marginBottom: 0}} type={type} {...input} />}*/}
+                    {/*{radio && <span style={{marginLeft: 10, marginRight: 10}}>{label.toUpperCase()}</span>}*/}
                     {textArea && <textarea {...input} rows="3"/>}
                     {cat &&
                     <div
-                        style={{borderColor: !!(touched && error) && '#e0b4b4', backgroundColor: !!(touched && error) && '#fff6f6'}}
+                        style={{
+                            borderColor: !!(touched && error) && '#e0b4b4',
+                            backgroundColor: !!(touched && error) && '#fff6f6'
+                        }}
                         className={classes.removeIcon}>
                         <select style={{color: selectColor()}} {...input}>
                             <option value='' disabled>Category</option>
@@ -104,13 +114,14 @@ const RenderField = field => {
                     </div>}
                     {cat &&
                     <div style={{position: 'absolute', top: 10, right: 12, zIndex: 100}}>
-                        <Icon style={{pointerEvents: 'none'}} color={iconColor()} name='angleDown' loose size={iconSize}/>
+                        <Icon style={{pointerEvents: 'none'}} color={iconColor()} name='angleDown' loose
+                              size={iconSize}/>
                     </div>}
                 </div>
             </Form.Field>,
             textArea && !radio &&
             <div key='radio'>
-                <label style={{fontWeight: 400, textTransform: 'uppercase'}}>Availability</label>
+                <label style={{fontWeight: 400, textTransform: 'uppercase'}}>Available</label>
                 <br/>
             </div>
         ]

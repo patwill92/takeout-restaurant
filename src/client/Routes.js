@@ -14,6 +14,12 @@ import TestMenu from './app/user/pages/Testmenu'
 //admin app
 import AdminDashboard from './app/admin/pages/Dashboard'
 import AdminMenu from './app/admin/pages/Menu'
+import AdminActivity from './app/admin/pages/Activity'
+import AdminUsers from './app/admin/pages/Users'
+import AdminSettings from './app/admin/pages/Settings'
+
+import AddMenu from './app/admin/pages/Menu/EditMenu'
+import MenuOverview from './app/admin/pages/Menu/Overview'
 
 export default {
     admin: [
@@ -27,7 +33,29 @@ export default {
                 },
                 {
                     ...AdminMenu,
-                    path: '/menu'
+                    routes: [
+                        {
+                            ...MenuOverview,
+                            path: '/menu',
+                            exact: true
+                        },
+                        {
+                            ...AddMenu,
+                            path: '/menu/additem'
+                        }
+                    ]
+                },
+                {
+                    ...AdminUsers,
+                    path: '/users'
+                },
+                {
+                    ...AdminActivity,
+                    path: '/activity'
+                },
+                {
+                    ...AdminSettings,
+                    path: '/settings'
                 }
             ]
         }

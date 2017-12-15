@@ -24,7 +24,6 @@ export default (req, store, context, routes) => {
             </StaticRouter>
         </Provider>
     );
-
     return `
     <html>
       <head>
@@ -41,9 +40,9 @@ export default (req, store, context, routes) => {
         </style>
       </head>
       <body>
-        <div id="root">${content}</div>
+        <div id="root" style='min-height: 100%;'>${content}</div>
         <script id="initialState">window.INITIAL_STATE = ${serialize(initStore)}</script>
-        <script src="bundle.js"></script>
+        <script src="/bundle.js"></script>
       </body>
     </html>
   `;
