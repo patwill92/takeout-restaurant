@@ -5,8 +5,8 @@ import withStyles from 'react-jss'
 import {connect} from 'react-redux';
 import axios from 'axios'
 import {Link, withRouter} from "react-router-dom"
-import {fetchMenu, fetchMenuAdmin, getUser,updateMenu} from "../../../../actions";
-import Icon from '../../../../components/Icon'
+import {fetchMenu, fetchMenuAdmin, getUser,updateMenu} from "../../actions";
+import Icon from '../../components/Icon'
 
 
 const styles = theme => ({

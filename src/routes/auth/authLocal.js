@@ -34,6 +34,7 @@ router.route('/signup')
                     password: hash
                 };
                 let newUser = await User.create(user);
+                console.log(newUser)
                 req.login(newUser, err => {
                     if (err) { return next(err); }
                     return res.redirect('/');
@@ -46,7 +47,7 @@ router.route('/signup')
     });
 
 router.route('/login')
-    .post(validate(check, User).login,
+    .post(validate(check,User).login,
         passport.authenticate('local'),
         (req, res) => {
             return res.redirect('/')

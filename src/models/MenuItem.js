@@ -24,6 +24,7 @@ const menuItemSchema = new Schema({
 }, {
   toJSON: { virtuals: true },
   toObject: { virtuals: true },
+  id:false
 });
 
 menuItemSchema.virtual('itemReviews', {

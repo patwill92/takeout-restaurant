@@ -14,7 +14,7 @@ router.route('/menu')
             path: 'itemReviews',
             populate: {path: 'user', select: 'name'}
         })
-        res.json(menu);
+        res.json(menu.map(menuItem=>{return {...menuItem,currentReview:'',starAmount:0,mouseOverStarAmount:0,showInput:false,showReviews:false}}));
     })
     .post(multer().single('image'),
         async (req, res) => {
@@ -102,6 +102,7 @@ router.post('/menuvalue', (req, res) => {
     Menu.create(req.body.value).then(response => console.log(response)).catch(error => console.log(error))
     res.json(req.body);
 })
+
 
 router.post('/uservalue', (req, res) => {
     const toResolve = [];
