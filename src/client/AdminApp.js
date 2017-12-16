@@ -45,6 +45,7 @@ const styles = theme => ({
 class Admin extends Component {
     render() {
         let {classes, subNav, route} = this.props;
+        console.log(subNav);
         return (
             <div style={{display: 'flex', flexDirection: 'column', position: 'relative', height: '100%'}}>
                 <div className={classes.topNav}>

@@ -2,9 +2,9 @@ import {FETCH_ADMIN_TAB, FETCH_ADMIN_SUB_NAV, FETCH_ADMIN_ACTIVE_SUB_NAV} from "
 
 const getSubNav = payload => {
     switch(payload) {
-        case 'menu': return ['menus', 'add item', 'edit item', 'settings'];
         case 'users': return ['users', 'comments', 'send info'];
         case 'activity': return ['orders', 'comments', 'visits'];
+        case 'menu': return ['menus', 'add item', 'edit item', 'settings'];
         case 'settings': return ['menu', 'users', 'orders', 'website'];
         default: return '';
     }

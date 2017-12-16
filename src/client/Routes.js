@@ -1,4 +1,3 @@
-
 import React from 'react';
 import App from './App'
 import Admin from './AdminApp'
@@ -22,6 +21,9 @@ import AdminSettings from './app/admin/pages/Settings'
 import AddMenu from './app/admin/pages/Menu/EditMenu'
 import MenuOverview from './app/admin/pages/Menu/Overview'
 
+import AdminActivityMain from './app/admin/pages/Activity/Main'
+
+
 export default {
     admin: [
         {
@@ -33,7 +35,19 @@ export default {
                     exact: true
                 },
                 {
+                    ...AdminActivity,
+                    path: '/activity',
+                    routes: [
+                        {
+                            ...AdminActivityMain,
+                            path: '/activity',
+                            exact: true
+                        }
+                    ]
+                },
+                {
                     ...AdminMenu,
+                    path: '/menu',
                     routes: [
                         {
                             ...MenuOverview,
@@ -49,10 +63,6 @@ export default {
                 {
                     ...AdminUsers,
                     path: '/users'
-                },
-                {
-                    ...AdminActivity,
-                    path: '/activity'
                 },
                 {
                     ...AdminSettings,
