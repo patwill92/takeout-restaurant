@@ -23,6 +23,11 @@ const styles = theme => ({
             cursor: 'pointer'
         }
     },
+    '@media (max-width: 767px)': {
+        menu: {
+            display: 'none !important'
+        }
+    },
     menu: {
         width: '300px !important',
         position: 'fixed !important',
