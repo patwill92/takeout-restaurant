@@ -7,7 +7,8 @@ export {
     changeStars,
     showReviews,
     postReview,
-    invalidInput
+    invalidInput,
+    reviewItemHandler
 } from './menu-actions'
 
 export {

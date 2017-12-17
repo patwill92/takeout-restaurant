@@ -103,3 +103,10 @@ export const addMenuItem = (formData, history) => async dispatch =>{
         console.log(e)
     }
 };
+export const reviewItemHandler = (item,index)=>{
+      return (dispatch,getState)=>{
+      const newMenu = [...getState().menu.clientMenu];
+      newMenu[index] = {...newMenu[index],showInput:!newMenu[index].showInput}
+      dispatch(updateMenu({clientMenu:newMenu}))
+      }
+  }

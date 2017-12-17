@@ -26,19 +26,10 @@ const styles = theme => ({
 
 class Menu extends Component {
 
-  reviewItemHandler = (item)=>{
-      this.props.updateMenu({
-          clientMenu:this.props.clientMenu.map((itemValue)=>{
-              return itemValue.name !== item? itemValue: {...itemValue,showInput:!itemValue.showInput}
-          })
-      })
-  }
-  reviewChangeHandler = (item,value)=>{
-      this.props.updateMenu({
-          clientMenu:this.props.clientMenu.map((itemValue)=>{
-              return itemValue.name !== item ? itemValue: {...itemValue,currentReview:value}
-          })
-      })
+  reviewChangeHandler = (value,index)=>{
+        const newMenu = [...this.props.clientMenu]
+        newMenu[index] = {...newMenu[index],currentReview:value}
+        this.props.updateMenu({clientMenu:newMenu})
   }
   emptyField = async (item,index)=>{
       const menuItemInQuestion = this.props.clientMenu[index];
@@ -51,7 +42,6 @@ class Menu extends Component {
       }            
   }
 render(){
-    const iconParent = this.props.classes.iconParent;
   return(
     <div>
   {this.props.user?null:(<Link to={"/login"}><p style={{fontSize:"25px"}}>Login/SignUp to Review!</p></Link>)}
@@ -64,7 +54,6 @@ render(){
               ):(<ReviewInput
               item={item}
               index={index} 
-              reviewItemHandler={this.reviewItemHandler}
               reviewChangeHandler={this.reviewChangeHandler}
               emptyField={this.emptyField}
                />)}

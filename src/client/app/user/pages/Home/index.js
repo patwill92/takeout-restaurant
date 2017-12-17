@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import withStyles from 'react-jss'
 import {connect} from 'react-redux';
 import axios from 'axios'
+import {Link} from "react-router-dom"
 
 import {fetchMenu, fetchMenuAdmin, getUser} from "../../../../actions";
 import HomeCard from './HomeCard'
@@ -73,7 +74,7 @@ class Home extends Component {
                 <div><HomeCard type='image' className={classes.root} src={srcMain}/></div>
                 <div><HomeCard type='image' className={classes.root} src={srcSalmon}/></div>
                 <div><HomeCard type='info' className={classes.root}/></div>
-                <div><HomeCard type='button' content='our menu' className={classes.root} src={srcTall}/></div>
+                <Link to="/menu"><div><HomeCard type='button' content='our menu' className={classes.root} src={srcTall}/></div></Link>
             </div>
         )
     }
