@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import withStyles from 'react-jss'
 
-import {toggleSideNav, fetchMenuAdmin} from "../../../../actions/index";
+import {toggleSideNav, fetchMenuAdmin} from "../../../actions/index";
 
 const styles = {
     root: {

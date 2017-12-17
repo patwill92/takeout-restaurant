@@ -6,7 +6,7 @@ import withStyles from 'react-jss'
 
 import Icon from '../../Icon/index'
 import Container from '../../Container/index'
-import SideMenu from '../SideMenu/index'
+import SideMenu from '../../SideMenu/index'
 import {toggleSideNav} from "../../../actions/index";
 
 

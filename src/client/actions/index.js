@@ -8,12 +8,16 @@ export {
     showReviews,
     postReview,
     invalidInput,
-    reviewItemHandler
+    reviewItemHandler,
+    addMenuItem,
+    updateMenu
 } from './menu-actions'
 
 export {
     toggleSideNav,
-    fetchAdminTab
+    fetchAdminTab,
+    fetchAdminSubNav,
+    fetchAdminActiveSubNav
 } from './ui-actions'
 
 export {

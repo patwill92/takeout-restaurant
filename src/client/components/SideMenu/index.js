@@ -5,7 +5,7 @@ import {Sidebar, Menu} from 'semantic-ui-react'
 
 
 import Wrapper from './Wrapper/index'
-import Icon from '../../Icon/index'
+import Icon from '../Icon/index'
 
 const styles = theme => ({
     root: {

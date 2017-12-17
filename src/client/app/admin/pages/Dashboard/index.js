@@ -5,7 +5,7 @@ import {Card} from 'semantic-ui-react'
 
 import StatsCard from './StatsCard/index'
 import data from './data/index'
-import {fetchAdminTab} from "../../../../actions/index";
+import {fetchAdminTab, fetchAdminSubNav} from "../../../../actions/index";
 
 
 const styles = theme => ({
@@ -14,19 +14,33 @@ const styles = theme => ({
 
 class Dashboard extends Component {
     componentDidMount = () => {
-        this.props.fetchAdminTab('dashboard')
+        this.props.fetchAdminTab('dashboard');
+        this.props.fetchAdminSubNav('');
     };
+
     render() {
         let {classes} = this.props;
         return (
-            <Card.Group stackable textAlign='center' itemsPerRow={3} style={{margin: 0, justifyContent: 'center', alignItems: 'center'}}>
+            <Card.Group stackable textAlign='center' itemsPerRow={3}
+                        style={{margin: 0, justifyContent: 'center', alignItems: 'center'}}>
                 {data.map((card, i) => <StatsCard color={card.color} title={card.title} icon={card.icon} key={i}/>)}
             </Card.Group>
         )
     }
 }
 
-const loadData = () => [{data: 'dashboard', func: fetchAdminTab}];
+const loadData = (mongoose) => {
+    return [
+        {
+            data: 'dashboard',
+            func: fetchAdminTab
+        },
+        {
+            data: '',
+            func: fetchAdminSubNav
+        }
+    ];
+};
 
 const mapStateToProps = ({menu}) => {
     return {
@@ -35,6 +49,6 @@ const mapStateToProps = ({menu}) => {
 };
 
 export default {
-    component: connect(mapStateToProps, {fetchAdminTab})(withStyles(styles)(Dashboard)),
+    component: connect(mapStateToProps, {fetchAdminTab, fetchAdminSubNav})(withStyles(styles)(Dashboard)),
     loadData
 }

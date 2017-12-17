@@ -23,21 +23,28 @@ const styles = theme => ({
             cursor: 'pointer'
         }
     },
+    '@media (max-width: 767px)': {
+        menu: {
+            display: 'none !important'
+        }
+    },
     menu: {
         width: '300px !important',
         position: 'fixed !important',
-        top: 50,
+        top: 50 + ' !important',
         background: '#edefef !important',
         border: 'none !important',
         borderRadius: 0 + ' !important',
-        margin: 0,
+        margin: 0 + ' !important',
         zIndex: 1,
-        height: '100% !important',
-        padding: '0 !important'
+        padding: '0 !important',
+        gridColumn: 1,
+        gridRow: '2/-1'
     }
 });
 
 const highlight = (state, tab) => {
+    console.log(tab === state, `${tab + ' ' + state}`);
     if(tab === state) {
         return '#dbe0e0'
     }
@@ -61,10 +68,9 @@ class SideMenu extends Component {
         let {classes, tab} = this.props;
         return (
             <Fragment>
-                <Menu className={classes.menu} vertical>
+                <Menu className={classes.menu} vertical style={{minHeight: '100%'}}>
                     {data.map(item => <MenuItem state={tab} classes={classes} key={item.name} {...item}/>)}
                 </Menu>
-                <Menu style={{minWidth: '300px', position: 'sticky', top: 50, background: 'transparent', border: 'none', margin: 0, zIndex: 0}} vertical/>
             </Fragment>
         )
     }

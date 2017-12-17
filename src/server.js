@@ -60,11 +60,18 @@ app.get('*', (req, res) => {
     let promises = matchRoutes(routes, req.url).map(({route}) => {
         return route.loadData ? route.loadData(mongoose) : null
     }).filter(promise => promise);
+<<<<<<< HEAD
      Promise.all(promises).then((promise) => {
+=======
+    console.log(promises);
+    Promise.all(promises).then((promise) => {
+>>>>>>> 648870429ebfbb23216203d641259a6b3d909721
         if(promise[0]) {
-            promise[0].forEach(({data, func}) => {
-                req.dispatchData = data;
-                store.dispatch(func(req))
+            promise.forEach((promise) => {
+                promise.forEach(({data, func}) => {
+                    req.dispatchData = data;
+                    store.dispatch(func(req))
+                })
             })
         }
         store.dispatch(toggleSideNav(false));

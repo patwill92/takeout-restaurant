@@ -11,8 +11,8 @@ const styles = theme => ({
 
 class AdminMenu extends Component {
     componentDidMount = () => {
-        this.props.fetchAdminTab('menu');
-        this.props.fetchAdminSubNav('menu');
+        this.props.fetchAdminTab('settings');
+        this.props.fetchAdminSubNav('settings');
     };
 
     render() {
@@ -28,11 +28,11 @@ class AdminMenu extends Component {
 const loadData = (mongoose) => {
     return [
         {
-            data: 'menu',
+            data: 'settings',
             func: fetchAdminTab
         },
         {
-            data: 'menu',
+            data: 'settings',
             func: fetchAdminSubNav
         }
     ];
