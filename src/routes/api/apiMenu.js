@@ -14,7 +14,7 @@ router.route('/menu')
             path: 'itemReviews',
             populate: {path: 'user', select: 'name'}
         })
-        res.json(menu.map(menuItem=>{return {...menuItem,currentReview:'',starAmount:0,mouseOverStarAmount:0,showInput:false,showReviews:false}}));
+        res.json(menu);
     })
     .post(multer().single('image'),
         async (req, res) => {
@@ -94,7 +94,16 @@ router.get('/deletetestingnow', async (req, res) => {
         console.log(error)
         res.send(error)
     }
-    const result = await User.update({_id: "5a31c79d88d76d04337af7b6"}, {$pop: {"itemsPurchased": 1}})
+})
+router.get('/deletewithoutrating', async (req, res) => {
+    const toResolve = [];
+    try {
+        const result = await Review.remove({rating:{$exists:false}});
+        res.json(result);
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
 })
 
 router.post('/menuvalue', (req, res) => {

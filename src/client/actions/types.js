@@ -5,3 +5,6 @@ export const GET_USER = 'GET_USER';
 export const FETCH_TEST_MENU = 'FETCH_TEST_MENU';
 export const UPDATE_MENU = 'UPDATE_MENU';
 export const FETCH_ADMIN_TAB = 'FETCH_ADMIN_TAB';
+export const UPDATE_MOUSE_OVER_STARS = 'UPDATE_MOUSE_OVER_STARS';
+export const UPDATE_STARS = 'UPDATE_STARS';
+export const SHOW_REVIEWS = 'SHOW_REVIEWS';

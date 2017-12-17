@@ -1,16 +1,20 @@
 import React from "react";
+import {connect} from "react-redux"
+import {changeMouseOverStars,showReviews} from "../../../../../actions";
+import {reviewsBox,reviewBox,userName,content} from "./styles"
+import Button from "../ReviewInput/Button"
 
 const Reviews = ({showReviews,item})=>{
 	return(
 		<div>
-      <button onClick={()=>showReviews(item.name)}>hide reviews</button>
-      <div style={{overflow:"scroll",height:"400px"}}>
+      <Button clicked={()=>showReviews(item.name)}>hide reviews</Button>
+      <div style={reviewsBox}>
           {item.itemReviews.map((reviewValue,index)=>
           (<div key={index}>
-          <div style={{boxShadow:"0px 0.5px 0.5px",padding:"10px", margin:"5px",backgroundColor:"#a7d1ba"}}>
-          <p style={{fontWeight:"bold",fontSize:"22px"}}>{reviewValue.user.name}</p>
-          <p style={{fontSize:"18px"}}>Rating : {reviewValue.rating}</p>
-          <em style={{fontSize:"18px"}}>{reviewValue.content}</em>
+          <div style={reviewBox}>
+          <p style={userName}>{reviewValue.user.name}</p>
+          <p style={content}>Rating : {reviewValue.rating}</p>
+          <em style={content}>{reviewValue.content}</em>
           </div>  
           </div>
           ))}
@@ -20,4 +24,4 @@ const Reviews = ({showReviews,item})=>{
 		)
 }
 
-export default Reviews		
+export default connect(null,{showReviews})(Reviews)		

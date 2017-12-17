@@ -2,7 +2,12 @@ export {
     fetchMenu,
     fetchMenuAdmin,
     fetchTestMenu,
-    updateMenu
+    updateMenu,
+    changeMouseOverStars,
+    changeStars,
+    showReviews,
+    postReview,
+    invalidInput
 } from './menu-actions'
 
 export {

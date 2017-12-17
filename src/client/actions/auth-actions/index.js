@@ -1,12 +1,12 @@
 import axios from 'axios'
-
 import {GET_USER} from "../types";
 
 export const getUser = req => {
     if(req) {
-        // req.user && delete req.user._doc.admin;
-        req.user && delete req.user._doc.password;
-        return {type: GET_USER, payload: req.user}
+        const user = req.user;
+        user.password = null;
+        console.log('user',user);
+        return {type: GET_USER, payload: user}
     } else {
         return async dispatch => {
             const res = await axios.get('/user/current_user');
