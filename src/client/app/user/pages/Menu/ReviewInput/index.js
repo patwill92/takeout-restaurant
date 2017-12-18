@@ -1,81 +1,52 @@
 import React from "react";
 import Icon from '../../../../../components/Icon'
+import {connect} from "react-redux"
+import {changeMouseOverStars,showReviews,reviewItemHandler} from "../../../../../actions";
+import RenderedStars from "./RenderedStars"
+import {whichStar} from "../util"
+import Button from "./Button"
+import ButtonDisabled from "./Button/ButtonDisabled"
+import TextInput from "./TextInput"
 
+//this function generates buttons for optimization purposes and code readability
 
- const whichStar = (amountOfStars)=>{
-	switch(amountOfStars){
-		case 1:
-		return '#de8918'
-		case 2:
-		return '#991312'
-		case 3:
-		return '#2b14dd'
-		case 4: 
-		return '#de12b7'
-		case 5:
-		return '#39ff2b'
-	}
-}
+// this argument deconstruction is to make property chains longer than 2 impossible.
+const ReviewInput = ({user:{itemsPurchased=[]},
+	showReviews,
+	reviewItemHandler,
+	emptyField,
+	reviewChangeHandler,
+	item:{showInput,name,itemReviews,_id,specialMessageValue,specialMessage},item,index})=>{
 
-
-const ReviewInput = (props)=>{
-			const renderedStars = (
-				<div className={props.iconParent}>{[1,2,3,4,5].map((num)=>(
-					<div key={num+props.item.name}
-						onMouseEnter={(event)=>{props.changeMouseOverStars(num,props.item.name)}}
-						onMouseLeave={()=>props.changeMouseOverStars(0,props.item.name)}
-						onClick={()=>props.changeStars(num,props.item.name)}
-						className={props.icon} 
-						style={{display: 'inline-block',"margin":"5px"}}
-					>
-					<Icon
-						 color={props.mouseOverStarAmount?
-			      	(props.mouseOverStarAmount>=num?
-			      		whichStar(props.mouseOverStarAmount):""):
-			      	props.starAmount>=num?whichStar(props.starAmount):""}
-			       name='star'
-			       loose
-			       size={30}/>
+		const buttonToReviewGeneratedDynamicallyBasedOnUserHistory = itemsPurchased.includes(_id)?
+		<Button clicked={()=>reviewItemHandler(item,index)}>Tell us what you thought!</Button>:null;
+		const toggleExistingReviewsButton = itemReviews.length?
+			<Button clicked={()=>showReviews(name)}>Show Reviews ({itemReviews.length})</Button>:
+			<Button>Show Reviews ({itemReviews.length})</Button>
+		const propsForTextInput = 
+			{emptyField:emptyField,reviewChangeHandler:reviewChangeHandler,item:item};
+		const conditionallyRenderedReviewInputFields = item.showInput?(
+			<div>
+					<RenderedStars item={item}/>
+					<TextInput {...propsForTextInput} index={index}/>
+					<Button clicked={()=>emptyField(item,index)}>Submit</Button>
+					<Button clicked={()=>reviewItemHandler(item,index)}>Cancel</Button>
+			</div>):null;
+		let conditionallyRenderedSpecialMessage = 
+		specialMessage?//this ternary is in outline format
+			specialMessageValue?
+					<h1>{specialMessageValue}</h1>
+					:<h1>Thank You</h1>
+			:null
+				return(
+					<div>
+							{buttonToReviewGeneratedDynamicallyBasedOnUserHistory}
+							{toggleExistingReviewsButton}
+							{conditionallyRenderedReviewInputFields}
+							{conditionallyRenderedSpecialMessage}
 					</div>
-	
-		))}</div>)
-			console.log(props.itemsReviewed)
-			console.log(props.itemsReviewed.includes(props.item._id))
-			return(
-				<div>
-						{props.itemsReviewed.includes(props.item._id+'')?
-								<button style={{padding:"10px", margin:"15px"}} onClick={()=>props.reviewItemHandler(props.item.name)}>
-								Tell us what you thought!
-								</button>:null}
-						{props.item.itemReviews.length?(<button style={{padding:"10px", margin:"15px"}} onClick={()=>props.showReviews(props.item.name)}>
-								Show Reviews({props.item.itemReviews.length})
-							</button>):<button disabled style={{padding:"10px", margin:"15px"}}>No reviews yet</button>}
-						<br/>
-						{props.item.showInput?							
-								(<div>
-										<div>
-											{renderedStars}
-										</div>
-										<textarea cols={60} rows={20} 
-										onChange={(event)=>{event.target.value.endsWith("\n")?
-										(confirm("would you like to submit?")?props.emptyField(props.item.name):null):null;
-										props.reviewChangeHandler(props.item.name,event.target.value)}} 
-										style={{margin:"5px",fontSize:"20px"}}
-										placeholder={" write your review here "}
-										value={props.item.currentReview}/>
-										<br/>
-										<button style={{padding:"10px", margin:"5px"}}
-										 onClick={()=>props.emptyField(props.item.name)}>
-											Submit
-										</button>
-										<button style={{padding:"10px", margin:"5px"}}
-										 onClick={()=>props.reviewItemHandler(props.item.name)}>
-											Cancel
-										</button>
-								</div>):null}
-						<br/>
-						{props.item.specialMessage?props.item.specialMessageValue?(<h1>{props.item.specialMessageValue}</h1>):(<h1>Thank You</h1>):null}
-				</div>
-					)
-}
-export default ReviewInput
+						)
+			}
+
+const mapStateToProps = ({user}) => ({user})
+export default connect(mapStateToProps,{changeMouseOverStars,showReviews,reviewItemHandler})(ReviewInput)
