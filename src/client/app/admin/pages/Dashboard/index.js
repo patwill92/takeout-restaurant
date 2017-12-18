@@ -9,7 +9,7 @@ import {fetchAdminTab, fetchAdminSubNav} from "../../../../actions/index";
 
 
 const styles = theme => ({
-    root: {}
+
 });
 
 class Dashboard extends Component {
@@ -22,7 +22,7 @@ class Dashboard extends Component {
         let {classes} = this.props;
         return (
             <Card.Group stackable textAlign='center' itemsPerRow={3}
-                        style={{margin: 0, justifyContent: 'center', alignItems: 'center'}}>
+                        style={{margin: 0, justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
                 {data.map((card, i) => <StatsCard color={card.color} title={card.title} icon={card.icon} key={i}/>)}
             </Card.Group>
         )

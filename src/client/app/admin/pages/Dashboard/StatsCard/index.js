@@ -26,7 +26,6 @@ const styles = theme => ({
         fontSize: '3.0rem !important'
     },
     card: {
-
         minWidth: 250 + ' !important',
         alignSelf: 'center !important',
         '&:hover': {
@@ -47,11 +46,21 @@ const styles = theme => ({
                 cursor: 'pointer'
             }
         }
+    },
+    '@media (min-width: 768px) and (max-width: 951px)': {
+        card: {
+            width: '100% !important'
+        }
+    },
+    '@media (max-width: 576px)': {
+        card: {
+            width: '100% !important'
+        }
     }
 });
 
 const Dashboard = props => {
-    let {classes, color, title, number, icon} = props;
+    let {classes, color, title, icon} = props;
     return (
         <Card className={classes.card} style={{background: color}}>
             <Card.Content>

@@ -60,7 +60,6 @@ app.get('*', (req, res) => {
     let promises = matchRoutes(routes, req.url).map(({route}) => {
         return route.loadData ? route.loadData(mongoose) : null
     }).filter(promise => promise);
-    console.log(promises);
     Promise.all(promises).then((promise) => {
         if(promise[0]) {
             promise.forEach((promise) => {

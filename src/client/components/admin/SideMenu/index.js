@@ -6,7 +6,7 @@ import {Menu} from 'semantic-ui-react'
 
 import Icon from '../../../components/Icon'
 import data from './data/index'
-import {fetchAdminTab} from "../../../actions/ui-actions";
+import {toggleSideNav} from "../../../actions/ui-actions";
 
 const styles = theme => ({
     menuItem: {
@@ -43,34 +43,55 @@ const styles = theme => ({
     }
 });
 
-const highlight = (state, tab) => {
-    console.log(tab === state, `${tab + ' ' + state}`);
-    if(tab === state) {
-        return '#dbe0e0'
+const highlight = (state, tab, mobile) => {
+    if (tab === state) {
+        return mobile ? 'rgba(0,0,0,0.3)' : '#dbe0e0'
     }
-    return '#edefef'
+    return !mobile ? '#edefef' : 'rgba(0,0,0,0.0)'
 };
 
 const MenuItem = props => {
-    const {classes, name, link, icon, state} = props;
+    const {classes, name, link, icon, state, mobile, styles, toggle} = props;
     return (
         <Link
-            className={classes.menuItem}
+            onClick={toggle}
+            className={styles ? styles : classes.menuItem}
             to={`${link}`}
-            style={{backgroundColor: highlight(state, name)}}>
-            <span><Icon style={{marginRight: 6}} color='#2185d0' name={icon}/> {name}</span>
+            style={{backgroundColor: highlight(state, name, mobile)}}>
+            <span><Icon style={{marginRight: 6}} color={!mobile ? '#2185d0' : '#d3d3d3'} name={icon}/> {name}</span>
         </Link>
     )
 };
 
 class SideMenu extends Component {
+    toggleNav = (mobile) => {
+        if(mobile) {
+            this.props.toggleSideNav(false)
+        }
+    };
     render() {
-        let {classes, tab} = this.props;
+        let {classes, tab, styles, mobile} = this.props;
         return (
             <Fragment>
-                <Menu className={classes.menu} vertical style={{minHeight: '100%'}}>
-                    {data.map(item => <MenuItem state={tab} classes={classes} key={item.name} {...item}/>)}
-                </Menu>
+                {!mobile ?
+                    <Menu className={classes.menu} vertical style={{minHeight: '100%'}}>
+                        {data.map(item => <MenuItem
+                            toggle={() => this.toggleNav(mobile)}
+                            state={tab}
+                            classes={classes}
+                            key={item.name}
+                            {...item}/>)}
+                    </Menu> :
+                    data.map(item => (
+                        <MenuItem
+                            toggle={() => this.toggleNav(mobile)}
+                            mobile={mobile}
+                            styles={styles}
+                            state={tab}
+                            classes={classes}
+                            key={item.name}
+                            {...item}/>
+                    ))}
             </Fragment>
         )
     }
@@ -83,4 +104,4 @@ const mapStateToProps = ({menu, admin}) => {
     }
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(SideMenu))
+export default connect(mapStateToProps, {toggleSideNav})(withStyles(styles)(SideMenu))
