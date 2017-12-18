@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Icon from '../../../../../../../components/Icon/index'
+import Icon from '../../../../../../components/Icon/index'
 
 const ImageField = props => {
     let {input, label, classes} = props;

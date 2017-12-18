@@ -3,16 +3,17 @@ import withStyles from 'react-jss'
 import {connect} from "react-redux"
 import {renderRoutes} from 'react-router-config'
 
-import {fetchAdminTab, fetchAdminSubNav} from "../../../../actions";
+import {fetchAdminTab, fetchAdminSubNav, fetchAdminActiveSubNav} from "../../../../actions";
 
 const styles = theme => ({
     root: {}
 });
 
-class AdminMenu extends Component {
+class AdminSettings extends Component {
     componentDidMount = () => {
         this.props.fetchAdminTab('settings');
         this.props.fetchAdminSubNav('settings');
+        this.props.fetchAdminActiveSubNav('website');
     };
 
     render() {
@@ -34,6 +35,10 @@ const loadData = (mongoose) => {
         {
             data: 'settings',
             func: fetchAdminSubNav
+        },
+        {
+            data: 'website',
+            func: fetchAdminActiveSubNav
         }
     ];
 };
@@ -46,6 +51,6 @@ const mapStateToProps = ({menu, admin}) => {
 };
 
 export default {
-    component: connect(mapStateToProps, {fetchAdminTab, fetchAdminSubNav})(withStyles(styles)(AdminMenu)),
+    component: connect(mapStateToProps, {fetchAdminTab, fetchAdminSubNav, fetchAdminActiveSubNav})(withStyles(styles)(AdminSettings)),
     loadData
 }

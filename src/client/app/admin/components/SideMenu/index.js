@@ -4,9 +4,9 @@ import withStyles from 'react-jss'
 import {connect} from "react-redux"
 import {Menu} from 'semantic-ui-react'
 
-import Icon from '../../../components/Icon'
+import Icon from '../../../components/Icon/index'
 import data from './data/index'
-import {toggleSideNav} from "../../../actions/ui-actions";
+import {toggleSideNav} from "../../../../actions/ui-actions/index";
 
 const styles = theme => ({
     menuItem: {

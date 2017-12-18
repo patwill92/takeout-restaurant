@@ -3,9 +3,9 @@ import injectSheet from 'react-jss'
 import {renderRoutes} from 'react-router-config'
 import {connect} from 'react-redux'
 
-import NavBar from './components/user/NavBar'
-import Footer from './components/user/Footer'
-import Container from './components/Container'
+import NavBar from './app/user/components/NavBar'
+import Footer from './app/user/components/Footer'
+import Container from './app/components/Container'
 
 const styles = theme => ({
     '@global': {

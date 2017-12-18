@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react'
 import {Button, Form, Divider} from 'semantic-ui-react'
 import withStyles from 'react-jss'
 
-import Icon from '../Icon'
+import Icon from '../Icon/index'
 
 const styles = theme => ({
     form: {

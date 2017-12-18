@@ -4,9 +4,9 @@ import withStyles from 'react-jss'
 import {connect} from "react-redux"
 
 import Icon from '../../../components/Icon/index'
-import SideNav from '../../../components/SideMenu'
-import SideMenu from '../../../components/admin/SideMenu'
-import {toggleSideNav} from "../../../actions";
+import SideNav from '../../../components/SideMenu/index'
+import SideMenu from '../SideMenu/index'
+import {toggleSideNav} from "../../../../actions/index";
 
 const styles = theme => ({
     '@media (max-width: 767px)': {

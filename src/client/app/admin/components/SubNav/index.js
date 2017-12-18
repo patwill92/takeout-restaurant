@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import { Menu, Input, Segment } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 import withStyles from 'react-jss'
 import {connect} from 'react-redux'
 
-import {fetchAdminActiveSubNav} from "../../../actions";
+import {fetchAdminActiveSubNav} from "../../../../actions/index";
 
 const font = {
     textTransform: 'uppercase !important',
@@ -40,7 +40,7 @@ class Subnav extends Component {
             <Menu pointing style={{borderRadius: 3, minHeight: 50}}>
                 {subNav.map((item, i) => {
                     const active = activeItem === item;
-                    let link = item === 'menus' ? '' : '/' + item.split(' ').join('');
+                    let link = i === 0 ? '' : '/' + item.split(' ').join('');
                     return (
                         <Link className={classes.link} key={item + i} to={`/${tab + link}`}>
                             <Menu.Item

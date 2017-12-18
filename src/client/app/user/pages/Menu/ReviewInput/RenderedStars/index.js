@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux"
-import Icon from '../../../../../../components/Icon'
+import Icon from '../../../../../components/Icon'
 import {changeMouseOverStars,changeStars} from "../../../../../../actions";
 import {whichStar} from "../../util";
 import withStyles from 'react-jss';

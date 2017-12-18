@@ -5,7 +5,7 @@ const getSubNav = payload => {
         case 'users': return ['users', 'comments', 'send info'];
         case 'activity': return ['orders', 'comments', 'visits'];
         case 'menu': return ['menus', 'add item', 'edit item', 'settings'];
-        case 'settings': return ['menu', 'users', 'orders', 'website'];
+        case 'settings': return ['website', 'menu', 'users', 'orders'];
         default: return '';
     }
 };

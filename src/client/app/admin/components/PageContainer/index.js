@@ -6,7 +6,8 @@ import {connect} from 'react-redux'
 const styles = theme => ({
     root: {
         width: '100% !important',
-        margin: 0 + ' !important'
+        margin: 0 + ' !important',
+        marginBottom: 10 + ' !important'
     },
     header: {
         color: '#333',
@@ -18,21 +19,21 @@ const styles = theme => ({
 })
 
 class PageContainer extends Component {
-    state = {activeItem: 'home'}
+    state = {activeItem: 'home'};
 
     handleItemClick = (e, {name}) => this.setState({activeItem: name})
 
     render() {
-        let {classes, children} = this.props;
+        let {classes, children, style, contentStyle} = this.props;
         return (
-            <Grid className={classes.root} >
+            <Grid className={classes.root} style={style && {...style}}>
                 <Card fluid>
                     <Card.Content style={{backgroundColor: '#DCEDC8', padding: 0}}>
                         <Card.Header className={classes.header}>
                             {children[0]}
                         </Card.Header>
                     </Card.Content>
-                    <Card.Content>
+                    <Card.Content style={contentStyle && {...contentStyle}}>
                         {children[1]}
                     </Card.Content>
                 </Card>

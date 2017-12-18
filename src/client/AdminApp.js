@@ -3,9 +3,9 @@ import withStyles from 'react-jss'
 import {connect} from "react-redux"
 import {renderRoutes} from 'react-router-config'
 
-import SideMenu from './components/admin/SideMenu'
-import SubNav from './components/admin/SubNav'
-import NavBar from './components/admin/NavBar'
+import SideMenu from './app/admin/components/SideMenu'
+import SubNav from './app/admin/components/SubNav'
+import NavBar from './app/admin/components/NavBar'
 import {toggleSideNav} from "./actions";
 
 const padding = {
@@ -79,7 +79,7 @@ const styles = theme => ({
     '@media (max-width: 767px)': {
         root: {
             minWidth: '80%',
-            width: '100% !important',
+            maxWidth: '100% !important',
             gridColumn: '1/-1',
             gridRow: 2,
             ...padding

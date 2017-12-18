@@ -2,7 +2,7 @@ import React, {Fragment} from 'react'
 import withStyles from 'react-jss'
 import {Form} from 'semantic-ui-react'
 
-import Icon from '../../../../../../../components/Icon/index'
+import Icon from '../../../../../../components/Icon/index'
 
 const styles = {
     root: {

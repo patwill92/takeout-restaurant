@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import axios from 'axios'
 import {Link, withRouter} from "react-router-dom"
 import {fetchMenu, fetchMenuAdmin,updateMenu,postReview,invalidInput} from "../../../../actions";
-import Icon from '../../../../components/Icon'
+import Icon from '../../../components/Icon'
 import ItemDetails from "./ItemDetails"
 const styles = theme => ({
     root: {

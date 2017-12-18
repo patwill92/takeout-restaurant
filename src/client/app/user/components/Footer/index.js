@@ -1,7 +1,7 @@
 import React from 'react'
 import withStyles from 'react-jss'
 
-import Icon from '../../Icon/index'
+import Icon from '../../../components/Icon/index'
 
 const styles = theme => ({
     root: {

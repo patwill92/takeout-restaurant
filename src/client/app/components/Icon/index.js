@@ -32,7 +32,7 @@ const looseStyle = {
 }
 
 const MyIcon = props => {
-    let icon = require('./icons')[props.name];
+    let icon = require('./icons/index')[props.name];
     let {name, path, viewBox} = icon;
     let size = viewBox.split(' ');
     let width = size[2].slice(0, 2);

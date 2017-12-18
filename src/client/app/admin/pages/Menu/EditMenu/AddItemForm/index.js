@@ -7,8 +7,8 @@ import withStyles from 'react-jss'
 import validate from './data/validate'
 import InputFields from './FormInputFields/index'
 import {fieldData} from './data/index'
-import PageContainer from '../../../../../../components/admin/PageContainer'
-import Icon from '../../../../../../components/Icon/index'
+import PageContainer from '../../../../components/PageContainer'
+import Icon from '../../../../../components/Icon/index'
 import ImageField from './FormImageField/index'
 
 

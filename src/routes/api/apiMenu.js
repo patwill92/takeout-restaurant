@@ -119,5 +119,16 @@ router.post('/uservalue', (req, res) => {
     res.json(req.body);
 })
 
+router.post('/availability', async (req, res) => {
+    console.log(req.body);
+    try {
+        const result = await Menu.findOneAndUpdate({_id: req.body.id}, {$set: {available: !req.body.available}});
+        res.send(result)
+    } catch (error) {
+        console.log(error);
+        res.send(error)
+    }
+})
+
 
 export default router;

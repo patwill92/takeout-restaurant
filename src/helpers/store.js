@@ -7,4 +7,4 @@ export const server = () => createStore(reducers, {});
 
 export const client = (initialState) => process.env.NODE_ENV === 'production' ?
     createStore(reducers, initialState, applyMiddleware(thunk)) :
-    createStore(reducers, initialState, applyMiddleware(thunk));
+    createStore(reducers, initialState, applyMiddleware(thunk, logger));

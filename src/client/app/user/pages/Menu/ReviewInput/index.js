@@ -1,5 +1,5 @@
 import React from "react";
-import Icon from '../../../../../components/Icon'
+import Icon from '../../../../components/Icon'
 import {connect} from "react-redux"
 import {changeMouseOverStars,showReviews,reviewItemHandler} from "../../../../../actions";
 import RenderedStars from "./RenderedStars"
