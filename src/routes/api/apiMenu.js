@@ -120,10 +120,13 @@ router.post('/uservalue', (req, res) => {
 })
 
 router.post('/availability', async (req, res) => {
-    console.log(req.body);
     try {
-        const result = await Menu.findOneAndUpdate({_id: req.body.id}, {$set: {available: !req.body.available}});
-        res.send(result)
+        await Menu.findByIdAndUpdate(req.body.id, {$set: {available: !req.body.available}});
+        const menu = await Menu.find().populate({
+            path: 'itemReviews',
+            populate: {path: 'user', select: 'name'}
+        });
+        res.json(menu);
     } catch (error) {
         console.log(error);
         res.send(error)

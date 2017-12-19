@@ -9,7 +9,8 @@ export {
     postReview,
     invalidInput,
     reviewItemHandler,
-    addMenuItem
+    addMenuItem,
+    updateAvailability
 } from './menu-actions'
 
 export {

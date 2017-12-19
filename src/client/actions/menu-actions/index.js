@@ -10,7 +10,7 @@ import {
 } from "../types";
 
 export const fetchMenu = (req, reset, index) => {
-    if (req) {
+    if (req && req.dispatchData) {
         return {type: FETCH_MENU, payload: req.dispatchData}
     }
     else if (reset) {
@@ -29,6 +29,8 @@ export const fetchMenu = (req, reset, index) => {
                 dispatch(updateMenu({clientMenu: newMenuForMessage}))
             }, 400)
         }
+    } else if(req && req.clientData) {
+        return {type: FETCH_MENU, payload: req.clientData}
     }
     else {
         return async dispatch => {
@@ -111,6 +113,12 @@ export const addMenuItem = (formData, history) => async dispatch => {
         console.log(e)
     }
 };
+
+export const updateAvailability = (id, available) => async dispatch => {
+    let {data} = await axios.post('/api/availability', {id, available});
+    dispatch(fetchMenu({clientData: data}));
+};
+
 export const reviewItemHandler = (item, index) => {
     return (dispatch, getState) => {
         const newMenu = [...getState().menu.clientMenu];
