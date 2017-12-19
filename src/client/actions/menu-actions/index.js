@@ -103,11 +103,10 @@ export const fetchMenuAdmin = req => {
     }
 };
 
-export const addMenuItem = (formData, history) => async dispatch => {
+export const addMenuItem = (formData) => async dispatch => {
     try {
         await axios.post('/api/menu', formData, {headers: {'Content-Type': 'multipart/form-data'}});
         const {data} = await axios.get('/api/menu');
-        history.push('/menu');
         dispatch({type: FETCH_MENU, payload: data});
     } catch (e) {
         console.log(e)

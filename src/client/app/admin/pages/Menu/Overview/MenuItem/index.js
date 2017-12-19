@@ -61,12 +61,12 @@ class MenuItemOverview extends Component {
             <PageContainer contentStyle={{padding: 0}}>
                 <span>{type}</span>
                 <div className={classes.content}>
-                    {this.props.menu.map((item, i) => {
+                    {this.props.menu && this.props.menu.map((item, i) => {
                         return item.category === type && (
                             <Segment className={classes.segment} key={item.name} style={{margin: 0}}>
                                 <div className={classes.itemInfo}>
                                     <h3>{item.name}</h3>
-                                    <h5>$ {item.price % 1 > 0 ? item.price : item.price + '.00'}</h5>
+                                    <h5>$ {item.price.toFixed(2)}</h5>
                                     <p>{item.description}</p>
                                 </div>
                                 <div className={classes.toggle}>

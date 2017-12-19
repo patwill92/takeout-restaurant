@@ -111,8 +111,8 @@ class AddItemForm extends Component {
 
     customSubmit = () => {
         this.props.setHeight(document.querySelector(`.${this.props.classes.form}`).clientHeight);
-        this.props.handleSubmit()
-    }
+        this.props.handleSubmit();
+    };
 
     render() {
         let {classes, height} = this.props;

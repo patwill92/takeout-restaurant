@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom'
 import withStyles from 'react-jss'
 import {connect} from "react-redux"
 
-import {fetchAdminActiveSubNav} from "../../../../../actions";
+import {fetchMenu, fetchAdminActiveSubNav} from "../../../../../actions";
 import MenuItem from './MenuItem'
 
 const styles = theme => ({
@@ -14,6 +14,7 @@ class MenuOverview extends Component {
 
     componentDidMount = () => {
         this.props.fetchAdminActiveSubNav('menus');
+        this.props.fetchMenu();
     };
 
     render() {
@@ -37,6 +38,7 @@ const loadData = (mongoose) => {
 
 export default {
     component: connect(null, {
+        fetchMenu,
         fetchAdminActiveSubNav
     })(withStyles(styles)(MenuOverview)),
     loadData

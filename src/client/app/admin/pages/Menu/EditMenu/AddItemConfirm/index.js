@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react'
-import {reduxForm} from 'redux-form'
+import {withRouter} from 'react-router-dom'
+import {reduxForm, destroy} from 'redux-form'
 import {Grid, List, Button} from 'semantic-ui-react'
 import withStyles from 'react-jss'
 
@@ -85,7 +86,11 @@ class AddItemForm extends Component {
                             </Button>
                             <Button
                                 style={{backgroundColor: '#8BC34A'}}
-                                onClick={onSubmit}
+                                onClick={() => {
+                                    onSubmit();
+                                    this.props.dispatch(destroy('addItem'));
+                                    this.props.history.push('/menu')
+                                }}
                                 className={classes.btn}>Add Item
                                 <Icon color='#fff' style={{marginLeft: 5, fontSize: '0.9rem', bottom: 1}}
                                       name='paperPlane'/>
@@ -96,12 +101,12 @@ class AddItemForm extends Component {
             </PageContainer>
         )
     }
-}
+};
 
 
 let AddItem = reduxForm({
-    form: 'additem',
+    form: 'addItem',
     destroyOnUnmount: false
-})(withStyles(styles)(AddItemForm));
+})(withRouter(withStyles(styles)(AddItemForm)));
 
 export default AddItem

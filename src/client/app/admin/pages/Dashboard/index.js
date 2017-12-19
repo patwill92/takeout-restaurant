@@ -5,7 +5,7 @@ import {Card} from 'semantic-ui-react'
 
 import StatsCard from './StatsCard/index'
 import data from './data/index'
-import {fetchAdminTab, fetchAdminSubNav} from "../../../../actions/index";
+import {fetchAdminTab, fetchAdminSubNav, fetchMenu} from "../../../../actions/index";
 
 
 const styles = theme => ({
@@ -16,6 +16,7 @@ class Dashboard extends Component {
     componentDidMount = () => {
         this.props.fetchAdminTab('dashboard');
         this.props.fetchAdminSubNav('');
+        this.props.fetchMenu();
     };
 
     render() {
@@ -49,6 +50,6 @@ const mapStateToProps = ({menu}) => {
 };
 
 export default {
-    component: connect(mapStateToProps, {fetchAdminTab, fetchAdminSubNav})(withStyles(styles)(Dashboard)),
+    component: connect(mapStateToProps, {fetchAdminTab, fetchAdminSubNav, fetchMenu})(withStyles(styles)(Dashboard)),
     loadData
 }

@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from 'react'
-import {withRouter} from 'react-router-dom'
 import withStyles from 'react-jss'
 import {connect} from "react-redux"
 
@@ -33,7 +32,7 @@ class EditMenu extends Component {
     };
 
     componentDidMount = () => {
-        this.props.fetchAdminActiveSubNav('add item')
+        this.props.fetchAdminActiveSubNav('add item');
     };
 
     setBlob = (blob) => {
@@ -58,7 +57,7 @@ class EditMenu extends Component {
         for(const name in item) {
             formData.append(name, item[name])
         }
-        this.props.addMenuItem(formData, this.props.history);
+        this.props.addMenuItem(formData);
     }
 
     render() {
@@ -102,6 +101,6 @@ const loadData = (mongoose) => {
 };
 
 export default {
-    component: connect(mapStateToProps, {addMenuItem, fetchMenu, fetchAdminActiveSubNav})(withRouter(withStyles(styles)(EditMenu))),
+    component: connect(mapStateToProps, {addMenuItem, fetchMenu, fetchAdminActiveSubNav})(withStyles(styles)(EditMenu)),
     loadData
 }
