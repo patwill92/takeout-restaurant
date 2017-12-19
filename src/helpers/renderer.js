@@ -11,7 +11,7 @@ import theme from '../styles/theme'
 
 export default (req, store, context, routes) => {
     const sheets = new SheetsRegistry();
-    const initStore = store.getState();
+    let initStore = store.getState();
     // initStore.user && delete initStore.user.password;
     const content = renderToString(
         <Provider store={store}>
