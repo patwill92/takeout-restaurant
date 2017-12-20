@@ -12,11 +12,6 @@ const styles = theme => ({
         '*': {
             fontFamily: 'Roboto !important'
         },
-        body: {
-            backgroundColor: '#FAFAFA !important',
-            backgroundImage: 'url("http://res.cloudinary.com/daj4m3xio/image/upload/e_colorize:100/v1511820883/45-degree-fabric-light_drgxti.png") !important',
-
-        },
         '.sidebar::-webkit-scrollbar': {
             '-webkit-appearance': 'none !important',
             display: 'none !important'

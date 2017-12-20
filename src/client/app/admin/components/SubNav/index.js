@@ -37,7 +37,7 @@ class Subnav extends Component {
     render() {
         let {classes, subNav, activeItem, tab} = this.props;
         return (
-            <Menu pointing style={{borderRadius: 3, minHeight: 50}}>
+            <Menu pointing style={{borderRadius: 3, minHeight: 50, width: '100%'}}>
                 {subNav.map((item, i) => {
                     const active = activeItem === item;
                     let link = i === 0 ? '' : '/' + item.split(' ').join('');

@@ -8,6 +8,13 @@ import {fetchMenu, fetchMenuAdmin, getUser} from "../../../../actions";
 import HomeCard from './HomeCard'
 
 const styles = theme => ({
+    '@global': {
+        body: {
+            backgroundColor: '#cacaca',
+            backgroundImage: 'url("http://res.cloudinary.com/daj4m3xio/image/upload/e_colorize:100/v1511820883/45-degree-fabric-light_drgxti.png") !important',
+
+        }
+    },
     root: {
         width: '100% !important',
         height: 'auto'
@@ -18,6 +25,9 @@ const styles = theme => ({
             pageBreakInside: 'avoid',
             breakInside: 'avoid',
             marginBottom: 12
+        },
+        '& .card': {
+            boxShadow: theme.shadows[10] + ' !important'
         }
     },
     grid: {

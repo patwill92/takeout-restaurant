@@ -9,6 +9,12 @@ import {fetchMenu, fetchMenuAdmin,updateMenu,postReview,invalidInput} from "../.
 import Icon from '../../../components/Icon'
 import ItemDetails from "./ItemDetails"
 const styles = theme => ({
+    '@global': {
+        body: {
+            backgroundColor: '#f5f5f5',
+            backgroundImage: 'url("http://res.cloudinary.com/daj4m3xio/image/upload/e_colorize:100/v1511820883/45-degree-fabric-light_drgxti.png") !important',
+        }
+    },
     root: {
         width: '100%',
         display: 'flex'

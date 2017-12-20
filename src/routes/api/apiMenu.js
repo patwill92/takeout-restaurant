@@ -98,7 +98,7 @@ router.get('/deletetestingnow', async (req, res) => {
 router.get('/deletewithoutrating', async (req, res) => {
     const toResolve = [];
     try {
-        const result = await Review.remove({rating:{$exists:false}});
+        const result = await Review.remove({rating: {$exists: false}});
         res.json(result);
     } catch (error) {
         console.log(error)
@@ -132,6 +132,40 @@ router.post('/availability', async (req, res) => {
         res.send(error)
     }
 })
+
+router.post('/edit_item', multer().single('image'), async (req, res) => {
+    let param = req.body.param;
+    if(req.file) {
+        cloudinary.v2.uploader.upload_stream({resource_type: 'raw'}, async (err, image) => {
+            try {
+                let {secure_url} = image;
+                await Menu.findByIdAndUpdate(req.body.id, {$set: {image: secure_url}});
+                const menu = await Menu.find().populate({
+                    path: 'itemReviews',
+                    populate: {path: 'user', select: 'name'}
+                });
+                res.json(menu);
+            } catch (e) {
+                console.log(error);
+                res.send(error)
+            }
+        }).end(req.file.buffer);
+    } else {
+        try {
+            await Menu.findByIdAndUpdate(req.body.id, {$set: {[param]: req.body.value}});
+            const menu = await Menu.find().populate({
+                path: 'itemReviews',
+                populate: {path: 'user', select: 'name'}
+            });
+            res.json(menu);
+        } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
+
+
+});
 
 
 export default router;

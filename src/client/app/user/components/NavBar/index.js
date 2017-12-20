@@ -13,6 +13,7 @@ import {toggleSideNav} from "../../../../actions/index";
 const styles = theme => ({
     root: {
         backgroundColor: theme.palette.primary + ' !important',
+        backgroundImage: 'url("http://res.cloudinary.com/daj4m3xio/image/upload/v1511822287/black-linen_vglyyw.png") !important',
         boxShadow: theme.shadows[2] + ' !important',
         position: 'sticky',
         zIndex: 101,
@@ -68,7 +69,7 @@ const styles = theme => ({
         fontWeight: 400 + ' !important',
         fontSize: '1.0rem !important',
         '&:hover': {
-            backgroundColor: theme.palette.hoverPrimary + ' !important',
+            backgroundColor: 'rgba(0,0,0,0.1) !important',
             cursor: 'pointer'
         }
     },

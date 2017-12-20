@@ -9,7 +9,7 @@ import InputFields from './FormInputFields/index'
 import {fieldData} from './data/index'
 import PageContainer from '../../../../components/PageContainer'
 import Icon from '../../../../../components/Icon/index'
-import ImageField from './FormImageField/index'
+import ImageField from '../../../../components/FormImageField/index'
 
 
 const styles = theme => ({
@@ -32,13 +32,6 @@ const styles = theme => ({
         margin: 0 + '!important',
         width: '100% !important',
         flex: 0
-    },
-    file: {
-        border: `1px solid ${theme.palette.admin.green}`,
-        borderRadius: 5,
-        display: 'inline-block',
-        padding: '6px 12px',
-        cursor: 'pointer'
     },
     btn: {
         float: 'right',
@@ -141,7 +134,6 @@ class AddItemForm extends Component {
                                form={this.state.name}
                                onChange={this.onImgChange}
                                component={ImageField}
-                               classes={classes}
                         />
                         {fields}
                         <Button

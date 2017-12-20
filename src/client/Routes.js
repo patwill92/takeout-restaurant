@@ -20,6 +20,7 @@ import AdminSettings from './app/admin/pages/Settings'
 
 import AddItem from './app/admin/pages/Menu/AddItem'
 import MenuOverview from './app/admin/pages/Menu/Overview'
+import EditItem from './app/admin/pages/Menu/EditItem'
 
 import AdminActivityMain from './app/admin/pages/Activity/Main'
 
@@ -57,6 +58,10 @@ export default {
                         {
                             ...AddItem,
                             path: '/menu/additem'
+                        },
+                        {
+                            ...EditItem,
+                            path: '/menu/edititem'
                         }
                     ]
                 },

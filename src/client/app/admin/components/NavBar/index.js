@@ -30,7 +30,7 @@ const styles = theme => ({
         zIndex: 100,
         position: 'fixed',
         top: 0,
-        minHeight: 50,
+        minHeight: 60,
         width: '100%',
         padding: '0 20px',
         alignItems: 'center',

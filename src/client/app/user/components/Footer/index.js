@@ -10,7 +10,7 @@ const styles = theme => ({
         flexDirection: 'column',
         alignContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.8)',
+        backgroundColor: '#3e3e3e',
         backgroundImage: 'url("http://res.cloudinary.com/daj4m3xio/image/upload/v1511822287/black-linen_vglyyw.png") !important',
         marginTop: 30,
         paddingTop: 50,

@@ -31,7 +31,7 @@ const styles = theme => ({
     menu: {
         width: '300px !important',
         position: 'fixed !important',
-        top: 50 + ' !important',
+        top: 60 + ' !important',
         background: '#edefef !important',
         border: 'none !important',
         borderRadius: 0 + ' !important',
