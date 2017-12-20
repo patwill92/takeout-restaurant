@@ -94,11 +94,12 @@ const styles = theme => ({
     },
 });
 
-const Item = ({title, state, id, editItem, back, classes, value, updateItem, binder}) => (
-    <Fragment>
-        <h5 className={classes.infoTitle}>
-            {state.item !== id + title &&
-            <span onClick={editItem}>
+const Item = ({title, state, id, editItem, back, classes, value, updateItem, binder, width}) => {
+    return (
+        <Fragment>
+            <h5 className={classes.infoTitle}>
+                {state.item !== id + title &&
+                <span onClick={editItem}>
                         <span style={{textTransform: 'capitalize'}}>{title}</span>
                         <span style={{fontSize: '1.2rem'}}>
                             <Icon
@@ -107,8 +108,8 @@ const Item = ({title, state, id, editItem, back, classes, value, updateItem, bin
                                 color='#2185d0'/>
                         </span>
                     </span>}
-            {state.item === id + title &&
-            <span>
+                {state.item === id + title &&
+                <span>
                 <span style={{textTransform: 'capitalize'}}>{title}</span>
                 <span onClick={back}
                       style={{fontSize: '1.2rem'}}>
@@ -121,19 +122,21 @@ const Item = ({title, state, id, editItem, back, classes, value, updateItem, bin
                           color='#4CAF50'/>
                 </span>
             </span>}
-        </h5>
-        {state.item !== id + title &&
-        <h5 className={classes.info}>{title === 'price' ? `$ ${value.toFixed(2)}` : value}</h5>}
-        {state.item === id + title && (title !== 'description' ?
-            <Form.Input onChange={(e) => binder.setState({field: e.target.value})} value={state.field} type="text"
-                        style={{marginBottom: 7}}/> :
-            <Form style={{margin: 0}}>
-                <Form.Field>
-                    <textarea onChange={(e) => binder.setState({field: e.target.value})} value={state.field} rows="2"/>
-                </Form.Field>
-            </Form>)}
-    </Fragment>
-);
+            </h5>
+            {state.item !== id + title && (title==='description' ?
+                <p style={{maxWidth: 300}}>{value}</p>:
+                <h5 className={classes.info}>{title === 'price' ? `$ ${value.toFixed(2)}` : value}</h5>)}
+            {state.item === id + title && (title !== 'description' ?
+                <Form.Input onChange={(e) => binder.setState({field: e.target.value})} value={state.field} type="text"
+                            style={{marginBottom: 7}}/> :
+                <Form style={{margin: 0, minWidth: width}}>
+                    <Form.Field>
+                        <textarea onChange={(e) => binder.setState({field: e.target.value})} value={state.field} rows="3"/>
+                    </Form.Field>
+                </Form>)}
+        </Fragment>
+    )
+};
 
 class EditMenuItem extends Component {
     state = {
@@ -186,9 +189,10 @@ class EditMenuItem extends Component {
                     {this.props.menu && this.props.menu.map(item => {
                         return item.category === type && (
                             <Segment className={classes.segment} key={item.name} style={{margin: 0}}>
-                                <div className={classes.itemInfo}>
+                                <div ref={(val) => this.myWidth = val} className={classes.itemInfo}>
                                     {['name', 'price', 'description'].map((title) => (
                                             <Item
+                                                width={this.myWidth && this.myWidth.clientWidth}
                                                 key={title + item._id}
                                                 title={title}
                                                 id={item._id}

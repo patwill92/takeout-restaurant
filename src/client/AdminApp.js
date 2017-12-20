@@ -18,9 +18,13 @@ const padding = {
 
 const styles = theme => ({
     '@global': {
+        html: {
+            minHeight: '100%'
+        },
         body: {
             backgroundColor: '#f7f7f7 !important',
             backgroundImage: 'none !important',
+            minHeight: '100%'
         }
     },
     gridParent: {

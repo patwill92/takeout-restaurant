@@ -118,8 +118,6 @@ export const updateAvailability = (id, available) => async dispatch => {
     dispatch(fetchMenu({clientData: data}));
 };
 
-
-
 export const reviewItemHandler = (item, index) => {
     return (dispatch, getState) => {
         const newMenu = [...getState().menu.clientMenu];
