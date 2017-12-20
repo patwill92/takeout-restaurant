@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import { Menu } from 'semantic-ui-react'
+import {Menu} from 'semantic-ui-react'
 import withStyles from 'react-jss'
 import {connect} from 'react-redux'
 
@@ -30,6 +30,43 @@ const styles = theme => ({
     link: {
         display: 'flex !important',
         borderRadius: 3 + ' !important'
+    },
+    menuWrapper: {
+        borderRadius: 3 + ' !important',
+        minHeight: 50 + ' !important',
+        width: '100% !important'
+    },
+    '@media (max-width: 767px)': {
+        active: {
+            borderRadius: 0 + ' !important'
+        },
+        tabs: {
+            borderRadius: 0 + ' !important'
+        },
+        menuWrapper: {
+            borderRadius: 0 + ' !important',
+            width: '100% !important',
+            border: 0 + ' !important',
+            position: 'sticky !important',
+            top: 60 + ' !important',
+            zIndex: 1
+        },
+       '@global': {
+           body: {
+               '& #adminNavbar': {
+                   boxShadow: theme.shadows[0] + ' !important'
+               },
+               '& .card': {
+                   borderRadius: 0 + ' !important',
+                   '& div': {
+                       borderRadius: 0 + ' !important',
+                   }
+               },
+               '& .header': {
+                   borderRadius: 0 + ' !important',
+               }
+           }
+       }
     }
 });
 
@@ -37,7 +74,7 @@ class Subnav extends Component {
     render() {
         let {classes, subNav, activeItem, tab} = this.props;
         return (
-            <Menu pointing style={{borderRadius: 3, minHeight: 50, width: '100%'}}>
+            <Menu className={classes.menuWrapper}>
                 {subNav.map((item, i) => {
                     const active = activeItem === item;
                     let link = i === 0 ? '' : '/' + item.split(' ').join('');
@@ -47,7 +84,7 @@ class Subnav extends Component {
                                 className={active ? classes.active : classes.tabs}
                                 name={item}
                                 active={active}
-                                style={{borderTopLeftRadius: i===0 && 3, borderBottomLeftRadius: i===0 && 3}}/>
+                                style={{borderTopLeftRadius: i === 0 && 3, borderBottomLeftRadius: i === 0 && 3}}/>
                         </Link>
                     )
                 })}

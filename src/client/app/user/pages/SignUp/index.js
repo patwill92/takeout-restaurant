@@ -19,7 +19,7 @@ const styles = theme => ({
     },
     column: {
         backgroundColor: 'rgba(0,0,0,0) !important',
-        boxShadow: theme.shadows[1] + ' !important',
+        boxShadow: theme.shadows[0] + ' !important',
         borderRadius: 5,
         padding: 0 + ' !important',
         display: 'flex !important'
@@ -47,7 +47,7 @@ const styles = theme => ({
     },
     imgOverlay: {
         minHeight: '100%',
-        padding: '33% 10px',
+        padding: '40% 10px',
         backgroundColor: 'rgba(0,0,0,0.3)',
         width: '100%',
         display: 'flex',
@@ -114,7 +114,7 @@ const styles = theme => ({
             order: 1,
         },
         imgOverlay: {
-            padding: '20px 10px',
+            padding: '40px 10px',
             '& a': {
                 marginTop: 10
             },
@@ -146,7 +146,7 @@ class Login extends Component {
                                 <p style={{textAlign: 'center', fontWeight: 300, maxWidth: '80%', margin: 'auto'}}>
                                     No need to sign up! Just log right in.</p>
                             </div>
-                            <Link to='/signup' className={classes.link}>Login</Link>
+                            <Link to='/login' className={classes.link}>Login</Link>
                         </div>
                     </div>
                 </Grid.Column>

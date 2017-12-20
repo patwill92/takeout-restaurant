@@ -29,7 +29,7 @@ const styles = theme => ({
     },
     gridParent: {
         display: 'grid',
-        gridTemplateRows: '50px 1fr',
+        gridTemplateRows: '60px 1fr',
         gridTemplateColumns: '300px 1fr'
     },
     root: {
@@ -82,11 +82,11 @@ const styles = theme => ({
     },
     '@media (max-width: 767px)': {
         root: {
+            paddingTop: 0,
             minWidth: '80%',
             maxWidth: '100% !important',
             gridColumn: '1/-1',
             gridRow: 2,
-            ...padding
         }
     }
 });

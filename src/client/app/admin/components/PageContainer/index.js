@@ -15,6 +15,25 @@ const styles = theme => ({
         fontWeight: 400 + ' !important',
         lineHeight: '100%',
         padding: 14
+    },
+    '@media (max-width: 767px)': {
+        '@global': {
+            body: {
+                '& .ui.card>:first-child': {
+                    borderRadius: 0 + ' !important'
+                },
+                '& .ui.cards>.card>:first-child': {
+                    borderRadius: 0 + ' !important'
+                },
+                '& .segment:last-child': {
+                    borderBottom: 0 + ' !important',
+                    borderRadius: '0 !important'
+                },
+                '& .card': {
+                    boxShadow: theme.shadows[0] + ' !important'
+                }
+            }
+        }
     }
 })
 
@@ -28,7 +47,7 @@ class PageContainer extends Component {
         return (
             <Grid className={classes.root} style={style && {...style}}>
                 <Card fluid>
-                    <Card.Content style={{backgroundColor: '#DCEDC8', padding: 0}}>
+                    <Card.Content id={'content'} style={{backgroundColor: '#DCEDC8', padding: 0}} className={classes.content}>
                         <Card.Header className={classes.header}>
                             {children[0]}
                         </Card.Header>

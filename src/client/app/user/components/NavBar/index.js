@@ -10,6 +10,18 @@ import SideMenu from '../../../components/SideMenu/index'
 import {toggleSideNav} from "../../../../actions/index";
 
 
+const menuItem = {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 16px !important',
+    fontWeight: 400 + ' !important',
+    fontSize: '1.2rem !important',
+    '&:hover': {
+        backgroundColor: 'rgba(0,0,0,0.1) !important',
+        cursor: 'pointer'
+    }
+};
+
 const styles = theme => ({
     root: {
         backgroundColor: theme.palette.primary + ' !important',
@@ -74,15 +86,10 @@ const styles = theme => ({
         }
     },
     menuItemRight: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 16px !important',
-        fontWeight: 400 + ' !important',
-        fontSize: '1.2rem !important',
-        '&:hover': {
-            backgroundColor: 'rgba(0,0,0,0.1) !important',
-            cursor: 'pointer'
-        }
+        ...menuItem
+    },
+    menuItemLunchBox: {
+        ...menuItem
     },
     menuItemBurger: {
         display: 'flex',
@@ -94,8 +101,7 @@ const styles = theme => ({
         color: '#fff !important',
         textDecoration: 'none !important'
     },
-    imgContainer: {
-    }
+    imgContainer: {}
 })
 
 class NavBar extends Component {
@@ -108,44 +114,58 @@ class NavBar extends Component {
     handleItemClick = (e, {name}) => this.setState({activeItem: name});
 
     renderNav = (user, classes, type) => {
-        switch(type) {
+        switch (type) {
             case 'desktop':
-                switch(user) {
-                    case null: return '';
-                    case false: return (
-                        <Fragment>
-                            <Link className={classes.menuItemRight} to='/login' >login </Link>
-                            <Link className={classes.menuItemRight} to='/signup' >signup</Link>
-                        </Fragment>
-                    );
-                    default: return (
-                        <a className={classes.menuItemRight} style={{textDecoration: 'none', color: '#fff'}} href='/user/logout'>logout</a>
-                    )
+                switch (user) {
+                    case null:
+                        return '';
+                    case false:
+                        return (
+                            <Fragment>
+                                <Link className={classes.menuItemRight} to='/login'>login </Link>
+                                <Link className={classes.menuItemRight} to='/signup'>signup</Link>
+                            </Fragment>
+                        );
+                    default:
+                        return (
+                            <a className={classes.menuItemRight} style={{textDecoration: 'none', color: '#fff'}}
+                               href='/user/logout'>logout</a>
+                        )
                 }
             case 'mobile' :
-                switch(user) {
-                    case null: return '';
-                    case false: return (
-                        <Fragment>
-                            <div className={classes.imgContainer} style={{padding: 20}}>
-                                <img style={{width: '100%', height: 'auto'}}
-                                     src="http://res.cloudinary.com/daj4m3xio/image/upload/v1513110298/forkit_pubkag.png" alt="forkit"/>
-                            </div>
-                            <Link onClick={() => this.props.toggleSideNav(false)} className={classes.menuItemBurger} to='/' >Menu</Link>
-                            <Link onClick={() => this.props.toggleSideNav(false)} className={classes.menuItemBurger} to='/login' >login</Link>
-                            <Link onClick={() => this.props.toggleSideNav(false)} className={classes.menuItemBurger} to='/signup' >signup</Link>
-                        </Fragment>
-                    );
-                    default: return (
-                        <Fragment>
-                            <div className={classes.imgContainer} style={{padding: 20}}>
-                                <img style={{width: '100%', height: 'auto'}}
-                                     src="http://res.cloudinary.com/daj4m3xio/image/upload/v1513110298/forkit_pubkag.png" alt="forkit"/>
-                            </div>
-                            <Link onClick={() => this.props.toggleSideNav(false)} className={classes.menuItemBurger} to='/' >Menu</Link>
-                            <a className={classes.menuItemBurger} style={{textDecoration: 'none', color: '#fff'}} href='/user/logout'>logout</a>
-                        </Fragment>
-                    )
+                switch (user) {
+                    case null:
+                        return '';
+                    case false:
+                        return (
+                            <Fragment>
+                                <div className={classes.imgContainer} style={{padding: 20}}>
+                                    <img style={{width: '100%', height: 'auto'}}
+                                         src="http://res.cloudinary.com/daj4m3xio/image/upload/v1513110298/forkit_pubkag.png"
+                                         alt="forkit"/>
+                                </div>
+                                <Link onClick={() => this.props.toggleSideNav(false)} className={classes.menuItemBurger}
+                                      to='/'>Menu</Link>
+                                <Link onClick={() => this.props.toggleSideNav(false)} className={classes.menuItemBurger}
+                                      to='/login'>login</Link>
+                                <Link onClick={() => this.props.toggleSideNav(false)} className={classes.menuItemBurger}
+                                      to='/signup'>signup</Link>
+                            </Fragment>
+                        );
+                    default:
+                        return (
+                            <Fragment>
+                                <div className={classes.imgContainer} style={{padding: 20}}>
+                                    <img style={{width: '100%', height: 'auto'}}
+                                         src="http://res.cloudinary.com/daj4m3xio/image/upload/v1513110298/forkit_pubkag.png"
+                                         alt="forkit"/>
+                                </div>
+                                <Link onClick={() => this.props.toggleSideNav(false)} className={classes.menuItemBurger}
+                                      to='/'>Menu</Link>
+                                <a className={classes.menuItemBurger} style={{textDecoration: 'none', color: '#fff'}}
+                                   href='/user/logout'>logout</a>
+                            </Fragment>
+                        )
                 }
         }
     };
@@ -172,21 +192,24 @@ class NavBar extends Component {
                             menu
                         </Menu.Item>
                         <Menu.Menu position='right'>
-                            <Menu.Item className={classes.menuItemRight} active={activeItem === 'friends'}
+                            <Menu.Item className={classes.menuItemLunchBox} active={activeItem === 'friends'}
                                        onClick={this.handleItemClick}>
                                 <span style={{fontSize: '2.3rem', position: 'relative'}}>
                                     <Icon style={{marginRight: 8, bottom: 5}} color='#ffffff' name='shoppingBag'/>
                                     <span
-                                        style={{fontSize: '1.2rem',
+                                        style={{
+                                            fontSize: '1.2rem',
                                             position: 'absolute',
                                             top: '39%',
-                                            left: cart > 9 ? (42/4 -4.5) : (42/2 - 10),
-                                            fontWeight: 300}}>{cart}</span>
+                                            left: cart > 9 ? (42 / 4 - 4.5) : (42 / 2 - 10),
+                                            fontWeight: 300
+                                        }}>{cart}</span>
                                 </span>
                                 lunch-box
                             </Menu.Item>
                             {this.renderNav(this.props.user, classes, 'desktop')}
-                            <Menu.Item id='burger' style={{bottom: 2, ...inactiveBackground}} active={this.props.sideNav}
+                            <Menu.Item id='burger' style={{bottom: 2, ...inactiveBackground}}
+                                       active={this.props.sideNav}
                                        className={classes.burgerMenu} onClick={this.toggleVisibility}>
                                 <h3><Icon color='#ffffff' name='bars'/></h3>
                             </Menu.Item>

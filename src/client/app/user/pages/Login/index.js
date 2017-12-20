@@ -19,7 +19,7 @@ const styles = theme => ({
     },
     column: {
         backgroundColor: 'rgba(0,0,0,0) !important',
-        boxShadow: theme.shadows[1] + ' !important',
+        boxShadow: theme.shadows[0] + ' !important',
         borderRadius: 5,
         padding: 0 + ' !important',
         display: 'flex !important'
@@ -87,26 +87,34 @@ const styles = theme => ({
     },
 
     '@media (max-width: 767px)': {
+        '@global': {
+            body: {
+                '& #containerID': {
+                    paddingLeft: 0 + ' !important',
+                    paddingRight: 0 + ' !important',
+
+                },
+                backgroundColor: '#fff',
+                '& #navbar': {
+                    marginBottom: 0 + ' !important'
+                }
+            }
+        },
         column: {
             flexDirection: 'column',
+            boxShadow: theme.shadows[0] + ' !important',
             '& #containerID': {
                 order: 2,
-                borderBottomRightRadius: 5,
-                borderBottomLeftRadius: 5,
-                padding: '30px 30px !important',
+                padding: '30px 10px !important',
                 paddingTop: '15px !important'
             }
         },
         registerMessage: {
             minWidth: '100%',
             order: 1,
-            borderTopRightRadius: 5,
-            borderTopLeftRadius: 5,
         },
         imgOverlay: {
-            borderTopRightRadius: 5,
-            borderTopLeftRadius: 5,
-            padding: '20px 10px',
+            padding: '40px 10px',
             '& a': {
                 marginTop: 10
             },

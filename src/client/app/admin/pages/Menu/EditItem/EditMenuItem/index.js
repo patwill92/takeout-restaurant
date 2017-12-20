@@ -112,6 +112,14 @@ const styles = theme => ({
             maxWidth: 150
         }
     },
+    '@media (max-width: 767px)': {
+        content: {
+            '& .segment:last-child': {
+                borderBottom: 0 + ' !important',
+                borderRadius: '0 !important'
+            }
+        }
+    }
 });
 
 const Item = ({title, state, id, editItem, back, classes, value, updateItem, binder, width}) => {
@@ -144,17 +152,17 @@ const Item = ({title, state, id, editItem, back, classes, value, updateItem, bin
                 </span>}
             </h5>
             {state.item !== id + title && (title === 'description' ?
-            <p className={classes.description}>{value}</p> :
-            <h5 className={classes.info}>{title === 'price' ? `$ ${value.toFixed(2)}` : value}</h5>)}
+                <p className={classes.description}>{value}</p> :
+                <h5 className={classes.info}>{title === 'price' ? `$ ${value.toFixed(2)}` : value}</h5>)}
             {state.item === id + title && (title !== 'description' ?
-            <Form.Input onChange={(e) => binder.setState({field: e.target.value})} value={state.field} type="text"
+                <Form.Input onChange={(e) => binder.setState({field: e.target.value})} value={state.field} type="text"
                             style={{marginBottom: 7}}/> :
-            <Form style={{margin: 0, minWidth: width}}>
-                <Form.Field>
+                <Form style={{margin: 0, minWidth: width}}>
+                    <Form.Field>
                     <textarea onChange={(e) => binder.setState({field: e.target.value})} value={state.field}
                               rows="3"/>
-                </Form.Field>
-            </Form>)}
+                    </Form.Field>
+                </Form>)}
         </Fragment>
     )
 };
@@ -212,18 +220,18 @@ class EditMenuItem extends Component {
                             <Segment className={classes.segment} key={item.name} style={{margin: 0}}>
                                 <div ref={(val) => this.myWidth = val} className={classes.itemInfo}>
                                     {['name', 'price', 'description'].map((title) => (
-                                    <Item
-                                        width={this.myWidth && this.myWidth.clientWidth}
-                                        key={title + item._id}
-                                        title={title}
-                                        id={item._id}
-                                        editItem={() => this.setState({item: item._id + title, field: item[title]})}
-                                        back={() => this.setState({item: ''})}
-                                        updateItem={this.updateItem}
-                                        value={item[title]}
-                                        binder={this}
-                                        classes={classes}
-                                        state={this.state}/>
+                                            <Item
+                                                width={this.myWidth && this.myWidth.clientWidth}
+                                                key={title + item._id}
+                                                title={title}
+                                                id={item._id}
+                                                editItem={() => this.setState({item: item._id + title, field: item[title]})}
+                                                back={() => this.setState({item: ''})}
+                                                updateItem={this.updateItem}
+                                                value={item[title]}
+                                                binder={this}
+                                                classes={classes}
+                                                state={this.state}/>
                                         )
                                     )}
                                 </div>
@@ -271,19 +279,19 @@ class EditMenuItem extends Component {
                                             }
                                         </div>
                                         {(this.state.item === item._id + 'image' && this.state.blob) ?
-                                            <div className={classes.image} >
-                                                <img className={classes.img} src={this.state.blob}  alt=""/>
+                                            <div className={classes.image}>
+                                                <img className={classes.img} src={this.state.blob} alt=""/>
                                             </div> :
-                                            <div className={classes.image} >
-                                                <img className={classes.img} src={item.image}  alt=""/>
+                                            <div className={classes.image}>
+                                                <img className={classes.img} src={item.image} alt=""/>
                                             </div>
                                         }
                                     </div>
                                     <Button
                                         onClick={() => this.props.deleteItem(item._id)}
-                                        style={{padding: '9px 12px', margin: 0, order: 3}} basic color='red' >
+                                        style={{padding: '9px 12px', margin: 0, order: 3}} basic color='red'>
                                         Delete
-                                        <Icon style={{marginLeft: 5}} name='trashAlt' color='#db2828' />
+                                        <Icon style={{marginLeft: 5}} name='trashAlt' color='#db2828'/>
                                     </Button>
                                 </div>
                             </Segment>

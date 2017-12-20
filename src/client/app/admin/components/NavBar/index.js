@@ -57,7 +57,7 @@ class AdminNavBar extends Component {
     render() {
         let {classes} = this.props;
         return (
-            <div className={classes.topNav}>
+            <div className={classes.topNav} id='adminNavbar'>
                 <SideNav animation='overlay' sideNav={this.props.sideNav} background={'rgba(0,0,0,0.8)'}>
                     <SideMenu
                         mobile
