@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from 'react'
-import {withRouter} from 'react-router-dom'
+import React, {Component} from 'react'
+import {withRouter, Link} from 'react-router-dom'
 import withStyles from 'react-jss'
 import {connect} from "react-redux"
 import {Grid} from 'semantic-ui-react'
@@ -10,8 +10,7 @@ import Container from '../../../components/Container'
 const styles = theme => ({
     '@global': {
         body: {
-            backgroundColor: '#f5f5f5',
-            backgroundImage: 'url("http://res.cloudinary.com/daj4m3xio/image/upload/e_colorize:100/v1511820883/45-degree-fabric-light_drgxti.png") !important',
+            backgroundColor: '#f7f7f7',
         }
     },
     root: {
@@ -19,9 +18,102 @@ const styles = theme => ({
         margin: 0 + ' !important'
     },
     column: {
-        backgroundColor: '#fff !important',
-        boxShadow: theme.shadows[4] + ' !important',
-        borderRadius: 5
+        backgroundColor: 'rgba(0,0,0,0) !important',
+        boxShadow: theme.shadows[1] + ' !important',
+        borderRadius: 5,
+        padding: 0 + ' !important',
+        display: 'flex !important'
+    },
+    message: {
+        '& *': {
+            fontWeight: 400,
+            margin: 0
+        },
+        marginBottom: 25
+    },
+    registerMessage: {
+        backgroundImage: 'url("http://www.seriouseats.com/images/2014/09/20140929-salmon-burger-yasmin-recipe-7.jpg") !important',
+        backgroundRepeat: 'no-repeat !important',
+        backgroundPosition: 'center!important',
+        backgroundSize: 'cover !important',
+        display: 'flex',
+        alignItems: 'stretch',
+        width: 300,
+        minWidth: '33%',
+        '& h1': {
+            fontWeight: 400,
+            margin: 0
+        }
+    },
+    imgOverlay: {
+        minHeight: '100%',
+        padding: '40px 10px',
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        flexDirection: 'column',
+        '& *': {
+            color: '#fff',
+            fontWeight: 400,
+        },
+    },
+    link: {
+        textDecoration: 'none',
+        padding: '4px 12px',
+        border: '1.5px solid #fff',
+        borderRadius: 5,
+        '&:hover': {
+            color: '#fff'
+        },
+        order: 2,
+    },
+    '@media (min-width: 768px)': {
+        column: {
+            '& div:first-child': {
+                borderTopLeftRadius: 5,
+                borderBottomLeftRadius: 5
+            }
+        },
+        registerMessage: {
+            borderTopRightRadius: 5,
+            borderBottomRightRadius: 5,
+        },
+        imgOverlay: {
+            borderTopRightRadius: 5,
+            borderBottomRightRadius: 5,
+        }
+    },
+
+    '@media (max-width: 767px)': {
+        column: {
+            flexDirection: 'column',
+            '& #containerID': {
+                order: 2,
+                borderBottomRightRadius: 5,
+                borderBottomLeftRadius: 5,
+                padding: '30px 30px !important',
+                paddingTop: '15px !important'
+            }
+        },
+        registerMessage: {
+            minWidth: '100%',
+            order: 1,
+            borderTopRightRadius: 5,
+            borderTopLeftRadius: 5,
+        },
+        imgOverlay: {
+            borderTopRightRadius: 5,
+            borderTopLeftRadius: 5,
+            padding: '20px 10px',
+            '& a': {
+                marginTop: 10
+            },
+            '& h1': {
+                marginBottom: 5 + ' !important'
+            }
+        }
     }
 });
 
@@ -30,10 +122,24 @@ class Login extends Component {
         let {classes} = this.props;
         return (
             <Grid className={classes.root} centered>
-                <Grid.Column className={classes.column} mobile={16} tablet={10} computer={8}>
-                    <Container>
+                <Grid.Column className={classes.column} mobile={16} tablet={15} computer={12}>
+                    <Container style={{padding: '40px 35px', backgroundColor: '#fff'}}>
+                        <div className={classes.message}>
+                            <h1>Welcome back!</h1>
+                            <h1 style={{fontWeight: 300}}>Let's get you logged in.</h1>
+                        </div>
                         <LoginForm/>
                     </Container>
+                    <div className={classes.registerMessage}>
+                        <div className={classes.imgOverlay}>
+                            <div>
+                                <h1 style={{textAlign: 'center', letterSpacing: '1px', marginBottom: 10}}>New here?</h1>
+                                <p style={{textAlign: 'center', fontWeight: 300, maxWidth: '80%', margin: 'auto'}}>
+                                    What are you waiting for? Sign up with us and see what the fuss is all about!</p>
+                            </div>
+                            <Link to='/signup' className={classes.link}>Sign up</Link>
+                        </div>
+                    </div>
                 </Grid.Column>
             </Grid>
         )

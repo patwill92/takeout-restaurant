@@ -118,6 +118,11 @@ export const updateAvailability = (id, available) => async dispatch => {
     dispatch(fetchMenu({clientData: data}));
 };
 
+export const deleteItem = id => async dispatch => {
+    let {data} = await axios.post('/api/delete_item', {id});
+    dispatch(fetchMenu({clientData: data}));
+};
+
 export const reviewItemHandler = (item, index) => {
     return (dispatch, getState) => {
         const newMenu = [...getState().menu.clientMenu];

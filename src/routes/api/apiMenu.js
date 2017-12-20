@@ -133,6 +133,20 @@ router.post('/availability', async (req, res) => {
     }
 })
 
+router.post('/delete_item', async (req, res) => {
+    try {
+        await Menu.remove({_id: req.body.id});
+        const menu = await Menu.find().populate({
+            path: 'itemReviews',
+            populate: {path: 'user', select: 'name'}
+        });
+        res.json(menu);
+    } catch (error) {
+        console.log(error);
+        res.send(error)
+    }
+})
+
 router.post('/edit_item', multer().single('image'), async (req, res) => {
     let param = req.body.param;
     if(req.file) {
@@ -163,8 +177,6 @@ router.post('/edit_item', multer().single('image'), async (req, res) => {
             res.send(error)
         }
     }
-
-
 });
 
 

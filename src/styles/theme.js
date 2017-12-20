@@ -1,6 +1,6 @@
 export default  {
     palette: {
-        primary: '#B71C1C',
+        primary: '#F44336',
         hoverPrimary: '#C62828',
         background: '#ebf0eb',
         admin: {

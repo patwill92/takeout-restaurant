@@ -21,7 +21,10 @@ const styles = theme => ({
         marginBottom: 30,
         width: '100%',
         top: 0,
-        left: 0
+        left: 0,
+        '& *': {
+            fontFamily: 'Ubuntu, sans-serif !important',
+        }
     },
     nav: {
         borderRadius: 0 + ' !important',
@@ -35,6 +38,17 @@ const styles = theme => ({
     logo: {
         '&:hover': {
             cursor: 'pointer !important'
+        },
+        '& *': {
+            fontWeight: 400 + ' !important',
+            fontSize: '3.5rem',
+            letterSpacing: '1.2px',
+            fontFamily: 'Indie Flower, sans-serif !important',
+        },
+        padding: '0 18px !important',
+        '& h3': {
+            position: 'relative',
+            top: 3
         }
     },
     '@media (max-width: 768px)': {
@@ -52,7 +66,6 @@ const styles = theme => ({
         }
     },
     menuItem: {
-        textTransform: 'uppercase !important',
         fontWeight: 400 + ' !important',
         fontSize: '1.0rem !important',
         '&:hover': {
@@ -63,11 +76,9 @@ const styles = theme => ({
     menuItemRight: {
         display: 'flex',
         alignItems: 'center',
-        paddingLeft: 16,
-        paddingRight: 16,
-        textTransform: 'uppercase !important',
+        padding: '0 16px !important',
         fontWeight: 400 + ' !important',
-        fontSize: '1.0rem !important',
+        fontSize: '1.2rem !important',
         '&:hover': {
             backgroundColor: 'rgba(0,0,0,0.1) !important',
             cursor: 'pointer'
@@ -78,7 +89,6 @@ const styles = theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         padding: '15px 16px',
-        textTransform: 'uppercase !important',
         fontWeight: 400 + ' !important',
         fontSize: '1.0rem !important',
         color: '#fff !important',
@@ -146,22 +156,34 @@ class NavBar extends Component {
         let inactiveBackground = !this.props.sideNav ? {
             backgroundColor: 'rgba(0,0,0,0)'
         } : {};
+        let cart = 0;
         return (
-            <div className={classes.root}>
+            <div className={classes.root} id='navbar'>
                 <SideMenu animation='overlay' sideNav={this.props.sideNav} background={'rgba(0,0,0,0.8)'}>
                     {this.renderNav(this.props.user, classes, 'mobile')}
                 </SideMenu>
                 <Container>
                     <Menu borderless size='huge' className={classes.nav}>
                         <Menu.Item className={classes.logo}>
-                            <Link to='/'><h3>{'Forkit'.toUpperCase()} <i className="far fa-camera-retro"/></h3></Link>
+                            <Link to='/'><h3>{'forkit'} <i className="far fa-camera-retro"/></h3></Link>
                         </Menu.Item>
-                        <Menu.Item className={classes.menuItemRight} name='menu'
-                                   onClick={this.handleItemClick}/>
+                        <Menu.Item className={classes.menuItemRight}
+                                   onClick={this.handleItemClick}>
+                            menu
+                        </Menu.Item>
                         <Menu.Menu position='right'>
                             <Menu.Item className={classes.menuItemRight} active={activeItem === 'friends'}
                                        onClick={this.handleItemClick}>
-                                Order <Icon style={{marginLeft: 5, bottom: 2}} color='#ffffff' name='utensilsAlt'/>
+                                <span style={{fontSize: '2.3rem', position: 'relative'}}>
+                                    <Icon style={{marginRight: 8, bottom: 5}} color='#ffffff' name='shoppingBag'/>
+                                    <span
+                                        style={{fontSize: '1.2rem',
+                                            position: 'absolute',
+                                            top: '39%',
+                                            left: cart > 9 ? (42/4 -4.5) : (42/2 - 10),
+                                            fontWeight: 300}}>{cart}</span>
+                                </span>
+                                lunch-box
                             </Menu.Item>
                             {this.renderNav(this.props.user, classes, 'desktop')}
                             <Menu.Item id='burger' style={{bottom: 2, ...inactiveBackground}} active={this.props.sideNav}

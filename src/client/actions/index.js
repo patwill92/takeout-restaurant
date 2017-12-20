@@ -10,7 +10,8 @@ export {
     invalidInput,
     reviewItemHandler,
     addMenuItem,
-    updateAvailability
+    updateAvailability,
+    deleteItem
 } from './menu-actions'
 
 export {

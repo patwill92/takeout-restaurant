@@ -10,7 +10,7 @@ import HomeCard from './HomeCard'
 const styles = theme => ({
     '@global': {
         body: {
-            backgroundColor: '#cacaca',
+            backgroundColor: '#ffffff',
             backgroundImage: 'url("http://res.cloudinary.com/daj4m3xio/image/upload/e_colorize:100/v1511820883/45-degree-fabric-light_drgxti.png") !important',
 
         }
@@ -21,6 +21,7 @@ const styles = theme => ({
     },
     parent: {
         columnGap: '12px',
+        padding: '30px 0 !important',
         '& div': {
             pageBreakInside: 'avoid',
             breakInside: 'avoid',
@@ -56,7 +57,8 @@ const styles = theme => ({
     },
     '@media (max-width: 767px)': {
         parent: {
-            columnCount: 1
+            columnCount: 1,
+            padding: '0 !important',
         }
     }
 });

@@ -14,7 +14,7 @@ const styles = theme => ({
         fontWeight: 400 + ' !important',
         borderBottom: '1px solid #fff !important',
         color: '#fff !important',
-        opacity: '0.8',
+        opacity: '0.9',
         paddingBottom: 10,
         fontSize: '1.7rem !important'
     },
@@ -23,14 +23,14 @@ const styles = theme => ({
         textTransform: 'uppercase',
         color: '#fff !important',
         fontWeight: 300 + ' !important',
-        opacity: '0.8'
+        opacity: '0.9'
     },
     subtitle: {
         marginBottom: 0 + ' !important',
         textTransform: 'uppercase',
         color: '#fff !important',
         fontWeight: 400 + ' !important',
-        opacity: '0.6',
+        opacity: '0.8',
         '&:hover': {
             cursor: 'pointer'
         }

@@ -42,7 +42,7 @@ let styles = theme => ({
 
 const Container = ({classes, children, style}) => {
     return (
-        <div className={classes.root} style={style ? style : {}}>
+        <div id='containerID' className={classes.root} style={style ? style : {}}>
             {children}
         </div>
     )

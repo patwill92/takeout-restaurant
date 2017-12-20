@@ -16,7 +16,7 @@ const styles = theme => ({
 const ImageField = props => {
     let {input, label, classes, loose, value, onChange} = props;
     return (
-        <div>
+        <Fragment>
             {!loose ?
             <Fragment>
                 <label>{'image'.toUpperCase()}</label>
@@ -43,7 +43,7 @@ const ImageField = props => {
                     }}/> {value ? value : 'Upload'}
                     </span>
             </label>}
-        </div>
+        </Fragment>
     )
 };
 

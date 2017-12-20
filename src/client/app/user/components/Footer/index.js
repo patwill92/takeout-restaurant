@@ -13,8 +13,8 @@ const styles = theme => ({
         backgroundColor: '#3e3e3e',
         backgroundImage: 'url("http://res.cloudinary.com/daj4m3xio/image/upload/v1511822287/black-linen_vglyyw.png") !important',
         marginTop: 30,
-        paddingTop: 50,
-        paddingBottom: 50,
+        paddingTop: 30,
+        paddingBottom: 30,
         '& div': {
             textAlign: 'center !important',
             color: 'rgba(255, 255, 255, 0.8)',
@@ -42,11 +42,11 @@ const Footer = ({classes}) => {
                 <Icon name='facebook' color='rgba(255, 255, 255, 0.8)'/>
             </div>
             <div className={classes.address}>
-                Giulia 1682 Massachusetts Avenue
-                Cambridge, MA 02138
+                4247 Dogwood Lane
+                Tucson, AZ 85704
             </div>
             <div className={classes.phone}>
-                (305) 992-2461
+                (520) 712-8804
             </div>
         </div>
     )
