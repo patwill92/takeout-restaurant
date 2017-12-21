@@ -88,4 +88,3 @@ export default {
     component: connect(mapStateToProps, {fetchMenu,updateMenu,postReview,invalidInput})(withRouter(withStyles(styles)(Menu))),
     loadData
 }
-
