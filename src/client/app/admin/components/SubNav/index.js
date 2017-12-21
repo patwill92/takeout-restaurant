@@ -56,12 +56,6 @@ const styles = theme => ({
                '& #adminNavbar': {
                    boxShadow: theme.shadows[0] + ' !important'
                },
-               '& .card': {
-                   borderRadius: 0 + ' !important',
-                   '& div': {
-                       borderRadius: 0 + ' !important',
-                   }
-               },
                '& .header': {
                    borderRadius: 0 + ' !important',
                }

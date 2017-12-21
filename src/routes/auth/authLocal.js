@@ -53,8 +53,8 @@ router.route('/login')
             return res.redirect('/')
         });
 
-router.get('/logout', async (req, res) => {
-    await req.logout();
+router.get('/logout', (req, res) => {
+    req.logout();
     res.redirect('/');
 });
 
