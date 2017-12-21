@@ -11,7 +11,6 @@ const styles = theme => ({
 
 class AdminMenu extends Component {
     componentDidMount = () => {
-        console.log('FUCK');
         this.props.fetchAdminTab('users');
         this.props.fetchAdminSubNav('users');
         this.props.fetchAdminActiveSubNav('users');

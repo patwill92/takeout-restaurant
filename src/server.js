@@ -70,7 +70,6 @@ app.get('*', (req, res) => {
                 })
             })
         }
-        store.dispatch(toggleSideNav(false));
         const context = {};
         const content = renderer(req, store, context, routes);
         res.send(content);

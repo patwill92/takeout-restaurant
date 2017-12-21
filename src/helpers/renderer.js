@@ -11,7 +11,7 @@ import theme from '../styles/theme'
 
 export default (req, store, context, routes) => {
     const sheets = new SheetsRegistry();
-    const initStore = store.getState();
+    let initStore = store.getState();
     // initStore.user && delete initStore.user.password;
     const content = renderToString(
         <Provider store={store}>
@@ -32,6 +32,7 @@ export default (req, store, context, routes) => {
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/>
+        <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Ubuntu:300,400" rel="stylesheet">
         <style type="text/css">
           ${css}
         </style>

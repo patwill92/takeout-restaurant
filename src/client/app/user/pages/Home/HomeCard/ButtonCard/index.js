@@ -12,7 +12,8 @@ const columnFlex = {
 const styles = theme => ({
     root: {
         position: 'relative',
-        borderRadius: 4
+        borderRadius: 4,
+        boxShadow: theme.shadows[10] + ' !important'
     },
     image: {
         height: 'auto',

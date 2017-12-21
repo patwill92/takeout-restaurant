@@ -18,8 +18,9 @@ import AdminActivity from './app/admin/pages/Activity'
 import AdminUsers from './app/admin/pages/Users'
 import AdminSettings from './app/admin/pages/Settings'
 
-import AddMenu from './app/admin/pages/Menu/EditMenu'
+import AddItem from './app/admin/pages/Menu/AddItem'
 import MenuOverview from './app/admin/pages/Menu/Overview'
+import EditItem from './app/admin/pages/Menu/EditItem'
 
 import AdminActivityMain from './app/admin/pages/Activity/Main'
 
@@ -55,8 +56,12 @@ export default {
                             exact: true
                         },
                         {
-                            ...AddMenu,
+                            ...AddItem,
                             path: '/menu/additem'
+                        },
+                        {
+                            ...EditItem,
+                            path: '/menu/edititem'
                         }
                     ]
                 },

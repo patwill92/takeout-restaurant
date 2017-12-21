@@ -4,34 +4,28 @@ import withStyles from 'react-jss'
 import {connect} from "react-redux"
 
 import {fetchMenu, fetchAdminActiveSubNav} from "../../../../../actions";
+import MenuItem from './MenuItem'
 
 const styles = theme => ({
-    root: {
 
-    }
 });
 
 class MenuOverview extends Component {
 
     componentDidMount = () => {
-        this.props.fetchAdminActiveSubNav('menus')
+        this.props.fetchAdminActiveSubNav('menus');
+        this.props.fetchMenu();
     };
 
     render() {
-        let {classes, form} = this.props;
+        let {classes} = this.props;
         return (
             <Fragment>
-                <h1>OVERVIEW</h1>
+                {['savory', 'sweet'].map((item, i) => <MenuItem type={item} key={i}/>)}
             </Fragment>
         )
     }
 }
-
-const mapStateToProps = ({form}) => {
-    return {
-        form: form.addItem
-    }
-};
 
 const loadData = (mongoose) => {
     return [
@@ -43,6 +37,9 @@ const loadData = (mongoose) => {
 };
 
 export default {
-    component: connect(mapStateToProps, {fetchMenu, fetchAdminActiveSubNav})(withRouter(withStyles(styles)(MenuOverview))),
+    component: connect(null, {
+        fetchMenu,
+        fetchAdminActiveSubNav
+    })(withStyles(styles)(MenuOverview)),
     loadData
 }

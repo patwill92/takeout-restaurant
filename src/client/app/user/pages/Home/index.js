@@ -8,16 +8,27 @@ import {fetchMenu, fetchMenuAdmin, getUser} from "../../../../actions";
 import HomeCard from './HomeCard'
 
 const styles = theme => ({
+    '@global': {
+        body: {
+            backgroundColor: '#ffffff',
+            backgroundImage: 'url("http://res.cloudinary.com/daj4m3xio/image/upload/e_colorize:100/v1511820883/45-degree-fabric-light_drgxti.png") !important',
+
+        }
+    },
     root: {
         width: '100% !important',
         height: 'auto'
     },
     parent: {
         columnGap: '12px',
+        padding: '30px 0 !important',
         '& div': {
             pageBreakInside: 'avoid',
             breakInside: 'avoid',
             marginBottom: 12
+        },
+        '& .card': {
+            boxShadow: theme.shadows[10] + ' !important'
         }
     },
     grid: {
@@ -46,7 +57,8 @@ const styles = theme => ({
     },
     '@media (max-width: 767px)': {
         parent: {
-            columnCount: 1
+            columnCount: 1,
+            padding: '0 !important',
         }
     }
 });
