@@ -4,7 +4,7 @@ import withStyles from 'react-jss'
 import {connect} from "react-redux"
 
 import {fetchMenu, fetchAdminActiveSubNav} from "../../../../../actions";
-import MenuItem from './MenuItem'
+import MenuItem from '../../../../components/MenuItem'
 
 const styles = theme => ({
 
@@ -21,7 +21,7 @@ class MenuOverview extends Component {
         let {classes} = this.props;
         return (
             <Fragment>
-                {['savory', 'sweet'].map((item, i) => <MenuItem type={item} key={i}/>)}
+                {['savory', 'sweet'].map((item, i) => <MenuItem type={item} key={i} menu={this.props.menu} categoryDriven admin/>)}
             </Fragment>
         )
     }
@@ -35,9 +35,14 @@ const loadData = (mongoose) => {
         }
     ];
 };
-
+//this was changed by me patrick, I needed to make sure that the menuItem was a reusable component
+const mapStateToProps = ({menu}) => {
+    return {
+        menu: menu.clientMenu
+    }
+};
 export default {
-    component: connect(null, {
+    component: connect(mapStateToProps, {
         fetchMenu,
         fetchAdminActiveSubNav
     })(withStyles(styles)(MenuOverview)),
