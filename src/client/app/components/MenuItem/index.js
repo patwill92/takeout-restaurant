@@ -52,73 +52,82 @@ const styles = theme => ({
         marginBottom: '5px !important',
         borderRadius: '50% !important'
     },
-    Button:{
-        outline:"none",
-        borderLeft : "10px solid transparent",
+    Button: {
+        outline: "none",
+        borderLeft: "10px solid transparent",
         borderRight: "10px solid transparent",
         borderBottom: "10px solid #c1202b",
-        borderTop:"none",
-        padding:"0px",
-        marginBottom:"2.5px",
-        transition:"background-color ease-in-out .2s",
-        height:"0px",
-        width:"0px",
+        borderTop: "none",
+        padding: "0px",
+        marginBottom: "2.5px",
+        transition: "background-color ease-in-out .2s",
+        height: "0px",
+        width: "0px",
         '&:hover': {
             cursor: 'pointer',
             borderBottom: "10px solid #DCEDC8"
         }
     },
-    ButtonBottom:{
-        outline:"none",
-        borderLeft : "10px solid transparent",
+    ButtonBottom: {
+        outline: "none",
+        borderLeft: "10px solid transparent",
         borderRight: "10px solid transparent",
         borderTop: "10px solid #c1202b",
-        borderBottom:"none",
-        marginTop:"2.5px",
-        padding:"0px",
-        transition:"background-color ease-in-out .2s",
-        height:"0px",
-        width:"0px",
+        borderBottom: "none",
+        marginTop: "2.5px",
+        padding: "0px",
+        transition: "background-color ease-in-out .2s",
+        height: "0px",
+        width: "0px",
         '&:hover': {
             cursor: 'pointer',
             borderTop: "10px solid #DCEDC8"
         }
     },
-    Amount:{
-        padding:"3px 2px 5px 0px",
-        margin:"0px",
+    Amount: {
+        padding: "3px 2px 5px 0px",
+        margin: "0px",
     }
 });
 
-const MenuItemOverview = (props)=>{
-        let {classes, type} = props;
-        return (
-            <PageContainer contentStyle={{padding: 0}}>
-                <span>{type}</span>
-                <div className={classes.content}>
-                    {props.menu && props.menu.map((itemValue, i) => {
-                        const item = itemValue.item || item;
-                        const quantity = itemValue.quantity === undefined?null:itemValue.quantity;
-                        return (props.categoryDriven?item.category === type:true) && (
-                            <Segment className={classes.segment} key={item._id} style={{margin: 0}}>
-                                <div className={classes.itemInfo}>
-                                    <h3>{item.name}</h3>
-                                    <h5>${Number(item.price).toFixed(2)}</h5>
-                                    <p>{item.description}</p>
-                                   {quantity !== null?
-                                    <div style={{display: "flex",justifyContent:"left"}}>
+const MenuItemOverview = (props) => {
+    let {classes, type} = props;
+    return (
+        <PageContainer contentStyle={{padding: 0}}>
+            <span>{type}</span>
+            <div className={classes.content}>
+                {props.menu && props.menu.map((itemValue, i) => {
+                    const item = itemValue.item || itemValue;
+                    const quantity = itemValue.quantity === undefined ? null : itemValue.quantity;
+                    return (props.categoryDriven ? item.category === type : true) && (
+                        <Segment className={classes.segment} key={item._id} style={{margin: 0}}>
+                            <div className={classes.itemInfo}>
+                                <h3>{item.name}</h3>
+                                <h5>${Number(item.price).toFixed(2)}</h5>
+                                <p>{item.description}</p>
+                                {quantity !== null ?
+                                    <div style={{display: "flex", justifyContent: "left"}}>
                                         <span className={classes.Amount}>Amount : {quantity}</span>
-                                        <div style={{display:"inline-flex",justifyContent:"center",flexDirection:"column",height:"100%"}}>
-                                        <button className={classes.Button} onClick={()=>{props.changed("up",i)}} />
-                                        <button className={classes.ButtonBottom} onClick={()=>{props.changed("down",i)}} />
+                                        <div style={{
+                                            display: "inline-flex",
+                                            justifyContent: "center",
+                                            flexDirection: "column",
+                                            height: "100%"
+                                        }}>
+                                            <button className={classes.Button} onClick={() => {
+                                                props.changed("up", i)
+                                            }}/>
+                                            <button className={classes.ButtonBottom} onClick={() => {
+                                                props.changed("down", i)
+                                            }}/>
                                         </div>
-                                   </div>:null} 
+                                    </div> : null}
+                            </div>
+                            <div className={classes.toggle}>
+                                <div className={classes.image} style={{marginBottom: 5}}>
+                                    <img src={item.image} style={{maxWidth: "75px", height: 'auto'}} alt=""/>
                                 </div>
-                                <div className={classes.toggle}>
-                                    <div className={classes.image} style={{marginBottom: 5}}>
-                                        <img src={item.image} style={{maxWidth: "75px", height: 'auto'}} alt=""/>
-                                    </div>
-                                {props.admin?(<ToggleButton
+                                {props.admin ? (<ToggleButton
                                     colors={{
                                         activeThumb: {
                                             base: 'rgb(250,250,250)'
@@ -136,15 +145,16 @@ const MenuItemOverview = (props)=>{
                                     inactiveLabel={<Icon name='times' color='#fff' style={{bottom: 1}}/>}
                                     activeLabel={<Icon name='check' color='#fff' style={{bottom: 1}}/>}
                                     value={item.available}
-                                    onToggle={() => props.updateAvailability(item._id, item.available)}/>):null}
-                                </div>
-                            </Segment>
-                        )
-                    })}
-                 {props.total?<Segment><h3 style={{marginTop:"-20px",marginBottom:"-20px"}}>Total: ${props.total.toFixed(2)}</h3></Segment>:null}
-                </div>
-            </PageContainer>
-        )
-    }
+                                    onToggle={() => props.updateAvailability(item._id, item.available)}/>) : null}
+                            </div>
+                        </Segment>
+                    )
+                })}
+                {props.total ? <Segment><h3 style={{marginTop: "-20px", marginBottom: "-20px"}}>Total:
+                    ${props.total.toFixed(2)}</h3></Segment> : null}
+            </div>
+        </PageContainer>
+    )
+}
 
 export default connect(null, {fetchMenu, updateAvailability})(withStyles(styles)(MenuItemOverview))
