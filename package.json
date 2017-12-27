@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "build/bundle.js",
-  "engines": {
-    "node": "8.9.1"
-  },
   "scripts": {
     "start": "node build/bundle.js",
     "prestart": "webpack --config webpack.server.js && webpack --config webpack.client.js",
