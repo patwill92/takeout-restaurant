@@ -1,14 +1,8 @@
 import React, {Component, Fragment} from 'react'
-import {withRouter} from 'react-router-dom'
-import withStyles from 'react-jss'
 import {connect} from "react-redux"
 
 import {fetchMenu, fetchAdminActiveSubNav} from "../../../../../actions";
 import MenuItem from './MenuItem'
-
-const styles = theme => ({
-
-});
 
 class MenuOverview extends Component {
 
@@ -40,6 +34,6 @@ export default {
     component: connect(null, {
         fetchMenu,
         fetchAdminActiveSubNav
-    })(withStyles(styles)(MenuOverview)),
+    })(MenuOverview),
     loadData
 }
