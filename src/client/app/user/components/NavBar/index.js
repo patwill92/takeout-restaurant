@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {Menu} from 'semantic-ui-react'
 import withStyles from 'react-jss'
+import {withRouter} from 'react-router'
 
 import Icon from '../../../components/Icon/index'
 import Container from '../../../components/Container/index'
@@ -113,6 +114,9 @@ class NavBar extends Component {
 
     handleItemClick = (e, {name}) => this.setState({activeItem: name});
 
+    handlePath = (path) => this.props.history.push(path);
+
+
     renderNav = (user, classes, type) => {
         switch (type) {
             case 'desktop':
@@ -193,7 +197,7 @@ class NavBar extends Component {
                         </Menu.Item>
                         <Menu.Menu position='right'>
                             <Menu.Item className={classes.menuItemLunchBox} active={activeItem === 'friends'}
-                                       onClick={this.handleItemClick}>
+                                       onClick={()=>this.handlePath('/cart')}>
                                 <span style={{fontSize: '2.3rem', position: 'relative'}}>
                                     <Icon style={{marginRight: 8, bottom: 5}} color='#ffffff' name='shoppingBag'/>
                                     <span
@@ -203,9 +207,8 @@ class NavBar extends Component {
                                             top: '39%',
                                             left: cart > 9 ? (42 / 4 - 4.5) : (42 / 2 - 10),
                                             fontWeight: 300
-                                        }}>{cart}</span>
+                                        }}>{this.props.cart.length}</span>
                                 </span>
-                                lunch-box
                             </Menu.Item>
                             {this.renderNav(this.props.user, classes, 'desktop')}
                             <Menu.Item id='burger' style={{bottom: 2, ...inactiveBackground}}
@@ -221,11 +224,12 @@ class NavBar extends Component {
     }
 }
 
-const mapStateToProps = ({sideNav, user}) => {
+const mapStateToProps = ({sideNav,user,cart}) => {
     return {
         sideNav,
-        user
+        user,
+        cart
     }
 };
 
-export default connect(mapStateToProps, {toggleSideNav})(withStyles(styles)(NavBar))
+export default connect(mapStateToProps, {toggleSideNav})(withRouter(withStyles(styles)(NavBar)))

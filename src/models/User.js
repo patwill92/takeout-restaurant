@@ -15,7 +15,18 @@ const userSchema = new Schema({
         type: Boolean,
         default: false
     },
-    cart:  { type: String, default: '' },
+    cart:  [
+    {
+    item:{
+        type: Schema.Types.ObjectId,
+        ref: "Item"
+    },
+    quantity:{
+      type:Number,
+      default:1
+    },
+    _id:false
+    }],
     history: [{
         type: Schema.Types.ObjectId,
         ref: "Invoice"
@@ -33,6 +44,12 @@ userSchema.virtual('userReviews', {
   ref: 'Review',
   localField: '_id',
   foreignField: 'user'
+});
+
+userSchema.virtual('cart.item', {
+  ref: 'Item',
+  localField: 'cart.item',
+  foreignField: '_id'
 });
 
 export default mongoose.model('User', userSchema);

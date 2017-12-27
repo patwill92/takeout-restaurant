@@ -24,3 +24,7 @@ export {
 export {
     getUser
 } from './auth-actions'
+export {
+    fetchCart,
+    updateCart
+} from './cart-actions'

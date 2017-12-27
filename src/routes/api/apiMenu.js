@@ -77,7 +77,27 @@ router.get('/getusers', async (req, res) => {
     } catch (error) {
         res.send(error)
     }
+});
+router.get('/getusercart', async (req, res) => {
+
+    try {
+        let user = await User.findOne({_id:req.user._id}).populate('cart.item')
+        res.json(user||[])
+    } catch (error) {
+        res.send(error)
+    }
 })
+
+router.post('/addtocart', async (req, res) => {
+    console.log('I am happening',req.body);
+    try {
+        let user = await User.findByIdAndUpdate(req.user._id,{$set:{[`cart.${req.body.index}.quantity`]:req.body.quantity}},{new:true}).populate('cart.item')
+        res.json(user)
+    } catch (error) {
+        res.send(error)
+    }
+})
+
 
 router.post('/reviewvalue', async (req, res) => {
     const toResolve = [];

@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import NavBar from './app/user/components/NavBar'
 import Footer from './app/user/components/Footer'
 import Container from './app/components/Container'
-import {fetchMenu} from "./actions";
+import {fetchMenu,fetchCart} from "./actions";
 
 const styles = theme => ({
     '@global': {
@@ -33,6 +33,7 @@ class App extends Component {
         const jssStyles = document.getElementById('server-side-styles');
         jssStyles.parentNode.removeChild(jssStyles);
         this.props.fetchMenu();
+        this.props.fetchCart();
     };
 
     renderUserApp = (route, classes) => {
@@ -61,5 +62,5 @@ const mapStateToProps = ({user}) => {
 };
 
 export default {
-    component: connect(mapStateToProps, {fetchMenu})(injectSheet(styles)(App))
+    component: connect(mapStateToProps, {fetchMenu,fetchCart})(injectSheet(styles)(App))
 };
