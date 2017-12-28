@@ -185,12 +185,9 @@ class NavBar extends Component {
                 <Container>
                     <Menu borderless size='huge' className={classes.nav}>
                         <Menu.Item className={classes.logo}>
-                            <Link to='/'><h3>{'forkit'} <i className="far fa-camera-retro"/></h3></Link>
+                            <Link to='/'><h3>{'forkit'}</h3></Link>
                         </Menu.Item>
-                        <Menu.Item className={classes.menuItemRight}
-                                   onClick={this.handleItemClick}>
-                            menu
-                        </Menu.Item>
+                        <Link className={classes.menuItemRight} to='/menu'>menu</Link>
                         <Menu.Menu position='right'>
                             <Menu.Item className={classes.menuItemLunchBox} active={activeItem === 'friends'}
                                        onClick={this.handleItemClick}>

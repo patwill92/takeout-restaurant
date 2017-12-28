@@ -7,6 +7,7 @@ import session from 'express-session'
 import MyMongoStore from 'connect-mongo'
 import passport from 'passport'
 import cloudinary from 'cloudinary'
+import compression from 'compression'
 
 import Routes from './client/Routes'
 import renderer from './helpers/renderer';
@@ -21,6 +22,8 @@ import {toggleSideNav, getUser} from './client/actions'
 
 const MongoStore = MyMongoStore(session);
 const app = express();
+
+app.use(compression());
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, {useMongoClient: true});
