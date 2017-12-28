@@ -10,7 +10,7 @@ const Login = props => {
         <FormWrapper
             image={'http://www.seriouseats.com/images/2014/09/20140929-salmon-burger-yasmin-recipe-7.jpg'}
             heading={'Welcome back!'}
-            subHeading={"Let's get you logged in."}
+            subHeading={"Hungry? Let's get you logged in."}
             sideHeading={'New Here?'}
             sideSubHeading={'What are you waiting for? Sign up with us and see what the fuss is all about!'}
             formType={'signup'}
@@ -18,7 +18,7 @@ const Login = props => {
             <LoginForm/>
         </FormWrapper>
     )
-}
+};
 
 const mapStateToProps = ({form}) => {
     return {
