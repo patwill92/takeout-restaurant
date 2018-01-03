@@ -54,14 +54,15 @@ const styles = theme => ({
     }
 });
 
-const MenuItemOverview = (props)=>{
-        let {classes, type} = props;
+class MenuItemOverview extends Component {
+    render() {
+        let {classes, type} = this.props;
         return (
             <PageContainer contentStyle={{padding: 0}}>
                 <span>{type}</span>
                 <div className={classes.content}>
-                    {props.menu && props.menu.map((item, i) => {
-                        return (props.categoryDriven?item.category === type:true) && (
+                    {this.props.menu && this.props.menu.map((item, i) => {
+                        return item.category === type && (
                             <Segment className={classes.segment} key={item.name} style={{margin: 0}}>
                                 <div className={classes.itemInfo}>
                                     <h3>{item.name}</h3>
@@ -72,25 +73,25 @@ const MenuItemOverview = (props)=>{
                                     <div className={classes.image} style={{marginBottom: 5}}>
                                         <img src={item.image} style={{maxWidth: 75, height: 'auto'}} alt=""/>
                                     </div>
-                                {props.admin?(<ToggleButton
-                                    colors={{
-                                        activeThumb: {
-                                            base: 'rgb(250,250,250)'
-                                        },
-                                        inactiveThumb: {
-                                            base: 'rgb(250,250,250)'
-                                        },
-                                        active: {
-                                            base: '#4CAF50'
-                                        },
-                                        inactive: {
-                                            base: '#F44336'
-                                        }
-                                    }}
-                                    inactiveLabel={<Icon name='times' color='#fff' style={{bottom: 1}}/>}
-                                    activeLabel={<Icon name='check' color='#fff' style={{bottom: 1}}/>}
-                                    value={item.available}
-                                    onToggle={() => props.updateAvailability(item._id, item.available)}/>):null}
+                                    <ToggleButton
+                                        colors={{
+                                            activeThumb: {
+                                                base: 'rgb(250,250,250)'
+                                            },
+                                            inactiveThumb: {
+                                                base: 'rgb(250,250,250)'
+                                            },
+                                            active: {
+                                                base: '#4CAF50'
+                                            },
+                                            inactive: {
+                                                base: '#F44336'
+                                            }
+                                        }}
+                                        inactiveLabel={<Icon name='times' color='#fff' style={{bottom: 1}}/>}
+                                        activeLabel={<Icon name='check' color='#fff' style={{bottom: 1}}/>}
+                                        value={item.available}
+                                        onToggle={() => this.props.updateAvailability(item._id, item.available)}/>
                                 </div>
                             </Segment>
                         )
@@ -99,5 +100,12 @@ const MenuItemOverview = (props)=>{
             </PageContainer>
         )
     }
+}
 
-export default connect(null, {fetchMenu, updateAvailability})(withStyles(styles)(MenuItemOverview))
+const mapStateToProps = ({menu}) => {
+    return {
+        menu: menu.clientMenu
+    }
+};
+
+export default connect(mapStateToProps, {fetchMenu, updateAvailability})(withStyles(styles)(MenuItemOverview))

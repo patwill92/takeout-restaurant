@@ -4,7 +4,7 @@ import withStyles from 'react-jss'
 import {connect} from "react-redux"
 
 import {fetchMenu, fetchAdminActiveSubNav} from "../../../../../actions";
-import MenuItem from '../../../../components/MenuItem'
+import MenuItem from './MenuItemOBSOLETE'
 
 const styles = theme => ({
 
@@ -21,7 +21,7 @@ class MenuOverview extends Component {
         let {classes} = this.props;
         return (
             <Fragment>
-                {['savory', 'sweet'].map((item, i) => <MenuItem type={item} key={i} menu={this.props.menu} categoryDriven admin/>)}
+                {['savory', 'sweet'].map((item, i) => <MenuItem type={item} key={i}/>)}
             </Fragment>
         )
     }

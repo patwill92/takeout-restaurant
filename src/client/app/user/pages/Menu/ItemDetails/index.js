@@ -39,7 +39,8 @@ const ItemDetails = ({item,className})=>{
 	const getAverage = (itemValue)=>{
         return (itemValue.itemReviews.reduce((sum,value)=>{return sum+(value.rating||0)},0)/itemValue.itemReviews.length)
     }
-	return(
+    console.log(item);
+    return(
     <div style={wrapper}>
     	<div style={nameStyle}>
           <span>{item.name.charAt(0).toUpperCase()+ item.name.slice(1)}</span>
