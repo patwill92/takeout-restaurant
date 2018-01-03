@@ -6,7 +6,8 @@ import {
     FETCH_TEST_MENU, UPDATE_MENU,
     UPDATE_MOUSE_OVER_STARS,
     UPDATE_STARS,
-    SHOW_REVIEWS
+    SHOW_REVIEWS,
+    SET_TIMEOUT
 } from "../types";
 
 export const fetchMenu = (req, reset, index) => {
@@ -112,10 +113,30 @@ export const addMenuItem = (formData) => async dispatch => {
         console.log(e)
     }
 };
-
-export const updateAvailability = (id, available) => async dispatch => {
+export const setTimerMenu = (dispatch)=>{
+    const timeout =  setTimeout(() => {
+            dispatch(fetchMenu())
+                dispatch({
+                type: SET_TIMEOUT,
+                payload: {timeout:null}
+            })
+        }, 5000);
+        dispatch({
+            type: SET_TIMEOUT,
+            payload: {timeout}
+        })
+}
+export const updateAvailability = (id,available,menu,index) => async(dispatch,getState) => {
+    const newMenu = [...menu]
+    newMenu[index] = {...newMenu[index],available:!newMenu[index].available}
+    dispatch({type:FETCH_MENU,payload:newMenu});
     let {data} = await axios.post('/api/availability', {id, available});
-    dispatch(fetchMenu({clientData: data}));
+    if(!getState().interval.timeout){
+        setTimerMenu(dispatch)
+    }else{
+        clearTimeout(getState().interval.timeout);
+        setTimerMenu(dispatch);
+    }
 };
 
 export const deleteItem = id => async dispatch => {

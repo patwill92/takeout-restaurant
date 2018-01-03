@@ -58,7 +58,7 @@ app.get('*', (req, res) => {
     store.dispatch(getUser(req));
     let routes = req.user ? !req.user.admin ? Routes.user : Routes.admin : Routes.user;
     let promises = matchRoutes(routes, req.url).map(({route}) => {
-        return route.loadData ? route.loadData(mongoose) : null
+        return route.loadData ? route.loadData(mongoose,req.user) : null
     }).filter(promise => promise);
 
     Promise.all(promises).then((promise) => {
