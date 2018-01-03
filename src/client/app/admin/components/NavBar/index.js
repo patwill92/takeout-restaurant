@@ -6,7 +6,7 @@ import {connect} from "react-redux"
 import Icon from '../../../components/Icon/index'
 import SideNav from '../../../components/SideMenu/index'
 import SideMenu from '../SideMenu/index'
-import {toggleSideNav} from "../../../../actions/index";
+import {toggleSideNav,getUser} from "../../../../actions/index";
 
 const styles = theme => ({
     '@media (max-width: 767px)': {
@@ -68,7 +68,7 @@ class AdminNavBar extends Component {
                         </h5>
                     </a>
                 </SideNav>
-                <Link to='/'><h3>Forkit</h3></Link>
+                <Link to='/' onClick={()=>this.props.getUser()}><h3>Forkit</h3></Link>
                 <a href='/user/logout' className={classes.logout}>
                     <h5>Logout
                         <Icon style={{marginLeft: 3}} color='#d3d3d3' name='powerOff'/>
@@ -88,4 +88,4 @@ const mapStateToProps = ({sideNav}) => {
     }
 };
 
-export default connect(mapStateToProps, {toggleSideNav})(withStyles(styles)(AdminNavBar))
+export default connect(mapStateToProps, {toggleSideNav,getUser})(withStyles(styles)(AdminNavBar))

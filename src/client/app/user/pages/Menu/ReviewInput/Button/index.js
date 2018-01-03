@@ -1,16 +1,13 @@
 import React from "react";
-import Hoc from "./hoc"
 
-const Button = ({children,clicked,toDisable})=>{
-	const styles = {
-		button:{padding:"10px", margin:"15px"}
-	}
+const Button = ({children,clicked,className})=>{
+
 	return(
-			<button style={styles.button} onClick={clicked}>
+			<button className={className} onClick={clicked}>
 				{children}
 			</button>
 
 		)
 }
 
-export default Button		
+export default Button	

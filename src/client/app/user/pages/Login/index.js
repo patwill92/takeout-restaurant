@@ -14,7 +14,7 @@ const Login = props => {
             subHeading={"Hungry? Let's get you logged in."}
             sideHeading={'New Here?'}
             sideSubHeading={'What are you waiting for? Sign up with us and see what the fuss is all about!'}
-            formType={'signup'}
+            formType={'sign up'}
         >
             <LoginForm/>
         </FormWrapper>

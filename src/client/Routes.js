@@ -11,6 +11,7 @@ import Menu from './app/user/pages/Menu'
 import Testing from './app/user/pages/Testing'
 import TestMenu from './app/user/pages/Testmenu'
 import StripeTest from './app/user/pages/StripeTest'
+import Cart from './app/user/pages/Cart'
 
 //admin app
 import AdminDashboard from './app/admin/pages/Dashboard'
@@ -109,6 +110,10 @@ export default {
                 {
                     ...StripeTest,
                     path: '/stripe'
+                },
+                {
+                    ...Cart,
+                    path: '/cart'
                 },
                 {...Error},
             ]

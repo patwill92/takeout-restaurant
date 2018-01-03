@@ -77,7 +77,43 @@ router.get('/getusers', async (req, res) => {
     } catch (error) {
         res.send(error)
     }
+});
+router.get('/getusercart', async (req, res) => {
+
+    try {
+        let user = await User.findOne({_id:req.user._id}).populate('cart.item')
+        res.json(user||[])
+    } catch (error) {
+        res.send(error)
+    }
 })
+
+router.post('/addtocart', async (req, res) => {
+    console.log('I am happening',req.body);
+    try {
+        let user = await User.findByIdAndUpdate(req.user._id,{$set:{[`cart.${req.body.index}.quantity`]:req.body.quantity}},{new:true}).populate('cart.item')
+        res.json(user)
+    } catch (error) {
+        res.send(error)
+    }
+})
+router.post('/additemtocart', async (req, res) => {
+    console.log('I am happening',req.body);
+    try {
+        let user = await User.findByIdAndUpdate(req.user._id,{$push:{cart:req.body}},{new:true}).populate('cart.item')
+        res.json(user)
+    } catch (error) {
+        res.send(error)
+    }
+
+    /*{
+            "quantity": 1,
+            "item": {
+                "$oid": "5a383dd4b6a41e2276addb3a"
+            }
+        }*/
+})
+
 
 router.post('/reviewvalue', async (req, res) => {
     const toResolve = [];

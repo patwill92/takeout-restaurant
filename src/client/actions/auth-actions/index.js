@@ -5,7 +5,8 @@ export const getUser = req => {
     if(req && req.user) {
         const user = req.user;
         user.password = '';
-        return {type: GET_USER, payload: user}
+        //this was what was causing the conflict, when it was ssr it was still considered a mongodb object so you couldn't use Array.prototype.includes properly
+        return {type: GET_USER, payload: {...user,_id:String(user._id)}}
     }
     else if(req){
         return {type: GET_USER, payload: null}
