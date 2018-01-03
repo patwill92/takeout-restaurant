@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {Link} from 'react-router-dom'
 import withStyles from 'react-jss'
 import {Grid} from 'semantic-ui-react'
@@ -126,26 +126,31 @@ const styles = theme => ({
 
 class FormWrapper extends Component {
     render() {
-        let {classes, image, heading, subHeading, sideHeading, sideSubHeading, formType} = this.props;
+        let {classes, image, heading, subHeading, sideHeading, sideSubHeading, formType, auth} = this.props;
         return (
             <Grid className={classes.root} centered>
                 <Grid.Column className={classes.column} mobile={16} tablet={16} computer={15}>
-                    <Container style={{padding: '40px 35px', backgroundColor: '#fff'}}>
-                        <div className={classes.message}>
-                            <h1>{heading}</h1>
-                            <h1 style={{fontWeight: 300}}>{subHeading}</h1>
-                        </div>
-                        {this.props.children}
-                    </Container>
-                    <div className={classes.registerMessage} style={{backgroundImage: `url(${image})`}}>
-                        <div className={classes.imgOverlay}>
-                            <div>
-                                <h1 style={{textAlign: 'center', letterSpacing: '1px', marginBottom: 10}}>{sideHeading}</h1>
-                                <p style={{textAlign: 'center', fontWeight: 300, maxWidth: '80%', margin: 'auto'}}>{sideSubHeading}</p>
+                    {auth &&
+                        <Fragment>
+                            <Container style={{padding: '40px 35px', backgroundColor: '#fff'}}>
+                                <div className={classes.message}>
+                                    <h1>{heading}</h1>
+                                    <h1 style={{fontWeight: 300}}>{subHeading}</h1>
+                                </div>
+                                {this.props.children}
+                            </Container>
+                            <div className={classes.registerMessage} style={{backgroundImage: `url(${image})`}}>
+                                <div className={classes.imgOverlay}>
+                                    <div>
+                                        <h1 style={{textAlign: 'center', letterSpacing: '1px', marginBottom: 10}}>{sideHeading}</h1>
+                                        <p style={{textAlign: 'center', fontWeight: 300, maxWidth: '80%', margin: 'auto'}}>{sideSubHeading}</p>
+                                    </div>
+                                    <Link to={`/${formType}`} className={classes.link}>{formType}</Link>
+                                </div>
                             </div>
-                            <Link to={`/${formType}`} className={classes.link}>{formType}</Link>
-                        </div>
-                    </div>
+                        </Fragment>
+                    }
+                    {!auth && this.props.children}
                 </Grid.Column>
             </Grid>
         )

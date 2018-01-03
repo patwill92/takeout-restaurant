@@ -8,6 +8,7 @@ import FormWrapper from '../../components/FormWrapper'
 const Login = props => {
     return (
         <FormWrapper
+            auth
             image={'http://cdn-image.foodandwine.com/sites/default/files/styles/medium_2x/public/2012-cocktails-xl-umami-burgers-with-port-and-stilton.jpg?itok=iiKxK4bs'}
             heading={'Welcome to Forkit!'}
             subHeading={"The best forking burgers, period."}

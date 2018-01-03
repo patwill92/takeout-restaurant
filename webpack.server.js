@@ -7,7 +7,7 @@ const config = {
     // Inform webpack that we're building a bundle
     // for nodeJS, rather than for the browser
     target: 'node',
-    entry: './src/server.js',
+    entry: ['babel-polyfill', './src/server.js'],
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'build')

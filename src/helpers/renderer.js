@@ -39,6 +39,7 @@ export default (req, store, context, routes) => {
         <style type="text/css" id="server-side-styles">
           ${sheets.toString()}
         </style>
+        <script src="https://js.stripe.com/v3/"></script>
       </head>
       <body>
         <div id="root" style='min-height: 100%;'>${content}</div>

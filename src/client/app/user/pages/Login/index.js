@@ -8,6 +8,7 @@ import FormWrapper from '../../components/FormWrapper'
 const Login = props => {
     return (
         <FormWrapper
+            auth
             image={'http://www.seriouseats.com/images/2014/09/20140929-salmon-burger-yasmin-recipe-7.jpg'}
             heading={'Welcome back!'}
             subHeading={"Hungry? Let's get you logged in."}
