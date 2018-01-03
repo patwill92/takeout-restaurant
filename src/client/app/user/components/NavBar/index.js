@@ -67,8 +67,11 @@ const styles = theme => ({
     '@media (max-width: 768px)': {
         menuItemRight: {
             display: 'none !important',
+        },
+        '#containerID': {
+            paddingLeft: 0 + ' !important',
+            paddingRight: 0 + ' !important'
         }
-
     },
     '@media (min-width: 769px)': {
         burgerMenu: {
@@ -102,7 +105,16 @@ const styles = theme => ({
         color: '#fff !important',
         textDecoration: 'none !important'
     },
-    imgContainer: {}
+    '@global': {
+        '@media (max-width: 767px)': {
+            body: {
+                '& #containerID': {
+                    paddingLeft: 0 + ' !important',
+                    paddingRight: 0 + ' !important',
+                }
+            }
+        },
+    },
 })
 
 class NavBar extends Component {
@@ -196,7 +208,7 @@ class NavBar extends Component {
                             <Menu.Item className={classes.menuItemLunchBox} active={activeItem === 'friends'}
                                        onClick={()=>this.handlePath('/cart')}>
                                 <span style={{fontSize: '2.3rem', position: 'relative'}}>
-                                    <Icon style={{marginRight: 8, bottom: 5}} color='#ffffff' name='shoppingBag'/>
+                                    <Icon style={{bottom: 5}} color='#ffffff' name='shoppingBag'/>
                                     <span
                                         style={{
                                             fontSize: '1.2rem',
