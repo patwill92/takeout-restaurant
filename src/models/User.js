@@ -15,8 +15,7 @@ const userSchema = new Schema({
         type: Boolean,
         default: false
     },
-    cart:  [
-    {
+    cart:  [{
     item:{
         type: Schema.Types.ObjectId,
         ref: "Item"

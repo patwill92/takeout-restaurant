@@ -6,7 +6,8 @@ import {connect} from 'react-redux'
 import NavBar from './app/user/components/NavBar'
 import Footer from './app/user/components/Footer'
 import Container from './app/components/Container'
-import {fetchMenu,fetchCart,getUser} from "./actions";
+import {fetchMenu, fetchCart, getUser} from "./actions";
+import axios from "axios/index";
 
 const styles = theme => ({
     '@global': {
@@ -62,6 +63,24 @@ const mapStateToProps = ({user}) => {
     }
 };
 
+// const loadData = async (mongoose, userValue) => {
+//     let user;
+//     let response;
+//     if (userValue) {
+//         user = await mongoose.model('User').findOne({_id: userValue._id}).populate('cart.item');
+//         response = user.cart;
+//     } else {
+//         response = null;
+//     }
+//     return [
+//         {
+//             data: response,
+//             func: fetchCart
+//         }
+//     ]
+// };
+
 export default {
-    component: connect(mapStateToProps, {fetchMenu,fetchCart,getUser})(injectSheet(styles)(App))
+    component: connect(mapStateToProps, {fetchMenu, fetchCart, getUser})(injectSheet(styles)(App)),
+    // loadData
 };

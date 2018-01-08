@@ -7,6 +7,7 @@ import session from 'express-session'
 import MyMongoStore from 'connect-mongo'
 import passport from 'passport'
 import cloudinary from 'cloudinary'
+import compression from 'compression'
 
 import Routes from './client/Routes'
 import renderer from './helpers/renderer';
@@ -17,10 +18,13 @@ import api from './routes/api/apiMenu'
 import localAuth from './routes/auth/authLocal'
 import oAuth from './routes/auth/oAuth'
 import adminUserRoutes from './routes/admin/userRoutes'
+import paymentRoutes from './routes/api/apiPayment'
 import {toggleSideNav, getUser} from './client/actions'
 
 const MongoStore = MyMongoStore(session);
 const app = express();
+
+app.use(compression());
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, {useMongoClient: true});
@@ -52,6 +56,7 @@ app.use('/api', api);
 app.use('/user', localAuth);
 app.use('/auth', oAuth);
 app.use('/admin', adminUserRoutes);
+app.use('/payment', paymentRoutes);
 
 app.get('*', (req, res) => {
     const store = createServerStore();

@@ -17,7 +17,7 @@ let plugins = process.env.NODE_ENV ? [...define, ...uglify] : [...define];
 
 
 const config = {
-    entry: './src/client/index.js',
+    entry: ['babel-polyfill', './src/client/index.js'],
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'public')

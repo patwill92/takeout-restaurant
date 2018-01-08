@@ -10,6 +10,7 @@ import Error from './app/user/pages/Error'
 import Menu from './app/user/pages/Menu'
 import Testing from './app/user/pages/Testing'
 import TestMenu from './app/user/pages/Testmenu'
+import StripeTest from './app/user/pages/StripeTest'
 import Cart from './app/user/pages/Cart'
 
 //admin app
@@ -105,6 +106,10 @@ export default {
                 {
                     ...Testing,
                     path: '/testing'
+                },
+                {
+                    ...StripeTest,
+                    path: '/stripe'
                 },
                 {
                     ...Cart,

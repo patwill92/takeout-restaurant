@@ -1,11 +1,9 @@
 import React from "react";
 
-const ShoppingCartItem = (props)=>{
-	
+const ShoppingCartItem = (props) => {
+    return (
+        <div>place shopping cart item here</div>
+    )
+};
 
-	return(
-		<div>place shopping cart item here</div>
-		)
-}
-
-export default ShoppingCartItem		
+export default ShoppingCartItem

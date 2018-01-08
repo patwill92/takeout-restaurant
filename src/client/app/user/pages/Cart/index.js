@@ -10,7 +10,8 @@ class Cart extends Component {
 
 		componentDidMount(){
 			this.props.fetchCart();
-		}
+            console.log('cart fetch');
+        }
 		onQuantityChangeHandler = (value,index)=>{
 		if(this.props.cart[index].quantity === 0 && value === "down"){
 			return

@@ -24,7 +24,8 @@ ReactDOM.hydrate(
                 {renderRoutes(routes)}
             </ThemeProvider>
         </BrowserRouter>
-    </Provider>,
+    </Provider>
+    ,
     document.querySelector('#root'),
     () => {
         if (window.location.hash && window.location.hash == '#_=_') {

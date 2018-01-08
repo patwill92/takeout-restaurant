@@ -6,6 +6,10 @@ module.exports = {
     cloudName: 'daj4m3xio',
     cloudKey: '979417658567592',
     cloudSecret: 'xhiWzS6C1UYHhI69pHk47k_2fD4',
+    stripePublishableKey: 'pk_test_sZyegBXFfU0cg7xrh4VG34rB',
+    stripeSecretKey: 'sk_test_XKgYbofHTIH4LpgOXEO96QZy',
+    nexmoKey: 'b0edd5f9',
+    nexmoSecret: '9279fd5231a5fac8',
     mongoURI: 'mongodb://restaurant-dev:rest-dev@ds117316.mlab.com:17316/restaurant-dev',
     cookieKey: 'kljsndgkjlnsdkjnfqwttplskrndi'
 };
