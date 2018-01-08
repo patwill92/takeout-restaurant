@@ -21,28 +21,24 @@ const styles = theme => ({
         display: 'flex'
     },
     item: {
-        width: "300px",
-        height: "300px",
-        marginBottom: "20px",
+        width: "100%",
+        height: "100%",
         textAlign: "center",
         boxSizing:"border-box",
         borderRadius: "5%",
         overflow:"hidden",
-        fontSize: "14px",
+        fontSize: ".8em",
         boxShadow: "darkgrey 2px 2px 20px",
-        backgroundColor: "transparent"
+        backgroundColor: "transparent",
+        minHeight:"20vh"
     },
     item2: {
-        minWidth: "100%",
-        minHeight: "100%",
+        width: '100%',
+         height: '100%',
         textAlign: "center",
-        display:"flex",
-        flexDirection:"column",
-        justifyContent:"space-between",
-        backgroundBlendMode: 'lighten',
-        backgroundPosition: "center",
-        backgroundSize: 'auto 100%',
-        backgroundRepeat: "no-repeat"
+        display:"grid",
+        gridTemplateRows:"20% 60% 20%"
+
     },
 
     addToCart: {
@@ -58,13 +54,18 @@ const styles = theme => ({
         }
     },
     itemWrapper: {
-        position: "relative",
-        height: "50px",
+        height: "100%",
         width: "100%",
         backgroundColor: "#ad1313"
+    },
+    pageWrapper: {
+    display: 'grid',
+    gridGap:'10px'
     }
 });
-
+/*display: grid;
+    text-align: center;
+    grid-template-rows: 20% 60% 20%*/
 class Menu extends Component {
 
   reviewChangeHandler = (value,index)=>{
@@ -85,7 +86,7 @@ class Menu extends Component {
 
 render(){
   return(
-    <div >
+    <div className={this.props.classes.pageWrapper}>
   {this.props.user?null:(<Link to={"/login"}><p style={{fontSize:"25px"}}>Login/SignUp to Review!</p></Link>)}
     {this.props.clientMenu.map((item,index)=>{
       return (
@@ -94,10 +95,11 @@ render(){
               <div className={this.props.classes.itemWrapper}>
                 <ItemDetails className ={this.props.classes.addToCart}item={item}/>
               </div>
-              <div style={{width:"100%",height:"100%"}}>
-                  <img style={{width:"100%",height:"auto"}} src={item.image} alt={item.name}/>
+              <div style={{backgroundImage:`url(${item.image})`,backgroundSize:'contain'}}>
+                  
               </div>
-              <div style={{position:"relative",width:"100%",minHeight:"60px"}}>
+
+              <div style={{width:"100%",alignSelf:"end",height:"100%"}}>
                 {item.showReviews?(
                   <Reviews item={item}/>
                   ):(<ReviewInput

@@ -36,7 +36,7 @@ const ReviewInput = ({user:{itemsPurchased=[]},
 	item:{showInput,name,itemReviews,_id,specialMessageValue,specialMessage},item,index})=>{
 
 		const buttonToReviewGeneratedDynamicallyBasedOnUserHistory = itemsPurchased.includes(_id)?
-		<Button className={classes.Button} clicked={()=>reviewItemHandler(item,index)}>Tell us what you thought!</Button>:null;
+		<Button className={classes.Button} clicked={()=>reviewItemHandler(item,index)}>Tell us what you thought!</Button>:<Button className={classes.Button}>Try now to review!</Button>;
 		const toggleExistingReviewsButton = itemReviews.length?
 			<Button className={classes.Button} clicked={()=>showReviews(name)}>Show Reviews ({itemReviews.length})</Button>:
 			<Button className={classes.Button} >Show Reviews ({itemReviews.length})</Button>
@@ -56,7 +56,7 @@ const ReviewInput = ({user:{itemsPurchased=[]},
 					:<h1>Thank You</h1>
 			:null
 				return(
-					<div style={{position:"absolute",bottom:"0px",width:"100%"}}>
+					<div style={{width:"100%"}}>
 							{buttonToReviewGeneratedDynamicallyBasedOnUserHistory}
 							{toggleExistingReviewsButton}
 							{conditionallyRenderedReviewInputFields}

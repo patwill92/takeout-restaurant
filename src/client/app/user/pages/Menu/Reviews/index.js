@@ -6,8 +6,6 @@ import Button from "../ReviewInput/Button"
 
 const Reviews = ({showReviews,item})=>{
 	return(
-		<div>
-      <Button clicked={()=>showReviews(item.name)}>hide reviews</Button>
       <div style={reviewsBox}>
           {item.itemReviews.map((reviewValue,index)=>
           (<div key={index}>
@@ -18,8 +16,8 @@ const Reviews = ({showReviews,item})=>{
           </div>  
           </div>
           ))}
+          <Button clicked={()=>showReviews(item.name)}>hide reviews</Button>
       </div>
-    </div>
 
 		)
 }
